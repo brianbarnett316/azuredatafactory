@@ -37,8 +37,7 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "Id",
-									"type": "String"
+									"name": "ProfiseeCode__c"
 								},
 								"sink": {
 									"path": "$['Code']"
