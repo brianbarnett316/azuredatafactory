@@ -1,0 +1,204 @@
+{
+	"name": "REST API to Salesforce",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy REST to JSON",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"additionalHeaders": {
+							"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+						},
+						"paginationRules": {
+							"AbsoluteUrl": "$.nextPage"
+						}
+					},
+					"sink": {
+						"type": "SalesforceSink",
+						"writeBatchSize": 5000,
+						"writeBehavior": "upsert",
+						"externalIdFieldName": "",
+						"ignoreNullValues": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['internalId']"
+								},
+								"sink": {
+									"path": "$.internalId"
+								}
+							},
+							{
+								"source": {
+									"path": "['id']"
+								},
+								"sink": {
+									"path": "$.id"
+								}
+							},
+							{
+								"source": {
+									"path": "['code']"
+								},
+								"sink": {
+									"path": "$.code"
+								}
+							},
+							{
+								"source": {
+									"path": "['name']"
+								},
+								"sink": {
+									"path": "$.name"
+								}
+							},
+							{
+								"source": {
+									"path": "['productSubCategory']"
+								},
+								"sink": {
+									"path": "$.productSubCategory"
+								}
+							},
+							{
+								"source": {
+									"path": "['standardCost']"
+								},
+								"sink": {
+									"path": "$.standardCost"
+								}
+							},
+							{
+								"source": {
+									"path": "['msrp']"
+								},
+								"sink": {
+									"path": "$.msrp"
+								}
+							},
+							{
+								"source": {
+									"path": "['dealerCost']"
+								},
+								"sink": {
+									"path": "$.dealerCost"
+								}
+							},
+							{
+								"source": {
+									"path": "['sellStartDate']"
+								},
+								"sink": {
+									"path": "$.sellStartDate"
+								}
+							},
+							{
+								"source": {
+									"path": "['sellEndDate']"
+								},
+								"sink": {
+									"path": "$.sellEndDate"
+								}
+							},
+							{
+								"source": {
+									"path": "['changedOn']"
+								},
+								"sink": {
+									"path": "$.changedOn"
+								}
+							},
+							{
+								"source": {
+									"path": "['changedByUser']"
+								},
+								"sink": {
+									"path": "$.changedByUser"
+								}
+							},
+							{
+								"source": {
+									"path": "['validationStatus']"
+								},
+								"sink": {
+									"path": "$.validationStatus"
+								}
+							},
+							{
+								"source": {
+									"path": "['weight']"
+								},
+								"sink": {
+									"path": "$.weight"
+								}
+							}
+						],
+						"collectionReference": "$['data']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ProfiseeRESTAPI_Get",
+						"type": "DatasetReference",
+						"parameters": {
+							"entityId": {
+								"value": "@pipeline().parameters.EntityName",
+								"type": "Expression"
+							},
+							"pageSize": 100,
+							"attributes": " ",
+							"filter": " ",
+							"orderBy": " ",
+							"dbaFormat": 1
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SalesforceObject1",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"parameters": {
+			"EntityName": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"InputContainer": {
+				"type": "String",
+				"defaultValue": "profisee-input"
+			},
+			"OutputContainer": {
+				"type": "String",
+				"defaultValue": "profisee-output"
+			}
+		},
+		"folder": {
+			"name": "REST API"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-25T15:29:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
