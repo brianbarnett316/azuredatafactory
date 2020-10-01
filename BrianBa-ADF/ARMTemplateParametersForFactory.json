@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "BrianBa-ADF"
+		},
+		"BlobStorage_accountKey": {
+			"value": ""
+		},
+		"BlobStorageGen2_accountKey": {
+			"value": ""
+		},
+		"ProfiseeSql_connectionString": {
+			"value": ""
+		},
+		"REST Output_accountKey": {
+			"value": ""
+		},
+		"Salesforce1_password": {
+			"value": ""
+		},
+		"Salesforce1_securityToken": {
+			"value": ""
+		},
+		"BlobStorage_properties_typeProperties_url": {
+			"value": "https://brianbastorage.dfs.core.windows.net"
+		},
+		"BlobStorageGen2_properties_typeProperties_url": {
+			"value": "https://brianbastorageadlsgen2.dfs.core.windows.net"
+		},
+		"Profisee REST API_properties_typeProperties_url": {
+			"value": "http://restpreview.dev.profisee.com/Profisee/rest"
+		},
+		"REST Output_properties_typeProperties_url": {
+			"value": "https://brianbastorage.dfs.core.windows.net"
+		},
+		"Salesforce1_properties_typeProperties_environmentUrl": {
+			"value": "https://login.salesforce.com"
+		},
+		"Salesforce1_properties_typeProperties_username": {
+			"value": "tye3950@yahoo.com"
+		},
+		"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileName": {
+			"value": "@triggerBody().FileName"
+		},
+		"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileFolder": {
+			"value": "@triggerBody().FolderPath"
+		},
+		"NewJsonMemberFile_properties_typeProperties_scope": {
+			"value": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
+		}
+	}
+}
