@@ -828,6 +828,22 @@
 										"sink": {
 											"path": "$['Zip Input']"
 										}
+									},
+									{
+										"source": {
+											"name": "Phone"
+										},
+										"sink": {
+											"path": "$['Phone']"
+										}
+									},
+									{
+										"source": {
+											"name": "Website"
+										},
+										"sink": {
+											"path": "$['Website']"
+										}
 									}
 								]
 							}
