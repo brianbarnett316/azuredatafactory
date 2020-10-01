@@ -129,6 +129,24 @@
 					},
 					"Salesforce1_properties_typeProperties_username": {
 						"value": "[parameters('Salesforce1_properties_typeProperties_username')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "BrianBa-ADF_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileName": {
 						"value": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileName')]"
@@ -141,7 +159,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'BrianBa-ADF_ArmTemplate_0')]"
+			]
 		}
 	]
 }

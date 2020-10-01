@@ -54,18 +54,6 @@
 		"Salesforce1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "tye3950@yahoo.com"
-		},
-		"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileName": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FileName"
-		},
-		"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileFolder": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FolderPath"
-		},
-		"NewJsonMemberFile_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		}
 	},
 	"variables": {
@@ -152,22 +140,19 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Salesforce1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AzureIREastUS')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "Salesforce",
+				"type": "Managed",
 				"typeProperties": {
-					"environmentUrl": "[parameters('Salesforce1_properties_typeProperties_environmentUrl')]",
-					"username": "[parameters('Salesforce1_properties_typeProperties_username')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Salesforce1_password')]"
-					},
-					"securityToken": {
-						"type": "SecureString",
-						"value": "[parameters('Salesforce1_securityToken')]"
+					"computeProperties": {
+						"location": "East US",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 0
+						}
 					}
 				}
 			},
@@ -682,23 +667,31 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SalesforceObject1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/Salesforce1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Salesforce1",
-					"type": "LinkedServiceReference"
-				},
 				"annotations": [],
-				"type": "SalesforceObject",
-				"schema": [],
+				"type": "Salesforce",
 				"typeProperties": {
-					"objectApiName": "Account"
+					"environmentUrl": "[parameters('Salesforce1_properties_typeProperties_environmentUrl')]",
+					"username": "[parameters('Salesforce1_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Salesforce1_password')]"
+					},
+					"securityToken": {
+						"type": "SecureString",
+						"value": "[parameters('Salesforce1_securityToken')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AzureIREastUS",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Salesforce1')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/AzureIREastUS')]"
 			]
 		},
 		{
@@ -1367,6 +1360,26 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SalesforceObject1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Salesforce1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SalesforceObject",
+				"schema": [],
+				"typeProperties": {
+					"objectApiName": "Account"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Salesforce1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Salesforce direct to REST API')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1661,40 +1674,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SalesforceObject1')]",
 				"[concat(variables('factoryId'), '/datasets/OutputBlobJson')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/NewJsonMemberFile')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Ingress Staging Area to REST API",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"FileName": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileName')]",
-							"FileFolder": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileFolder')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/profisee-input/blobs/",
-					"blobPathEndsWith": ".json",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('NewJsonMemberFile_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Ingress Staging Area to REST API')]"
 			]
 		}
 	]
