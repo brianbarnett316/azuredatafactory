@@ -31,7 +31,7 @@
 						"type": "SalesforceSink",
 						"writeBatchSize": 5000,
 						"writeBehavior": "upsert",
-						"externalIdFieldName": "",
+						"externalIdFieldName": "ProfiseeCode__c",
 						"ignoreNullValues": false
 					},
 					"enableStaging": false,
