@@ -1,0 +1,13 @@
+{
+	"name": "Profisee REST API",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "http://restpreview.dev.profisee.com/Profisee/rest",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

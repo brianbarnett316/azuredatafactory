@@ -1,0 +1,150 @@
+{
+	"name": "Salesforce to Ingress Staging Area",
+	"properties": {
+		"activities": [
+			{
+				"name": "Salesforce Accounts to JSON",
+				"description": "Note, the sink is the AddressTest entity.  Used for testing only.",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SalesforceSource",
+						"readBehavior": "query"
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "arrayOfObjects"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Code']"
+								}
+							},
+							{
+								"source": {
+									"name": "Name",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Name']"
+								}
+							},
+							{
+								"source": {
+									"name": "BillingStreet"
+								},
+								"sink": {
+									"path": "$['Address Input']"
+								}
+							},
+							{
+								"source": {
+									"name": "BillingCity"
+								},
+								"sink": {
+									"path": "$['City Input']"
+								}
+							},
+							{
+								"source": {
+									"name": "BillingState"
+								},
+								"sink": {
+									"path": "$['State Input']"
+								}
+							},
+							{
+								"source": {
+									"name": "BillingPostalCode"
+								},
+								"sink": {
+									"path": "$['Zip Input']"
+								}
+							},
+							{
+								"source": {
+									"name": "Phone",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Phone']"
+								}
+							},
+							{
+								"source": {
+									"name": "Website",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Website']"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SalesforceObject1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "OutputBlobJson",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileSystem": {
+								"value": "@variables('InputContainer')",
+								"type": "Expression"
+							},
+							"Directory": "addresstest",
+							"FileName": {
+								"value": "@concat('addresstest_', string(utcnow()), '.json')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"variables": {
+			"InputContainer": {
+				"type": "String",
+				"defaultValue": "profisee-input"
+			},
+			"OutputContainer": {
+				"type": "String",
+				"defaultValue": "profisee-output"
+			}
+		},
+		"folder": {
+			"name": "REST API"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-25T16:03:36Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

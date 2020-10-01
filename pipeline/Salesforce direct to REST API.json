@@ -1,0 +1,120 @@
+{
+	"name": "Salesforce direct to REST API",
+	"properties": {
+		"activities": [
+			{
+				"name": "Salesforce Accounts to REST API",
+				"description": "Note, the sink is the AddressTest entity.  Used for testing only.",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SalesforceSource",
+						"readBehavior": "query"
+					},
+					"sink": {
+						"type": "RestSink",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": 10,
+						"requestMethod": "PATCH",
+						"writeBatchSize": 10000,
+						"additionalHeaders": {
+							"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+						},
+						"httpCompressionType": "none"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Code']"
+								}
+							},
+							{
+								"source": {
+									"name": "Name",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Name']"
+								}
+							},
+							{
+								"source": {
+									"name": "ShippingStreet",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Address Input']"
+								}
+							},
+							{
+								"source": {
+									"name": "ShippingCity",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['City Input']"
+								}
+							},
+							{
+								"source": {
+									"name": "ShippingState",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['State Input']"
+								}
+							},
+							{
+								"source": {
+									"name": "ShippingPostalCode",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Zip Input']"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SalesforceObject1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ProfiseeRESTAPI_Update",
+						"type": "DatasetReference",
+						"parameters": {
+							"entityId": "addresstest",
+							"isUpsert": true
+						}
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "REST API"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-25T16:03:36Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
