@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy REST to Salesforce",
+				"name": "REST API to Salesforce Accounts",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
