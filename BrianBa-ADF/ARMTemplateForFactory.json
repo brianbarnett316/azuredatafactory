@@ -66,6 +66,18 @@
 		"NewJsonMemberFile_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
+		},
+		"NewCsvMemberFile_properties_Ingress Staging Area CSV to REST API_parameters_FileName": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FileName"
+		},
+		"NewCsvMemberFile_properties_Ingress Staging Area CSV to REST API_parameters_FileFolder": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FolderPath"
+		},
+		"NewCsvMemberFile_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		}
 	},
 	"variables": {
@@ -2163,6 +2175,40 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/InputBlobCsv')]",
 				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Update')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/NewCsvMemberFile')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Ingress Staging Area CSV to REST API",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"FileName": "[parameters('NewCsvMemberFile_properties_Ingress Staging Area CSV to REST API_parameters_FileName')]",
+							"FileFolder": "[parameters('NewCsvMemberFile_properties_Ingress Staging Area CSV to REST API_parameters_FileFolder')]"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/profisee-input/blobs/",
+					"blobPathEndsWith": ".csv",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('NewCsvMemberFile_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Ingress Staging Area CSV to REST API')]"
 			]
 		}
 	]
