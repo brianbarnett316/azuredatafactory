@@ -826,7 +826,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy REST Product to CSV",
+						"name": "REST API Product to CSV",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -1140,7 +1140,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy REST to JSON",
+						"name": "REST API Product to JSON",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {

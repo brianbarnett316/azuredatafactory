@@ -63,7 +63,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy REST to Salesforce",
+						"name": "REST API to Salesforce Accounts",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -203,16 +203,6 @@
 				"parameters": {
 					"EntityName": {
 						"type": "string"
-					}
-				},
-				"variables": {
-					"InputContainer": {
-						"type": "String",
-						"defaultValue": "profisee-input"
-					},
-					"OutputContainer": {
-						"type": "String",
-						"defaultValue": "profisee-output"
 					}
 				},
 				"folder": {
