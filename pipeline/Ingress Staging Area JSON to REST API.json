@@ -1,5 +1,5 @@
 {
-	"name": "Ingress Staging Area to REST API",
+	"name": "Ingress Staging Area JSON to REST API",
 	"properties": {
 		"activities": [
 			{
