@@ -113,7 +113,7 @@
 							{
 								"source": {
 									"name": "standardCost",
-									"type": "String"
+									"type": "Double"
 								},
 								"sink": {
 									"path": "$['standardCost']"
@@ -131,7 +131,7 @@
 							{
 								"source": {
 									"name": "reorderPoint",
-									"type": "String"
+									"type": "Double"
 								},
 								"sink": {
 									"path": "$['reorderPoint']"
@@ -149,7 +149,7 @@
 							{
 								"source": {
 									"name": "weight",
-									"type": "String"
+									"type": "Double"
 								},
 								"sink": {
 									"path": "$['weight']"
@@ -167,7 +167,7 @@
 							{
 								"source": {
 									"name": "sellStartDate",
-									"type": "String"
+									"type": "DateTime"
 								},
 								"sink": {
 									"path": "$['sellStartDate']"
@@ -176,7 +176,7 @@
 							{
 								"source": {
 									"name": "sellEndDate",
-									"type": "String"
+									"type": "DateTime"
 								},
 								"sink": {
 									"path": "$['sellEndDate']"
@@ -194,7 +194,7 @@
 							{
 								"source": {
 									"name": "size",
-									"type": "String"
+									"type": "Double"
 								},
 								"sink": {
 									"path": "$['size']"
