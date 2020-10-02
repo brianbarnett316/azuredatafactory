@@ -6,24 +6,134 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "BrianBa-ADF"
-		},
-		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FileName"
-		},
-		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FolderPath"
-		},
-		"NewJsonMemberFile_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Ingress Staging Area JSON to REST API')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Update JSON to REST API",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Set EntityName variable",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"sink": {
+								"type": "RestSink",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": 10,
+								"requestMethod": "PATCH",
+								"writeBatchSize": 10000,
+								"additionalHeaders": {
+									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+								},
+								"httpCompressionType": "none"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "InputBlobJson",
+								"type": "DatasetReference",
+								"parameters": {
+									"FolderName": {
+										"value": "@pipeline().parameters.FileFolder",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@pipeline().parameters.FileName",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Update",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"isUpsert": true
+								}
+							}
+						]
+					},
+					{
+						"name": "Set EntityName variable",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "EntityName",
+							"value": {
+								"value": "@replace(pipeline().parameters.FileFolder, concat(variables('InputContainer'),'/'), '')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					},
+					"FileFolder": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"EntityName": {
+						"type": "String"
+					},
+					"InputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-input"
+					},
+					"OutputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-output"
+					}
+				},
+				"folder": {
+					"name": "REST API"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Salesforce to Ingress Staging Area JSON')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -136,8 +246,7 @@
 						"inputs": [
 							{
 								"referenceName": "SalesforceObject1",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
@@ -191,8 +300,8 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {
-							"FileName": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName')]",
-							"FileFolder": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder')]"
+							"FileName": "@triggerBody().FileName",
+							"FileFolder": "@triggerBody().FolderPath"
 						}
 					}
 				],
@@ -201,24 +310,33 @@
 					"blobPathBeginsWith": "/profisee-input/blobs/",
 					"blobPathEndsWith": ".json",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('NewJsonMemberFile_properties_typeProperties_scope')]",
+					"scope": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Ingress Staging Area JSON to REST API')]"
+			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/REST API direct to Salesforce')]",
+			"name": "[concat(parameters('factoryName'), '/Ingress Staging Area CSV to REST API')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "REST API to Salesforce Accounts",
+						"name": "Update CSV to REST API",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Set EntityName variable",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -229,133 +347,91 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "RestSource",
-								"httpRequestTimeout": "00:01:40",
-								"requestInterval": "00.00:00:00.010",
-								"requestMethod": "GET",
-								"additionalHeaders": {
-									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
 								},
-								"paginationRules": {
-									"AbsoluteUrl": "$.nextPage"
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
 								}
 							},
 							"sink": {
-								"type": "SalesforceSink",
-								"writeBatchSize": 5000,
-								"writeBehavior": "upsert",
-								"externalIdFieldName": "ProfiseeCode__c",
-								"ignoreNullValues": false
+								"type": "RestSink",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": 10,
+								"requestMethod": "PATCH",
+								"writeBatchSize": 10000,
+								"additionalHeaders": {
+									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+								},
+								"httpCompressionType": "none"
 							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "[['code']"
-										},
-										"sink": {
-											"name": "ProfiseeCode__c",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['name']"
-										},
-										"sink": {
-											"name": "Name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['address Input']"
-										},
-										"sink": {
-											"name": "ShippingStreet",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['city Input']"
-										},
-										"sink": {
-											"name": "ShippingCity",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['state Input']"
-										},
-										"sink": {
-											"name": "ShippingState",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['zip Input']"
-										},
-										"sink": {
-											"name": "ShippingPostalCode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['phone']"
-										},
-										"sink": {
-											"name": "Phone",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['website']"
-										},
-										"sink": {
-											"name": "Website",
-											"type": "String"
-										}
-									}
-								],
-								"collectionReference": "$['data']"
-							}
+							"enableStaging": false
 						},
 						"inputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Get",
+								"referenceName": "InputBlobCsv",
 								"type": "DatasetReference",
 								"parameters": {
-									"entityId": {
-										"value": "@pipeline().parameters.EntityName",
+									"FolderName": {
+										"value": "@pipeline().parameters.FileFolder",
 										"type": "Expression"
 									},
-									"pageSize": 100,
-									"attributes": "Address Input,City Input,State Input,Zip Input,Phone,Website",
-									"filter": " ",
-									"orderBy": " ",
-									"dbaFormat": 1
+									"FileName": {
+										"value": "@pipeline().parameters.FileName",
+										"type": "Expression"
+									}
 								}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "SalesforceObject1",
+								"referenceName": "ProfiseeRESTAPI_Update",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"entityId": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"isUpsert": true
+								}
 							}
 						]
+					},
+					{
+						"name": "Set EntityName variable",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "EntityName",
+							"value": {
+								"value": "@replace(pipeline().parameters.FileFolder, concat(variables('InputContainer'),'/'), '')",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"parameters": {
-					"EntityName": {
+					"FileName": {
 						"type": "string"
+					},
+					"FileFolder": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"EntityName": {
+						"type": "String"
+					},
+					"InputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-input"
+					},
+					"OutputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-output"
 					}
 				},
 				"folder": {

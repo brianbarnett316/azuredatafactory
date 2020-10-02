@@ -55,11 +55,11 @@
 			"type": "string",
 			"defaultValue": "tye3950@yahoo.com"
 		},
-		"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileName": {
+		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FileName"
 		},
-		"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileFolder": {
+		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FolderPath"
 		},
@@ -148,11 +148,11 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileName": {
-						"value": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileName')]"
+					"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName": {
+						"value": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName')]"
 					},
-					"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileFolder": {
-						"value": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileFolder')]"
+					"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder": {
+						"value": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder')]"
 					},
 					"NewJsonMemberFile_properties_typeProperties_scope": {
 						"value": "[parameters('NewJsonMemberFile_properties_typeProperties_scope')]"

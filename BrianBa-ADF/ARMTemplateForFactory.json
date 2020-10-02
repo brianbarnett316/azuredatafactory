@@ -55,11 +55,11 @@
 			"type": "string",
 			"defaultValue": "tye3950@yahoo.com"
 		},
-		"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileName": {
+		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FileName"
 		},
-		"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileFolder": {
+		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FolderPath"
 		},
@@ -73,7 +73,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/Ingress Staging Area to REST API')]",
+			"name": "[concat(parameters('factoryName'), '/Ingress Staging Area JSON to REST API')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -879,7 +879,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Salesforce to Ingress Staging Area')]",
+			"name": "[concat(parameters('factoryName'), '/Salesforce to Ingress Staging Area JSON')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1679,12 +1679,12 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "Ingress Staging Area to REST API",
+							"referenceName": "Ingress Staging Area JSON to REST API",
 							"type": "PipelineReference"
 						},
 						"parameters": {
-							"FileName": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileName')]",
-							"FileFolder": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileFolder')]"
+							"FileName": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName')]",
+							"FileFolder": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder')]"
 						}
 					}
 				],
@@ -1700,7 +1700,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Ingress Staging Area to REST API')]"
+				"[concat(variables('factoryId'), '/pipelines/Ingress Staging Area JSON to REST API')]"
 			]
 		},
 		{
@@ -1880,6 +1880,131 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Get')]",
 				"[concat(variables('factoryId'), '/datasets/SalesforceObject1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Ingress Staging Area CSV to REST API')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Update CSV to REST API",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Set EntityName variable",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "RestSink",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": 10,
+								"requestMethod": "PATCH",
+								"writeBatchSize": 10000,
+								"additionalHeaders": {
+									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+								},
+								"httpCompressionType": "none"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "InputBlobCsv",
+								"type": "DatasetReference",
+								"parameters": {
+									"FolderName": {
+										"value": "@pipeline().parameters.FileFolder",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@pipeline().parameters.FileName",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Update",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"isUpsert": true
+								}
+							}
+						]
+					},
+					{
+						"name": "Set EntityName variable",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "EntityName",
+							"value": {
+								"value": "@replace(pipeline().parameters.FileFolder, concat(variables('InputContainer'),'/'), '')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					},
+					"FileFolder": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"EntityName": {
+						"type": "String"
+					},
+					"InputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-input"
+					},
+					"OutputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-output"
+					}
+				},
+				"folder": {
+					"name": "REST API"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/InputBlobCsv')]",
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Update')]"
 			]
 		}
 	]

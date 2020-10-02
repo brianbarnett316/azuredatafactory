@@ -41,10 +41,10 @@
 		"Salesforce1_properties_typeProperties_username": {
 			"value": "tye3950@yahoo.com"
 		},
-		"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileName": {
+		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName": {
 			"value": "@triggerBody().FileName"
 		},
-		"NewJsonMemberFile_properties_Ingress Staging Area to REST API_parameters_FileFolder": {
+		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder": {
 			"value": "@triggerBody().FolderPath"
 		},
 		"NewJsonMemberFile_properties_typeProperties_scope": {
