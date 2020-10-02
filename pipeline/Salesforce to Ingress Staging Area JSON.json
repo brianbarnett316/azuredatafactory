@@ -1,5 +1,5 @@
 {
-	"name": "Salesforce to Ingress Staging Area",
+	"name": "Salesforce to Ingress Staging Area JSON",
 	"properties": {
 		"activities": [
 			{
