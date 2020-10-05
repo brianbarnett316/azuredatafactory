@@ -76,7 +76,21 @@
 						"outputs": [
 							{
 								"referenceName": "OutputBlobJson",
-								"type": "DatasetReference"
+								"type": "DatasetReference",
+								"parameters": {
+									"FileSystem": {
+										"value": "@variables('OutputContainer')",
+										"type": "Expression"
+									},
+									"Directory": {
+										"value": "@pipeline().parameters.EntityName",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@concat(pipeline().parameters.EntityName, '_', string(utcnow()), '.json')",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}
