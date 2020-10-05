@@ -41,14 +41,10 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ProfiseeRESTAPI_Get1",
+						"referenceName": "ProfiseeRESTAPI_Get",
 						"type": "DatasetReference",
 						"parameters": {
-							"entityId": {
-								"value": "@pipeline().parameters.EntityName",
-								"type": "Expression"
-							},
-							"pageSize": 100,
+							"pageSize": 50,
 							"attributes": " ",
 							"filter": " ",
 							"orderBy": " ",
@@ -58,22 +54,8 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "OutputBlobJson1",
-						"type": "DatasetReference",
-						"parameters": {
-							"FileSystem": {
-								"value": "@variables('OutputContainer')",
-								"type": "Expression"
-							},
-							"Directory": {
-								"value": "@pipeline().parameters.EntityName",
-								"type": "Expression"
-							},
-							"FileName": {
-								"value": "@concat(pipeline().parameters.EntityName, '_', string(utcnow()), '.json')",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "OutputBlobJson",
+						"type": "DatasetReference"
 					}
 				]
 			}
