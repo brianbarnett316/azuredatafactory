@@ -1,0 +1,102 @@
+{
+	"name": "REST API to Egress Staging Area - JSON1",
+	"properties": {
+		"activities": [
+			{
+				"name": "REST API Product to JSON",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"additionalHeaders": {
+							"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+						},
+						"paginationRules": {
+							"AbsoluteUrl": "$.nextPage"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "arrayOfObjects"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ProfiseeRESTAPI_Get1",
+						"type": "DatasetReference",
+						"parameters": {
+							"entityId": {
+								"value": "@pipeline().parameters.EntityName",
+								"type": "Expression"
+							},
+							"pageSize": 100,
+							"attributes": " ",
+							"filter": " ",
+							"orderBy": " ",
+							"dbaFormat": 1
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "OutputBlobJson1",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileSystem": {
+								"value": "@variables('OutputContainer')",
+								"type": "Expression"
+							},
+							"Directory": {
+								"value": "@pipeline().parameters.EntityName",
+								"type": "Expression"
+							},
+							"FileName": {
+								"value": "@concat(pipeline().parameters.EntityName, '_', string(utcnow()), '.json')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"EntityName": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"InputContainer": {
+				"type": "String",
+				"defaultValue": "profisee-input"
+			},
+			"OutputContainer": {
+				"type": "String",
+				"defaultValue": "profisee-output"
+			}
+		},
+		"folder": {
+			"name": "REST API"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-25T15:29:08Z"
+	}
+}
