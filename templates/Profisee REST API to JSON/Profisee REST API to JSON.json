@@ -65,6 +65,10 @@
 								"referenceName": "ProfiseeRESTAPI_Get",
 								"type": "DatasetReference",
 								"parameters": {
+									"entityId": {
+										"value": "@pipeline().parameters.EntityName",
+										"type": "Expression"
+									},
 									"pageSize": 50,
 									"attributes": " ",
 									"filter": " ",
