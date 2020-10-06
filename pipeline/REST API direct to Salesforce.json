@@ -133,7 +133,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "SalesforceObject1",
+						"referenceName": "SalesforceAccount",
 						"type": "DatasetReference"
 					}
 				]
