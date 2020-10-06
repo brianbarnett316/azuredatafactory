@@ -42,7 +42,7 @@
 								"requestInterval": "00.00:00:00.010",
 								"requestMethod": "GET",
 								"additionalHeaders": {
-									"x-api-key": "enter api key "
+									"x-api-key": "<api key>"
 								},
 								"paginationRules": {
 									"AbsoluteUrl": "$.nextPage"
