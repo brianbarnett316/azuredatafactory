@@ -1,0 +1,116 @@
+{
+	"name": "JSON to Profisee REST API",
+	"properties": {
+		"activities": [
+			{
+				"name": "Update JSON to REST API",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set EntityName variable",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "RestSink",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": 10,
+						"requestMethod": "PATCH",
+						"writeBatchSize": 10000,
+						"additionalHeaders": {
+							"x-api-key": "<api key>"
+						},
+						"httpCompressionType": "none"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "InputBlobJson",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderName": {
+								"value": "@pipeline().parameters.FileFolder",
+								"type": "Expression"
+							},
+							"FileName": {
+								"value": "@pipeline().parameters.FileName",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ProfiseeRESTAPI_Update",
+						"type": "DatasetReference",
+						"parameters": {
+							"entityId": {
+								"value": "@variables('EntityName')",
+								"type": "Expression"
+							},
+							"isUpsert": true
+						}
+					}
+				]
+			},
+			{
+				"name": "Set EntityName variable",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "EntityName",
+					"value": {
+						"value": "@replace(pipeline().parameters.FileFolder, concat(variables('InputContainer'),'/'), '')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			},
+			"FileFolder": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"EntityName": {
+				"type": "String"
+			},
+			"InputContainer": {
+				"type": "String",
+				"defaultValue": "profisee-input"
+			}
+		},
+		"folder": {
+			"name": "REST API"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-25T15:29:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
