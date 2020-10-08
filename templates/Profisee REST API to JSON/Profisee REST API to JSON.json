@@ -11,6 +11,14 @@
 		},
 		"BlobStorageGen2": {
 			"type": "string"
+		},
+		"entityName": {
+			"type": "string",
+			"metadata": "Profisee entity name"
+		},
+		"apiKey": {
+			"type": "string",
+			"metadata": "Profisee REST API key"
 		}
 	},
 	"variables": {
@@ -42,7 +50,7 @@
 								"requestInterval": "00.00:00:00.010",
 								"requestMethod": "GET",
 								"additionalHeaders": {
-									"x-api-key": "<api key>"
+									"x-api-key": "parameters('apiKey')"
 								},
 								"paginationRules": {
 									"AbsoluteUrl": "$.nextPage"
@@ -101,7 +109,8 @@
 				],
 				"parameters": {
 					"EntityName": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "parameters('entityName')"
 					}
 				},
 				"variables": {
@@ -131,6 +140,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
+					"description": "Connection to your Profisee REST API."
 					"referenceName": "[parameters('Profisee REST API')]",
 					"type": "LinkedServiceReference"
 				},
@@ -177,6 +187,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
+					"description": "Connection to your Azure Data Lake Store."
 					"referenceName": "[parameters('BlobStorageGen2')]",
 					"type": "LinkedServiceReference"
 				},
