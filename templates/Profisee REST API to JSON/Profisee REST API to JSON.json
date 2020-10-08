@@ -13,12 +13,10 @@
 			"type": "string"
 		},
 		"entityName": {
-			"type": "string",
-			"metadata": "Profisee entity name"
+			"type": "string"
 		},
 		"apiKey": {
-			"type": "string",
-			"metadata": "Profisee REST API key"
+			"type": "string"
 		}
 	},
 	"variables": {
