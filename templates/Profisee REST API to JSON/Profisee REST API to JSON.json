@@ -11,9 +11,6 @@
 		},
 		"BlobStorageGen2": {
 			"type": "string"
-		},
-		"apiKey": {
-			"type": "string"
 		}	
 	},
 	"variables": {
@@ -45,7 +42,7 @@
 								"requestInterval": "00.00:00:00.010",
 								"requestMethod": "GET",
 								"additionalHeaders": {
-									"x-api-key": "[parameters('apiKey')]"
+									"x-api-key": "<api key>"
 								},
 								"paginationRules": {
 									"AbsoluteUrl": "$.nextPage"
