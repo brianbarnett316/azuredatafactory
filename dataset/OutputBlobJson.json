@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"FileSystem": {
+			"Container": {
 				"type": "string"
 			},
 			"Directory": {

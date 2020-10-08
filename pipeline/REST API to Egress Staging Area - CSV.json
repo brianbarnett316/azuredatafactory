@@ -267,7 +267,7 @@
 						"referenceName": "OutputBlobCsv",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileSystem": {
+							"Container": {
 								"value": "@variables('OutputContainer')",
 								"type": "Expression"
 							},

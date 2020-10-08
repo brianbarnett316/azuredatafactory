@@ -116,7 +116,7 @@
 						"referenceName": "OutputBlobJson",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileSystem": {
+							"Container": {
 								"value": "@variables('InputContainer')",
 								"type": "Expression"
 							},
