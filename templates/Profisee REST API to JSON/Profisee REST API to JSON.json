@@ -11,7 +11,10 @@
 		},
 		"BlobStorageGen2": {
 			"type": "string"
-		}
+		},
+		"apiKey": {
+			"type": "string"
+		}	
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
@@ -42,7 +45,7 @@
 								"requestInterval": "00.00:00:00.010",
 								"requestMethod": "GET",
 								"additionalHeaders": {
-									"x-api-key": "<api key>"
+									"x-api-key": "[parameters('apiKey')]"
 								},
 								"paginationRules": {
 									"AbsoluteUrl": "$.nextPage"
