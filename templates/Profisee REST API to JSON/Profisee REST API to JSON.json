@@ -91,7 +91,7 @@
 										"type": "Expression"
 									},
 									"FileName": {
-										"value": "@concat(@variables('EntityName'), '_', string(utcnow()), '.json')",
+										"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.json')",
 										"type": "Expression"
 									}
 								}
