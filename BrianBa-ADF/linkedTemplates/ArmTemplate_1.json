@@ -156,7 +156,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Get",
+								"referenceName": "ProfiseeRESTAPI_Members_Get",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
@@ -313,7 +313,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Update",
+								"referenceName": "ProfiseeRESTAPI_Members_Update",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": "addresstest",

@@ -309,7 +309,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Update",
+								"referenceName": "ProfiseeRESTAPI_Members_Update",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
@@ -364,7 +364,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/InputBlobCsv')]",
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Update')]"
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Update')]"
 			]
 		},
 		{
@@ -434,7 +434,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Update",
+								"referenceName": "ProfiseeRESTAPI_Members_Update",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
@@ -489,7 +489,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/InputBlobJson')]",
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Update')]"
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Update')]"
 			]
 		},
 		{
@@ -559,7 +559,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Update",
+								"referenceName": "ProfiseeRESTAPI_Members_Update",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
@@ -610,7 +610,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/InputBlobJson')]",
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Update')]"
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Update')]"
 			]
 		},
 		{
@@ -733,7 +733,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Get",
+								"referenceName": "ProfiseeRESTAPI_Members_Get",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
@@ -769,7 +769,7 @@
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Get')]",
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Get')]",
 				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]"
 			]
 		},
@@ -1024,7 +1024,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Get",
+								"referenceName": "ProfiseeRESTAPI_Members_Get",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
@@ -1083,7 +1083,7 @@
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Get')]",
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Get')]",
 				"[concat(variables('factoryId'), '/datasets/OutputBlobCsv')]"
 			]
 		},
@@ -1250,7 +1250,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Get",
+								"referenceName": "ProfiseeRESTAPI_Members_Get",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
@@ -1309,7 +1309,7 @@
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Get')]",
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Get')]",
 				"[concat(variables('factoryId'), '/datasets/OutputBlobJson')]"
 			]
 		},
@@ -1433,7 +1433,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Update",
+								"referenceName": "ProfiseeRESTAPI_Members_Update",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": "addresstest",
@@ -1451,7 +1451,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]",
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Update')]"
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Update')]"
 			]
 		},
 		{
@@ -1615,6 +1615,7 @@
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for CSV files.",
 				"linkedServiceName": {
 					"referenceName": "BlobStorageGen2",
 					"type": "LinkedServiceReference"
@@ -1657,6 +1658,7 @@
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for JSON files.",
 				"linkedServiceName": {
 					"referenceName": "BlobStorageGen2",
 					"type": "LinkedServiceReference"
@@ -1695,6 +1697,7 @@
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for CSV files.",
 				"linkedServiceName": {
 					"referenceName": "BlobStorageGen2",
 					"type": "LinkedServiceReference"
@@ -1744,6 +1747,7 @@
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for JSON files.",
 				"linkedServiceName": {
 					"referenceName": "BlobStorageGen2",
 					"type": "LinkedServiceReference"
@@ -1785,10 +1789,11 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Get')]",
+			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Members_Get')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Profisee members get REST API call.",
 				"linkedServiceName": {
 					"referenceName": "Profisee REST API",
 					"type": "LinkedServiceReference"
@@ -1833,10 +1838,11 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Update')]",
+			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Members_Update')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Profisee members update REST API call.",
 				"linkedServiceName": {
 					"referenceName": "Profisee REST API",
 					"type": "LinkedServiceReference"
@@ -2160,6 +2166,7 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container.",
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
@@ -2177,6 +2184,7 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Profisee REST API",
 				"annotations": [],
 				"type": "RestService",
 				"typeProperties": {
