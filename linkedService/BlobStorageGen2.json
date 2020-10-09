@@ -7,6 +7,7 @@
 		"typeProperties": {
 			"url": "https://brianbastorageadlsgen2.dfs.core.windows.net",
 			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkJSSUFOQkEtQURGXzkzZDZhMjkyLTViYWUtNDYzZS1hNjk4LWQ4Y2Y1ZjY4NWYyNSINCn0="
-		}
+		},
+		"description": "Azure Data Lake Storage Gen2 container."
 	}
 }
