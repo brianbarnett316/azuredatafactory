@@ -41,15 +41,6 @@
 		"Salesforce1_properties_typeProperties_username": {
 			"value": "tye3950@yahoo.com"
 		},
-		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName": {
-			"value": "@triggerBody().FileName"
-		},
-		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder": {
-			"value": "@triggerBody().FolderPath"
-		},
-		"NewJsonMemberFile_properties_typeProperties_scope": {
-			"value": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
-		},
 		"NewCsvMemberFile_properties_Ingress Staging Area CSV to REST API_parameters_FileName": {
 			"value": "@triggerBody().FileName"
 		},
@@ -57,6 +48,15 @@
 			"value": "@triggerBody().FolderPath"
 		},
 		"NewCsvMemberFile_properties_typeProperties_scope": {
+			"value": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
+		},
+		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName": {
+			"value": "@triggerBody().FileName"
+		},
+		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder": {
+			"value": "@triggerBody().FolderPath"
+		},
+		"NewJsonMemberFile_properties_typeProperties_scope": {
 			"value": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		}
 	}
