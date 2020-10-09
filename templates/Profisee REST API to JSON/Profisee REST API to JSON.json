@@ -42,7 +42,7 @@
 								"requestInterval": "00.00:00:00.010",
 								"requestMethod": "GET",
 								"additionalHeaders": {
-									"x-api-key": "<api key>"
+									"x-api-key": ""
 								},
 								"paginationRules": {
 									"AbsoluteUrl": "$.nextPage"
@@ -66,10 +66,10 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
-										"value": "@pipeline().parameters.EntityName",
+										"value": "@variables('EntityName')",
 										"type": "Expression"
 									},
-									"pageSize": 50,
+									"pageSize": 1000,
 									"attributes": " ",
 									"filter": " ",
 									"orderBy": " ",
@@ -83,15 +83,15 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"FileSystem": {
-										"value": "@variables('OutputContainer')",
+										"value": "",
 										"type": "Expression"
 									},
 									"Directory": {
-										"value": "@pipeline().parameters.EntityName",
+										"value": "@variables('EntityName')",
 										"type": "Expression"
 									},
 									"FileName": {
-										"value": "@concat(pipeline().parameters.EntityName, '_', string(utcnow()), '.json')",
+										"value": "@concat(@variables('EntityName'), '_', string(utcnow()), '.json')",
 										"type": "Expression"
 									}
 								}
@@ -99,23 +99,11 @@
 						]
 					}
 				],
-				"parameters": {
-					"EntityName": {
-						"type": "string"
-					}
-				},
 				"variables": {
-					"InputContainer": {
+					"EntityName": {
 						"type": "String",
-						"defaultValue": "profisee-input"
-					},
-					"OutputContainer": {
-						"type": "String",
-						"defaultValue": "profisee-output"
+						"defaultValue": ""
 					}
-				},
-				"folder": {
-					"name": "REST API"
 				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
