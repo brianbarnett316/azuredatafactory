@@ -82,7 +82,7 @@
 								"referenceName": "OutputBlobJson",
 								"type": "DatasetReference",
 								"parameters": {
-									"FileSystem": {
+									"Container": {
 										"value": "",
 										"type": "Expression"
 									},
@@ -171,7 +171,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
-					"FileSystem": {
+					"Container": {
 						"type": "string"
 					},
 					"Directory": {
@@ -194,8 +194,8 @@
 							"value": "@dataset().Directory",
 							"type": "Expression"
 						},
-						"fileSystem": {
-							"value": "@dataset().FileSystem",
+						"container": {
+							"value": "@dataset().Container",
 							"type": "Expression"
 						}
 					}
