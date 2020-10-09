@@ -1,6 +1,7 @@
 {
 	"name": "OutputBlobJson",
 	"properties": {
+		"description": "Azure Data Lake Storage Gen2 container for JSON files.",
 		"linkedServiceName": {
 			"referenceName": "BlobStorageGen2",
 			"type": "LinkedServiceReference"

@@ -1,6 +1,7 @@
 {
-	"name": "ProfiseeRESTAPI_Get",
+	"name": "ProfiseeRESTAPI_Members_Get",
 	"properties": {
+		"description": "Profisee members get REST API call.",
 		"linkedServiceName": {
 			"referenceName": "Profisee REST API",
 			"type": "LinkedServiceReference"

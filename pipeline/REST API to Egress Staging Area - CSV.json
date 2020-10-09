@@ -247,7 +247,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ProfiseeRESTAPI_Get",
+						"referenceName": "ProfiseeRESTAPI_Members_Get",
 						"type": "DatasetReference",
 						"parameters": {
 							"entityId": {

@@ -1,6 +1,7 @@
 {
 	"name": "OutputBlobCsv",
 	"properties": {
+		"description": "Azure Data Lake Storage Gen2 container for CSV files.",
 		"linkedServiceName": {
 			"referenceName": "BlobStorageGen2",
 			"type": "LinkedServiceReference"

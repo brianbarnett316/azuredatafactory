@@ -1,6 +1,7 @@
 {
-	"name": "ProfiseeRESTAPI_Update",
+	"name": "ProfiseeRESTAPI_Members_Update",
 	"properties": {
+		"description": "Profisee members update REST API call.",
 		"linkedServiceName": {
 			"referenceName": "Profisee REST API",
 			"type": "LinkedServiceReference"
