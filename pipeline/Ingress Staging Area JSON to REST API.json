@@ -83,7 +83,7 @@
 				"typeProperties": {
 					"variableName": "EntityName",
 					"value": {
-						"value": "@replace(pipeline().parameters.FileFolder, concat(variables('InputContainer'),'/'), '')",
+						"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
 						"type": "Expression"
 					}
 				}
@@ -100,14 +100,6 @@
 		"variables": {
 			"EntityName": {
 				"type": "String"
-			},
-			"InputContainer": {
-				"type": "String",
-				"defaultValue": "profisee-input"
-			},
-			"OutputContainer": {
-				"type": "String",
-				"defaultValue": "profisee-output"
 			}
 		},
 		"folder": {
