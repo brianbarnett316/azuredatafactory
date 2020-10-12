@@ -12,7 +12,7 @@
 			},
 			"pageSize": {
 				"type": "int",
-				"defaultValue": 50
+				"defaultValue": 1000
 			},
 			"attributes": {
 				"type": "string",
