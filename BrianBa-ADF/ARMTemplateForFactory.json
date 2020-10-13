@@ -2523,7 +2523,7 @@
 								"referenceName": "OutputBlobJson1",
 								"type": "DatasetReference",
 								"parameters": {
-									"Container": "profisee-input",
+									"Container": "profisee-output",
 									"Directory": {
 										"value": "@variables('EntityName')",
 										"type": "Expression"
