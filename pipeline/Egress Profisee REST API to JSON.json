@@ -1,0 +1,118 @@
+{
+	"name": "Egress Profisee REST API to JSON",
+	"properties": {
+		"activities": [
+			{
+				"name": "Profisee REST API to JSON",
+				"description": "Copy member data from Profisee via the REST API to ADLS Gen2 in JSON format.",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"additionalHeaders": {
+							"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+						},
+						"paginationRules": {
+							"AbsoluteUrl": "$.nextPage"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "arrayOfObjects"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['code']"
+								},
+								"sink": {
+									"path": "$.code"
+								}
+							},
+							{
+								"source": {
+									"path": "['name']"
+								},
+								"sink": {
+									"path": "$.name"
+								}
+							},
+							{
+								"source": {
+									"path": "['productSubCategory']"
+								},
+								"sink": {
+									"path": "$.productSubCategory"
+								}
+							}
+						],
+						"collectionReference": "$['data']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ProfiseeRESTAPI_Members_Get1",
+						"type": "DatasetReference",
+						"parameters": {
+							"entityId": {
+								"value": "@variables('EntityName')",
+								"type": "Expression"
+							},
+							"pageSize": 1000,
+							"attributes": " ",
+							"filter": " ",
+							"orderBy": " ",
+							"dbaFormat": 1
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "OutputBlobJson1",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": "profisee-input",
+							"Directory": {
+								"value": "@variables('EntityName')",
+								"type": "Expression"
+							},
+							"FileName": {
+								"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.json')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"variables": {
+			"EntityName": {
+				"type": "String",
+				"defaultValue": "Product"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-25T15:29:08Z"
+	}
+}
