@@ -1,0 +1,561 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "BrianBa-ADF"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Ingress Staging Area JSON to REST API')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Update JSON to REST API",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Set EntityName variable",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"sink": {
+								"type": "RestSink",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": 10,
+								"requestMethod": "PATCH",
+								"writeBatchSize": 10000,
+								"additionalHeaders": {
+									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+								},
+								"httpCompressionType": "none"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "InputBlobJson",
+								"type": "DatasetReference",
+								"parameters": {
+									"FolderName": {
+										"value": "@pipeline().parameters.FileFolder",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@pipeline().parameters.FileName",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Members_Update",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"isUpsert": true
+								}
+							}
+						]
+					},
+					{
+						"name": "Set EntityName variable",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "EntityName",
+							"value": {
+								"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					},
+					"FileFolder": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"EntityName": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "REST API"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/InputBlobJson')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/InputBlobCsv')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for CSV format.",
+				"linkedServiceName": {
+					"referenceName": "BlobStorageGen2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FolderName": {
+						"type": "string"
+					},
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().FolderName",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/InputBlobJson')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for JSON format.",
+				"linkedServiceName": {
+					"referenceName": "BlobStorageGen2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FolderName": {
+						"type": "string"
+					},
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().FolderName",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OutputBlobCsv')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for CSV format.",
+				"linkedServiceName": {
+					"referenceName": "BlobStorageGen2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Container": {
+						"type": "string"
+					},
+					"Directory": {
+						"type": "string"
+					},
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().Container",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OutputBlobJson')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for JSON format.",
+				"linkedServiceName": {
+					"referenceName": "BlobStorageGen2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Container": {
+						"type": "string"
+					},
+					"Directory": {
+						"type": "string"
+					},
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().Container",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Members_Get')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Profisee members get REST API call.",
+				"linkedServiceName": {
+					"referenceName": "Profisee REST API",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"entityId": {
+						"type": "string"
+					},
+					"pageSize": {
+						"type": "int",
+						"defaultValue": 1000
+					},
+					"attributes": {
+						"type": "string",
+						"defaultValue": " "
+					},
+					"filter": {
+						"type": "string",
+						"defaultValue": " "
+					},
+					"orderBy": {
+						"type": "string",
+						"defaultValue": " "
+					},
+					"dbaFormat": {
+						"type": "int",
+						"defaultValue": 1
+					}
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@concat('members/',\ndataset().entityId, \n'/?pageSize=', string(dataset().pageSize),\n'&attributes=', dataset().attributes,\n'&filter=', dataset().filter,\n'&orderBy=', dataset().orderBy,\n'&dbaFormat=', string(dataset().dbaFormat)\n)",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Members_Get1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Profisee members get REST API call.",
+				"linkedServiceName": {
+					"referenceName": "Profisee REST API",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"entityId": {
+						"type": "string"
+					},
+					"pageSize": {
+						"type": "int",
+						"defaultValue": 1000
+					},
+					"attributes": {
+						"type": "string",
+						"defaultValue": " "
+					},
+					"filter": {
+						"type": "string",
+						"defaultValue": " "
+					},
+					"orderBy": {
+						"type": "string",
+						"defaultValue": " "
+					},
+					"dbaFormat": {
+						"type": "int",
+						"defaultValue": 1
+					}
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@concat('members/',\ndataset().entityId, \n'/?pageSize=', string(dataset().pageSize),\n'&attributes=', dataset().attributes,\n'&filter=', dataset().filter,\n'&orderBy=', dataset().orderBy,\n'&dbaFormat=', string(dataset().dbaFormat)\n)",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OutputBlobJson1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for JSON format.",
+				"linkedServiceName": {
+					"referenceName": "BlobStorageGen2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Container": {
+						"type": "string"
+					},
+					"Directory": {
+						"type": "string"
+					},
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().Container",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Egress Profisee REST API to JSON')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Profisee REST API to JSON",
+						"description": "Copy member data from Profisee via the REST API to ADLS Gen2 in JSON format.",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"additionalHeaders": {
+									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+								},
+								"paginationRules": {
+									"AbsoluteUrl": "$.nextPage"
+								}
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings",
+									"filePattern": "arrayOfObjects"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['code']"
+										},
+										"sink": {
+											"path": "$.code"
+										}
+									},
+									{
+										"source": {
+											"path": "[['name']"
+										},
+										"sink": {
+											"path": "$.name"
+										}
+									},
+									{
+										"source": {
+											"path": "[['productSubCategory']"
+										},
+										"sink": {
+											"path": "$.productSubCategory"
+										}
+									}
+								],
+								"collectionReference": "$['data']"
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Members_Get1",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"pageSize": 1000,
+									"attributes": " ",
+									"filter": " ",
+									"orderBy": " ",
+									"dbaFormat": 1
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OutputBlobJson1",
+								"type": "DatasetReference",
+								"parameters": {
+									"Container": "profisee-input",
+									"Directory": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.json')",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"variables": {
+					"EntityName": {
+						"type": "String",
+						"defaultValue": "Product"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Get1')]",
+				"[concat(variables('factoryId'), '/datasets/OutputBlobJson1')]"
+			]
+		}
+	]
+}
