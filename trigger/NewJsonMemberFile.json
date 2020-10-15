@@ -13,6 +13,16 @@
 					"FileName": "@triggerBody().FileName",
 					"FileFolder": "@triggerBody().FolderPath"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Ingress JSON to Profisee REST API",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"FileName": "@triggerBody().FileName",
+					"FileFolder": "@triggerBody().FolderPath"
+				}
 			}
 		],
 		"type": "BlobEventsTrigger",
