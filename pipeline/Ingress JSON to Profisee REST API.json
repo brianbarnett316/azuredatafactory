@@ -1,7 +1,6 @@
 {
 	"name": "Ingress JSON to Profisee REST API",
 	"properties": {
-		"description": "task123",
 		"activities": [
 			{
 				"name": "Update JSON to REST API",
