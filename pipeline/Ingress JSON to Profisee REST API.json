@@ -1,6 +1,7 @@
 {
 	"name": "Ingress JSON to Profisee REST API",
 	"properties": {
+		"description": "task123",
 		"activities": [
 			{
 				"name": "Update JSON to REST API",
@@ -59,19 +60,6 @@
 								"value": "@pipeline().parameters.FileName",
 								"type": "Expression"
 							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ProfiseeRESTAPI_Members_Update1",
-						"type": "DatasetReference",
-						"parameters": {
-							"entityId": {
-								"value": "@variables('EntityName')",
-								"type": "Expression"
-							},
-							"isUpsert": true
 						}
 					}
 				]
