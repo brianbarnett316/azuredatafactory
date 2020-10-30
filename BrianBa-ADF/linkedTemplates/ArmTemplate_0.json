@@ -243,6 +243,45 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/InputBlobJson1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for JSON format.",
+				"linkedServiceName": {
+					"referenceName": "BlobStorageGen2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FolderName": {
+						"type": "string"
+					},
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().FolderName",
+							"type": "Expression"
+						}
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BlobStorageGen2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/OutputBlobCsv')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -294,6 +333,52 @@
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/OutputBlobJson')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for JSON format.",
+				"linkedServiceName": {
+					"referenceName": "BlobStorageGen2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Container": {
+						"type": "string"
+					},
+					"Directory": {
+						"type": "string"
+					},
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().Container",
+							"type": "Expression"
+						}
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BlobStorageGen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OutputBlobJson1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -703,101 +788,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Members_Get1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Profisee members get REST API call.",
-				"linkedServiceName": {
-					"referenceName": "Profisee REST API",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"entityId": {
-						"type": "string"
-					},
-					"pageSize": {
-						"type": "int",
-						"defaultValue": 1000
-					},
-					"attributes": {
-						"type": "string",
-						"defaultValue": " "
-					},
-					"filter": {
-						"type": "string",
-						"defaultValue": " "
-					},
-					"orderBy": {
-						"type": "string",
-						"defaultValue": " "
-					},
-					"dbaFormat": {
-						"type": "int",
-						"defaultValue": 1
-					}
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {
-					"relativeUrl": {
-						"value": "@concat('members/',\ndataset().entityId, \n'/?pageSize=', string(dataset().pageSize),\n'&attributes=', dataset().attributes,\n'&filter=', dataset().filter,\n'&orderBy=', dataset().orderBy,\n'&dbaFormat=', string(dataset().dbaFormat)\n)",
-						"type": "Expression"
-					}
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Profisee REST API')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OutputBlobJson1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Azure Data Lake Storage Gen2 container for JSON format.",
-				"linkedServiceName": {
-					"referenceName": "BlobStorageGen2",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"Container": {
-						"type": "string"
-					},
-					"Directory": {
-						"type": "string"
-					},
-					"FileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": {
-							"value": "@dataset().FileName",
-							"type": "Expression"
-						},
-						"folderPath": {
-							"value": "@dataset().Directory",
-							"type": "Expression"
-						},
-						"fileSystem": {
-							"value": "@dataset().Container",
-							"type": "Expression"
-						}
-					}
-				},
-				"schema": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BlobStorageGen2')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Ingress Staging Area CSV to REST API')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -895,60 +885,6 @@
 									},
 									{
 										"source": {
-											"name": "style",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['style']"
-										}
-									},
-									{
-										"source": {
-											"name": "country",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['country']"
-										}
-									},
-									{
-										"source": {
-											"name": "standardCost",
-											"type": "Double"
-										},
-										"sink": {
-											"path": "$['standardCost']"
-										}
-									},
-									{
-										"source": {
-											"name": "safetyStockLevel",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['safetyStockLevel']"
-										}
-									},
-									{
-										"source": {
-											"name": "reorderPoint",
-											"type": "Double"
-										},
-										"sink": {
-											"path": "$['reorderPoint']"
-										}
-									},
-									{
-										"source": {
-											"name": "msrp",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['msrp']"
-										}
-									},
-									{
-										"source": {
 											"name": "weight",
 											"type": "Double"
 										},
@@ -958,47 +894,11 @@
 									},
 									{
 										"source": {
-											"name": "dealerCost",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['dealerCost']"
-										}
-									},
-									{
-										"source": {
-											"name": "sellStartDate",
-											"type": "DateTime"
-										},
-										"sink": {
-											"path": "$['sellStartDate']"
-										}
-									},
-									{
-										"source": {
 											"name": "sellEndDate",
 											"type": "DateTime"
 										},
 										"sink": {
 											"path": "$['sellEndDate']"
-										}
-									},
-									{
-										"source": {
-											"name": "productLine",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['productLine']"
-										}
-									},
-									{
-										"source": {
-											"name": "size",
-											"type": "Double"
-										},
-										"sink": {
-											"path": "$['size']"
 										}
 									}
 								]
