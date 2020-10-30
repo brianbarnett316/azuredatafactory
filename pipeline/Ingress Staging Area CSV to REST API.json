@@ -94,60 +94,6 @@
 							},
 							{
 								"source": {
-									"name": "style",
-									"type": "String"
-								},
-								"sink": {
-									"path": "$['style']"
-								}
-							},
-							{
-								"source": {
-									"name": "country",
-									"type": "String"
-								},
-								"sink": {
-									"path": "$['country']"
-								}
-							},
-							{
-								"source": {
-									"name": "standardCost",
-									"type": "Double"
-								},
-								"sink": {
-									"path": "$['standardCost']"
-								}
-							},
-							{
-								"source": {
-									"name": "safetyStockLevel",
-									"type": "String"
-								},
-								"sink": {
-									"path": "$['safetyStockLevel']"
-								}
-							},
-							{
-								"source": {
-									"name": "reorderPoint",
-									"type": "Double"
-								},
-								"sink": {
-									"path": "$['reorderPoint']"
-								}
-							},
-							{
-								"source": {
-									"name": "msrp",
-									"type": "String"
-								},
-								"sink": {
-									"path": "$['msrp']"
-								}
-							},
-							{
-								"source": {
 									"name": "weight",
 									"type": "Double"
 								},
@@ -157,47 +103,11 @@
 							},
 							{
 								"source": {
-									"name": "dealerCost",
-									"type": "String"
-								},
-								"sink": {
-									"path": "$['dealerCost']"
-								}
-							},
-							{
-								"source": {
-									"name": "sellStartDate",
-									"type": "DateTime"
-								},
-								"sink": {
-									"path": "$['sellStartDate']"
-								}
-							},
-							{
-								"source": {
 									"name": "sellEndDate",
 									"type": "DateTime"
 								},
 								"sink": {
 									"path": "$['sellEndDate']"
-								}
-							},
-							{
-								"source": {
-									"name": "productLine",
-									"type": "String"
-								},
-								"sink": {
-									"path": "$['productLine']"
-								}
-							},
-							{
-								"source": {
-									"name": "size",
-									"type": "Double"
-								},
-								"sink": {
-									"path": "$['size']"
 								}
 							}
 						]
