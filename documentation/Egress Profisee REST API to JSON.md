@@ -14,35 +14,35 @@ The template will create a folder for the entity and copy the file to
 that folder. The file name is composed of the entity name and date/time
 in UTC with the .json extension.
 
-<img src="./media/image1.png" style="width:3.80106in;height:2.44509in" />
+<img src="./media/egress_1.png" style="width:3.80106in;height:2.44509in" />
 
 **How to use this solution template**
 
 1.  Go to the **Egress Profisee REST API to JSON** template.
 
-> <img src="./media/image2.png" style="width:3.18497in;height:2.18351in" />
+> <img src="./media/egress_2.png" style="width:3.18497in;height:2.18351in" />
 
 1.  Create a **New** or use an existing connection to the source
     Profisee REST API.
 
-> <img src="./media/image3.png" style="width:6.5in;height:3.32569in" />
+> <img src="./media/egress_3.png" style="width:6.5in;height:3.32569in" />
 
 1.  Create a **New** or use an existing connection to the ADLS Gen2 sink
     data store that you are copying data to.
 
-> <img src="./media/image4.png" style="width:6.5in;height:3.32569in" />
+> <img src="./media/egress_4.png" style="width:6.5in;height:3.32569in" />
 
 1.  Select **Use this template**.
 
-> <img src="./media/image5.png" style="width:6.5in;height:3.725in" />
+> <img src="./media/egress_5.png" style="width:6.5in;height:3.725in" />
 
 1.  You will see a pipeline created as shown in the following example:
 
-> <img src="./media/image6.png" style="width:3.86928in;height:4.53896in" />
+> <img src="./media/egress_6.png" style="width:3.86928in;height:4.53896in" />
 >
 > You should also see the following template validation output.
 >
-> <img src="./media/image7.png" style="width:2.81309in;height:1.19481in" />
+> <img src="./media/egress_7.png" style="width:2.81309in;height:1.19481in" />
 >
 > There are three items needed for the pipeline, two of them are
 > mentioned above.
@@ -50,7 +50,7 @@ in UTC with the .json extension.
 1.  **EntityName:** The entity you are copying member data for. This is
     entered in the pipeline Variables tab.
 
-> <img src="./media/image8.png" style="width:4.27103in;height:2.09034in" />
+> <img src="./media/egress_8.png" style="width:4.27103in;height:2.09034in" />
 
 1.  **x-api-key:** The Profisee API key, which is the Client Id for the
     user account you are using to connect to the Profisee API. This is
@@ -58,12 +58,12 @@ in UTC with the .json extension.
     will be an option in the Linked Service dialog when creating the
     REST API connection. We will update this documentation at that time.
 
-> <img src="./media/image9.png" style="width:2.96789in;height:3.50613in" />
+> <img src="./media/egress_9.png" style="width:2.96789in;height:3.50613in" />
 
 1.  **Container:** The output container name. This is entered in the
     Sink tab.
 
-> <img src="./media/image10.png" style="width:4.42244in;height:2.93506in" />
+> <img src="./media/egress_10.png" style="width:4.42244in;height:2.93506in" />
 
 1.  Select **Mapping** tab to map the member data result properties to
     the corresponding JSON column.
@@ -72,39 +72,39 @@ in UTC with the .json extension.
 > confirm the value of the pipeline parameter for the EntityName. Click
 > **OK**.
 >
-> <img src="./media/image11.png" style="width:3.72727in;height:3.12677in" />
+> <img src="./media/egress_11.png" style="width:3.72727in;height:3.12677in" />
 >
 > After a couple of seconds, you will see a list of mapping fields
 > listed, as shown in the following example.
 >
-> <img src="./media/image12.png" style="width:6.5in;height:4.37361in" />
+> <img src="./media/egress_12.png" style="width:6.5in;height:4.37361in" />
 >
 > Next, select **data** from the **Collection reference** drop down
 > list. The **data** property is the array of member data.
 >
-> <img src="./media/image13.png" style="width:3.70779in;height:0.45753in" />
+> <img src="./media/egress_13.png" style="width:3.70779in;height:0.45753in" />
 >
 > Unselect the Include checkboxes for the pageNbr, pageSize,
 > resultCount, totalPages, totalRecords, and nextPage properties as we
 > are not going to be copying them to the file.
 >
-> <img src="./media/image14.png" style="width:5.29221in;height:1.43161in" />
+> <img src="./media/egress_14.png" style="width:5.29221in;height:1.43161in" />
 >
 > After selecting the data collection reference, you need to correct the
 > Column names for each property you want to copy. **Note:** Microsoft
-> may change this to default to the correct Column names.
+> may change this to default to the correct Column name.
 >
 > From this
 >
-> <img src="./media/image15.png" style="width:6.08442in;height:0.53369in" />
+> <img src="./media/egress_15.png" style="width:6.08442in;height:0.53369in" />
 >
 > To this
 >
-> <img src="./media/image16.png" style="width:6.06936in;height:0.55701in" />
+> <img src="./media/egress_16.png" style="width:6.06936in;height:0.55701in" />
 
 1.  Once you are finished with all your changes, click Publish All.
 
-> <img src="./media/image17.png" style="width:1.36994in;height:0.29043in" />
+> <img src="./media/egress_17.png" style="width:1.36994in;height:0.29043in" />
 
 1.  To run the pipeline now, select **Add Trigger** and select **Trigger
     now**. Press **OK** at the Pipeline run prompt.
@@ -115,12 +115,12 @@ in UTC with the .json extension.
 3.  When the pipeline run completes successfully, you would see results
     like the following example:
 
-> <img src="./media/image18.png" style="width:6.58743in;height:1.22388in" />
+> <img src="./media/egress_18.png" style="width:6.58743in;height:1.22388in" />
 
 1.  You should also see the output file in the Container and Directory
     you entered.
 
-> <img src="./media/image19.png" style="width:5.20896in;height:1.95756in" />
+> <img src="./media/egress_19.png" style="width:5.20896in;height:1.95756in" />
 
 Source parameters
 -----------------
@@ -206,7 +206,7 @@ Source parameters
 >
 > }
 
-<img src="./media/image20.png" style="width:5.80347in;height:2.59172in" />
+<img src="./media/egress_20.png" style="width:5.80347in;height:2.59172in" />
 
 Sink parameters
 ---------------
@@ -214,7 +214,7 @@ Sink parameters
 > You can customize the directory and file name by changing the template
 > values for the following parameters.
 >
-> <img src="./media/image21.png" style="width:5.26119in;height:1.82174in" />
+> <img src="./media/egress_21.png" style="width:5.26119in;height:1.82174in" />
 
 Next steps
 ----------
