@@ -92,7 +92,7 @@ in UTC with the .json extension.
 >
 > After selecting the data collection reference, you need to correct the
 > Column names for each property you want to copy. **Note:** Microsoft
-> may change this to default to the correct Column name.
+> may change this to default to the correct Column names.
 >
 > From this
 >
