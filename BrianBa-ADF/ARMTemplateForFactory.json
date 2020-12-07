@@ -7,10 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "BrianBa-ADF"
 		},
-		"BlobStorage_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'BlobStorage'"
-		},
 		"BlobStorageGen2_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'BlobStorageGen2'"
@@ -18,10 +14,6 @@
 		"ProfiseeSql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ProfiseeSql'"
-		},
-		"REST Output_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'REST Output'"
 		},
 		"Salesforce1_password": {
 			"type": "secureString",
@@ -31,10 +23,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'securityToken' of 'Salesforce1'"
 		},
-		"BlobStorage_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://brianbastorage.dfs.core.windows.net"
-		},
 		"BlobStorageGen2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://brianbastorageadlsgen2.dfs.core.windows.net"
@@ -42,10 +30,6 @@
 		"Profisee REST API_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "http://restpreview.dev.profisee.com/Profisee/rest"
-		},
-		"REST Output_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://brianbastorage.dfs.core.windows.net"
 		},
 		"Salesforce1_properties_typeProperties_environmentUrl": {
 			"type": "string",
@@ -2132,23 +2116,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/BlobStorage')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('BlobStorage_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('BlobStorage_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/BlobStorageGen2')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -2191,23 +2158,6 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('ProfiseeSql_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/REST Output')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('REST Output_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('REST Output_accountKey')]"
-					}
 				}
 			},
 			"dependsOn": []

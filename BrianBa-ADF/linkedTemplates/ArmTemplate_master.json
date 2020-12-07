@@ -7,10 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "BrianBa-ADF"
 		},
-		"BlobStorage_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'BlobStorage'"
-		},
 		"BlobStorageGen2_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'BlobStorageGen2'"
@@ -18,10 +14,6 @@
 		"ProfiseeSql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ProfiseeSql'"
-		},
-		"REST Output_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'REST Output'"
 		},
 		"Salesforce1_password": {
 			"type": "secureString",
@@ -31,10 +23,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'securityToken' of 'Salesforce1'"
 		},
-		"BlobStorage_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://brianbastorage.dfs.core.windows.net"
-		},
 		"BlobStorageGen2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://brianbastorageadlsgen2.dfs.core.windows.net"
@@ -42,10 +30,6 @@
 		"Profisee REST API_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "http://restpreview.dev.profisee.com/Profisee/rest"
-		},
-		"REST Output_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://brianbastorage.dfs.core.windows.net"
 		},
 		"Salesforce1_properties_typeProperties_environmentUrl": {
 			"type": "string",
@@ -106,17 +90,11 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"BlobStorage_accountKey": {
-						"value": "[parameters('BlobStorage_accountKey')]"
-					},
 					"BlobStorageGen2_accountKey": {
 						"value": "[parameters('BlobStorageGen2_accountKey')]"
 					},
 					"ProfiseeSql_connectionString": {
 						"value": "[parameters('ProfiseeSql_connectionString')]"
-					},
-					"REST Output_accountKey": {
-						"value": "[parameters('REST Output_accountKey')]"
 					},
 					"Salesforce1_password": {
 						"value": "[parameters('Salesforce1_password')]"
@@ -124,17 +102,11 @@
 					"Salesforce1_securityToken": {
 						"value": "[parameters('Salesforce1_securityToken')]"
 					},
-					"BlobStorage_properties_typeProperties_url": {
-						"value": "[parameters('BlobStorage_properties_typeProperties_url')]"
-					},
 					"BlobStorageGen2_properties_typeProperties_url": {
 						"value": "[parameters('BlobStorageGen2_properties_typeProperties_url')]"
 					},
 					"Profisee REST API_properties_typeProperties_url": {
 						"value": "[parameters('Profisee REST API_properties_typeProperties_url')]"
-					},
-					"REST Output_properties_typeProperties_url": {
-						"value": "[parameters('REST Output_properties_typeProperties_url')]"
 					},
 					"Salesforce1_properties_typeProperties_environmentUrl": {
 						"value": "[parameters('Salesforce1_properties_typeProperties_environmentUrl')]"

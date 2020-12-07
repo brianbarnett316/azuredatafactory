@@ -7,10 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "BrianBa-ADF"
 		},
-		"BlobStorage_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'BlobStorage'"
-		},
 		"BlobStorageGen2_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'BlobStorageGen2'"
@@ -18,10 +14,6 @@
 		"ProfiseeSql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ProfiseeSql'"
-		},
-		"REST Output_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'REST Output'"
 		},
 		"Salesforce1_password": {
 			"type": "secureString",
@@ -31,10 +23,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'securityToken' of 'Salesforce1'"
 		},
-		"BlobStorage_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://brianbastorage.dfs.core.windows.net"
-		},
 		"BlobStorageGen2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://brianbastorageadlsgen2.dfs.core.windows.net"
@@ -42,10 +30,6 @@
 		"Profisee REST API_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "http://restpreview.dev.profisee.com/Profisee/rest"
-		},
-		"REST Output_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://brianbastorage.dfs.core.windows.net"
 		},
 		"Salesforce1_properties_typeProperties_environmentUrl": {
 			"type": "string",
@@ -60,23 +44,6 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/BlobStorage')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('BlobStorage_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('BlobStorage_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/BlobStorageGen2')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -120,23 +87,6 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('ProfiseeSql_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/REST Output')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('REST Output_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('REST Output_accountKey')]"
-					}
 				}
 			},
 			"dependsOn": []
@@ -1530,6 +1480,252 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Get')]",
 				"[concat(variables('factoryId'), '/datasets/OutputBlobCsv')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/REST API to Egress Staging Area - JSON')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "REST API Product to JSON",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"additionalHeaders": {
+									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+								},
+								"paginationRules": {
+									"AbsoluteUrl": "$.nextPage"
+								}
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings",
+									"filePattern": "arrayOfObjects"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['internalId']"
+										},
+										"sink": {
+											"path": "$.internalId"
+										}
+									},
+									{
+										"source": {
+											"path": "[['id']"
+										},
+										"sink": {
+											"path": "$.id"
+										}
+									},
+									{
+										"source": {
+											"path": "[['code']"
+										},
+										"sink": {
+											"path": "$.code"
+										}
+									},
+									{
+										"source": {
+											"path": "[['name']"
+										},
+										"sink": {
+											"path": "$.name"
+										}
+									},
+									{
+										"source": {
+											"path": "[['productSubCategory']"
+										},
+										"sink": {
+											"path": "$.productSubCategory"
+										}
+									},
+									{
+										"source": {
+											"path": "[['standardCost']"
+										},
+										"sink": {
+											"path": "$.standardCost"
+										}
+									},
+									{
+										"source": {
+											"path": "[['msrp']"
+										},
+										"sink": {
+											"path": "$.msrp"
+										}
+									},
+									{
+										"source": {
+											"path": "[['dealerCost']"
+										},
+										"sink": {
+											"path": "$.dealerCost"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellStartDate']"
+										},
+										"sink": {
+											"path": "$.sellStartDate"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellEndDate']"
+										},
+										"sink": {
+											"path": "$.sellEndDate"
+										}
+									},
+									{
+										"source": {
+											"path": "[['changedOn']"
+										},
+										"sink": {
+											"path": "$.changedOn"
+										}
+									},
+									{
+										"source": {
+											"path": "[['changedByUser']"
+										},
+										"sink": {
+											"path": "$.changedByUser"
+										}
+									},
+									{
+										"source": {
+											"path": "[['validationStatus']"
+										},
+										"sink": {
+											"path": "$.validationStatus"
+										}
+									},
+									{
+										"source": {
+											"path": "[['weight']"
+										},
+										"sink": {
+											"path": "$.weight"
+										}
+									}
+								],
+								"collectionReference": "$['data']"
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Members_Get",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": {
+										"value": "@pipeline().parameters.EntityName",
+										"type": "Expression"
+									},
+									"pageSize": 100,
+									"attributes": " ",
+									"filter": " ",
+									"orderBy": " ",
+									"dbaFormat": 1
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OutputBlobJson",
+								"type": "DatasetReference",
+								"parameters": {
+									"Container": {
+										"value": "@variables('OutputContainer')",
+										"type": "Expression"
+									},
+									"Directory": {
+										"value": "@pipeline().parameters.EntityName",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@concat(pipeline().parameters.EntityName, '_', string(utcnow()), '.json')",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"parameters": {
+					"EntityName": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"InputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-input"
+					},
+					"OutputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-output"
+					}
+				},
+				"folder": {
+					"name": "REST API"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Get')]",
+				"[concat(variables('factoryId'), '/datasets/OutputBlobJson')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SalesforceAccount')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Salesforce1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SalesforceObject",
+				"schema": [],
+				"typeProperties": {
+					"objectApiName": "Account"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Salesforce1')]"
 			]
 		}
 	]
