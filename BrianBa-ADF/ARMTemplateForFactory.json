@@ -934,7 +934,7 @@
 										"type": "Expression"
 									},
 									"pageSize": 100,
-									"attributes": "color,class,productSubCategory,sellEndDate,weight",
+									"attributes": " ",
 									"filter": " ",
 									"orderBy": " ",
 									"dbaFormat": 1
