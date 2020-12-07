@@ -1477,7 +1477,7 @@
 										"type": "Expression"
 									},
 									"pageSize": 100,
-									"attributes": " ",
+									"attributes": " color, size, productSubCategory",
 									"filter": " ",
 									"orderBy": " ",
 									"dbaFormat": 1
