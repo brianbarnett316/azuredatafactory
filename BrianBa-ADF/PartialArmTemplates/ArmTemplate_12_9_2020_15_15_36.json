@@ -1,0 +1,424 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "BrianBa-ADF"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Ingress Staging Area CSV to REST API')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Update CSV to REST API",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Set EntityName variable",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "RestSink",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": 10,
+								"requestMethod": "PATCH",
+								"writeBatchSize": 10000,
+								"additionalHeaders": {
+									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+								},
+								"httpCompressionType": "none"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "code",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['code']"
+										}
+									},
+									{
+										"source": {
+											"name": "name",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['name']"
+										}
+									},
+									{
+										"source": {
+											"name": "productSubCategory",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['productSubCategory']"
+										}
+									},
+									{
+										"source": {
+											"name": "color",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['color']"
+										}
+									},
+									{
+										"source": {
+											"name": "class",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['class']"
+										}
+									},
+									{
+										"source": {
+											"name": "weight",
+											"type": "Double"
+										},
+										"sink": {
+											"path": "$['weight']"
+										}
+									},
+									{
+										"source": {
+											"name": "sellEndDate",
+											"type": "DateTime"
+										},
+										"sink": {
+											"path": "$['sellEndDate']"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "InputBlobCsv",
+								"type": "DatasetReference",
+								"parameters": {
+									"FolderName": {
+										"value": "@pipeline().parameters.FileFolder",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@pipeline().parameters.FileName",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Members_Update",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"isUpsert": true
+								}
+							}
+						]
+					},
+					{
+						"name": "Set EntityName variable",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "EntityName",
+							"value": {
+								"value": "@replace(pipeline().parameters.FileFolder, concat(variables('InputContainer'),'/'), '')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					},
+					"FileFolder": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"EntityName": {
+						"type": "String"
+					},
+					"InputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-input"
+					}
+				},
+				"folder": {
+					"name": "REST API"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/REST API to Egress Staging Area - JSON')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "REST API Product to JSON",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"additionalHeaders": {
+									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+								},
+								"paginationRules": {
+									"AbsoluteUrl": "$.nextPage"
+								}
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings",
+									"filePattern": "arrayOfObjects"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['internalId']"
+										},
+										"sink": {
+											"path": "$.internalId"
+										}
+									},
+									{
+										"source": {
+											"path": "[['id']"
+										},
+										"sink": {
+											"path": "$.id"
+										}
+									},
+									{
+										"source": {
+											"path": "[['code']"
+										},
+										"sink": {
+											"path": "$.code"
+										}
+									},
+									{
+										"source": {
+											"path": "[['name']"
+										},
+										"sink": {
+											"path": "$.name"
+										}
+									},
+									{
+										"source": {
+											"path": "[['productSubCategory']"
+										},
+										"sink": {
+											"path": "$.productSubCategory"
+										}
+									},
+									{
+										"source": {
+											"path": "[['standardCost']"
+										},
+										"sink": {
+											"path": "$.standardCost"
+										}
+									},
+									{
+										"source": {
+											"path": "[['msrp']"
+										},
+										"sink": {
+											"path": "$.msrp"
+										}
+									},
+									{
+										"source": {
+											"path": "[['dealerCost']"
+										},
+										"sink": {
+											"path": "$.dealerCost"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellStartDate']"
+										},
+										"sink": {
+											"path": "$.sellStartDate"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellEndDate']"
+										},
+										"sink": {
+											"path": "$.sellEndDate"
+										}
+									},
+									{
+										"source": {
+											"path": "[['changedOn']"
+										},
+										"sink": {
+											"path": "$.changedOn"
+										}
+									},
+									{
+										"source": {
+											"path": "[['changedByUser']"
+										},
+										"sink": {
+											"path": "$.changedByUser"
+										}
+									},
+									{
+										"source": {
+											"path": "[['validationStatus']"
+										},
+										"sink": {
+											"path": "$.validationStatus"
+										}
+									},
+									{
+										"source": {
+											"path": "[['weight']"
+										},
+										"sink": {
+											"path": "$.weight"
+										}
+									}
+								],
+								"collectionReference": "$['data']"
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Members_Get",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"pageSize": 100,
+									"attributes": " ",
+									"filter": " ",
+									"orderBy": " ",
+									"dbaFormat": 1
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OutputBlobJson",
+								"type": "DatasetReference",
+								"parameters": {
+									"Container": {
+										"value": "@variables('OutputContainer')",
+										"type": "Expression"
+									},
+									"Directory": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.json')",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"variables": {
+					"InputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-input"
+					},
+					"OutputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-output"
+					},
+					"EntityName": {
+						"type": "String",
+						"defaultValue": "product"
+					}
+				},
+				"folder": {
+					"name": "REST API"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": []
+		}
+	]
+}
