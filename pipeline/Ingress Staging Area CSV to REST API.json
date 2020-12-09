@@ -168,10 +168,6 @@
 		"variables": {
 			"EntityName": {
 				"type": "String"
-			},
-			"InputContainer": {
-				"type": "String",
-				"defaultValue": "profisee-input"
 			}
 		},
 		"folder": {
