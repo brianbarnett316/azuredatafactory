@@ -1,5 +1,5 @@
 {
-	"name": "Ingress CSV to REST API",
+	"name": "Ingress CSV to Profisee REST API",
 	"properties": {
 		"activities": [
 			{
