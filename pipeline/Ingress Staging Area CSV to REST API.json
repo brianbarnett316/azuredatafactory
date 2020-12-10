@@ -151,7 +151,7 @@
 				"typeProperties": {
 					"variableName": "EntityName",
 					"value": {
-						"value": "@replace(pipeline().parameters.FileFolder, concat(variables('InputContainer'),'/'), '')",
+						"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
 						"type": "Expression"
 					}
 				}
