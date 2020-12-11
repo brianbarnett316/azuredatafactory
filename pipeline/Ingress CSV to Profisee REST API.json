@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "Update CSV to REST API",
+				"description": "Copy member data from ADLS Gen2 in CSV format to Profisee via the Profisee REST API.",
 				"type": "Copy",
 				"dependsOn": [
 					{
