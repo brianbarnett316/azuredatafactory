@@ -112,7 +112,7 @@
 					},
 					"EntityName": {
 						"type": "String",
-						"defaultValue": "product"
+						"defaultValue": null
 					}
 				},
 				"annotations": [],
