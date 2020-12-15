@@ -22,7 +22,7 @@
 						"requestInterval": "00.00:00:00.010",
 						"requestMethod": "GET",
 						"additionalHeaders": {
-							"x-api-key": ""
+							"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
 						},
 						"paginationRules": {
 							"AbsoluteUrl": "$.nextPage"
