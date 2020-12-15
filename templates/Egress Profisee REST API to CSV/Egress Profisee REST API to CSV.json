@@ -111,8 +111,7 @@
 						"defaultValue": "profisee-output"
 					},
 					"EntityName": {
-						"type": "String",
-						"defaultValue": null
+						"type": "String"
 					}
 				},
 				"annotations": [],
