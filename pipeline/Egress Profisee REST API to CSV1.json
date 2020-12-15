@@ -42,6 +42,99 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "['code']"
+								},
+								"sink": {
+									"name": "code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['name']"
+								},
+								"sink": {
+									"name": "name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['color']"
+								},
+								"sink": {
+									"name": "color",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['class']"
+								},
+								"sink": {
+									"name": "class",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['productSubCategory']"
+								},
+								"sink": {
+									"name": "productSubCategory",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['sellEndDate']"
+								},
+								"sink": {
+									"name": "sellEndDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "['weight']"
+								},
+								"sink": {
+									"name": "weight",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "['changedOn']"
+								},
+								"sink": {
+									"name": "changedOn",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "['changedByUser']"
+								},
+								"sink": {
+									"name": "changedByUser",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "$['data']",
 						"mapComplexValuesToString": false
 					}
 				},
