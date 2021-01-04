@@ -47,6 +47,9 @@
 		"NewJsonMemberFile_properties_typeProperties_scope": {
 			"value": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		},
+		"Profisee Preview REST API_properties_typeProperties_url": {
+			"value": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
+		},
 		"containerUri": {
 			"value": ""
 		},
