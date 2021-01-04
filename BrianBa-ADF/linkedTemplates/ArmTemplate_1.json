@@ -37,31 +37,13 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/SalesforceAccount')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Salesforce1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SalesforceObject",
-				"schema": [],
-				"typeProperties": {
-					"objectApiName": "Account"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/REST API direct to Salesforce')]",
+			"name": "[concat(parameters('factoryName'), '/REST API to Egress Staging Area - CSV')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "REST API to Salesforce Accounts",
+						"name": "REST API Product to CSV",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -79,18 +61,22 @@
 								"requestInterval": "00.00:00:00.010",
 								"requestMethod": "GET",
 								"additionalHeaders": {
-									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+									"x-api-key": "93e4de0d436c4630ae0ca0a1780eee14"
 								},
 								"paginationRules": {
 									"AbsoluteUrl": "$.nextPage"
 								}
 							},
 							"sink": {
-								"type": "SalesforceSink",
-								"writeBatchSize": 5000,
-								"writeBehavior": "upsert",
-								"externalIdFieldName": "ProfiseeCode__c",
-								"ignoreNullValues": false
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
 							},
 							"enableStaging": false,
 							"translator": {
@@ -98,10 +84,28 @@
 								"mappings": [
 									{
 										"source": {
+											"path": "[['internalId']"
+										},
+										"sink": {
+											"name": "internalId",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "[['id']"
+										},
+										"sink": {
+											"name": "id",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
 											"path": "[['code']"
 										},
 										"sink": {
-											"name": "ProfiseeCode__c",
+											"name": "code",
 											"type": "String"
 										}
 									},
@@ -110,62 +114,389 @@
 											"path": "[['name']"
 										},
 										"sink": {
-											"name": "Name",
+											"name": "name",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"path": "[['address Input']"
+											"path": "[['productSubCategory']"
 										},
 										"sink": {
-											"name": "ShippingStreet",
+											"name": "productSubCategory",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"path": "[['city Input']"
+											"path": "[['color']"
 										},
 										"sink": {
-											"name": "ShippingCity",
+											"name": "color",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"path": "[['state Input']"
+											"path": "[['class']"
 										},
 										"sink": {
-											"name": "ShippingState",
+											"name": "class",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"path": "[['zip Input']"
+											"path": "[['style']"
 										},
 										"sink": {
-											"name": "ShippingPostalCode",
+											"name": "style",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"path": "[['phone']"
+											"path": "[['country']"
 										},
 										"sink": {
-											"name": "Phone",
+											"name": "country",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"path": "[['website']"
+											"path": "[['standardCost']"
 										},
 										"sink": {
-											"name": "Website",
+											"name": "standardCost",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['safetyStockLevel']"
+										},
+										"sink": {
+											"name": "safetyStockLevel",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['reorderPoint']"
+										},
+										"sink": {
+											"name": "reorderPoint",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['msrp']"
+										},
+										"sink": {
+											"name": "msrp",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['weight']"
+										},
+										"sink": {
+											"name": "weight",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['dealerCost']"
+										},
+										"sink": {
+											"name": "dealerCost",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellStartDate']"
+										},
+										"sink": {
+											"name": "sellStartDate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellEndDate']"
+										},
+										"sink": {
+											"name": "sellEndDate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "[['productLine']"
+										},
+										"sink": {
+											"name": "productLine",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['size']"
+										},
+										"sink": {
+											"name": "size",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['changedOn']"
+										},
+										"sink": {
+											"name": "changedOn",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "[['changedByUser']"
+										},
+										"sink": {
+											"name": "changedByUser",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['validationStatus']"
+										},
+										"sink": {
+											"name": "validationStatus",
+											"type": "Int32"
+										}
+									}
+								],
+								"collectionReference": "$['data']",
+								"mapComplexValuesToString": false
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Members_Get",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"pageSize": 100,
+									"attributes": " ",
+									"filter": " ",
+									"orderBy": " ",
+									"dbaFormat": 1
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OutputBlobCsv",
+								"type": "DatasetReference",
+								"parameters": {
+									"Container": {
+										"value": "@variables('OutputContainer')",
+										"type": "Expression"
+									},
+									"Directory": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.csv')",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"variables": {
+					"OutputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-output"
+					},
+					"EntityName": {
+						"type": "String",
+						"defaultValue": "product"
+					}
+				},
+				"folder": {
+					"name": "REST API"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/REST API to Egress Staging Area - JSON')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "REST API Product to JSON",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"additionalHeaders": {
+									"x-api-key": "93e4de0d436c4630ae0ca0a1780eee14"
+								},
+								"paginationRules": {
+									"AbsoluteUrl": "$.nextPage"
+								}
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings",
+									"filePattern": "arrayOfObjects"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['internalId']"
+										},
+										"sink": {
+											"path": "$.internalId"
+										}
+									},
+									{
+										"source": {
+											"path": "[['id']"
+										},
+										"sink": {
+											"path": "$.id"
+										}
+									},
+									{
+										"source": {
+											"path": "[['code']"
+										},
+										"sink": {
+											"path": "$.code"
+										}
+									},
+									{
+										"source": {
+											"path": "[['name']"
+										},
+										"sink": {
+											"path": "$.name"
+										}
+									},
+									{
+										"source": {
+											"path": "[['productSubCategory']"
+										},
+										"sink": {
+											"path": "$.productSubCategory"
+										}
+									},
+									{
+										"source": {
+											"path": "[['standardCost']"
+										},
+										"sink": {
+											"path": "$.standardCost"
+										}
+									},
+									{
+										"source": {
+											"path": "[['msrp']"
+										},
+										"sink": {
+											"path": "$.msrp"
+										}
+									},
+									{
+										"source": {
+											"path": "[['dealerCost']"
+										},
+										"sink": {
+											"path": "$.dealerCost"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellStartDate']"
+										},
+										"sink": {
+											"path": "$.sellStartDate"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellEndDate']"
+										},
+										"sink": {
+											"path": "$.sellEndDate"
+										}
+									},
+									{
+										"source": {
+											"path": "[['changedOn']"
+										},
+										"sink": {
+											"path": "$.changedOn"
+										}
+									},
+									{
+										"source": {
+											"path": "[['changedByUser']"
+										},
+										"sink": {
+											"path": "$.changedByUser"
+										}
+									},
+									{
+										"source": {
+											"path": "[['validationStatus']"
+										},
+										"sink": {
+											"path": "$.validationStatus"
+										}
+									},
+									{
+										"source": {
+											"path": "[['weight']"
+										},
+										"sink": {
+											"path": "$.weight"
 										}
 									}
 								],
@@ -178,11 +509,11 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
-										"value": "@pipeline().parameters.EntityName",
+										"value": "@variables('EntityName')",
 										"type": "Expression"
 									},
 									"pageSize": 100,
-									"attributes": "Address Input,City Input,State Input,Zip Input,Phone,Website",
+									"attributes": " ",
 									"filter": " ",
 									"orderBy": " ",
 									"dbaFormat": 1
@@ -191,16 +522,34 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "SalesforceAccount",
+								"referenceName": "OutputBlobJson",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"Container": {
+										"value": "@variables('OutputContainer')",
+										"type": "Expression"
+									},
+									"Directory": {
+										"value": "@variables('EntityName')",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.json')",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}
 				],
-				"parameters": {
+				"variables": {
+					"OutputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-output"
+					},
 					"EntityName": {
-						"type": "string"
+						"type": "String",
+						"defaultValue": "product"
 					}
 				},
 				"folder": {
@@ -209,9 +558,7 @@
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Salesforce direct to REST API')]",
@@ -349,9 +696,7 @@
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T16:03:36Z"
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Salesforce to Ingress Staging Area JSON')]",
@@ -504,9 +849,7 @@
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T16:03:36Z"
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/NewCsvMemberFile')]",

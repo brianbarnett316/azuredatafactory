@@ -2160,9 +2160,15 @@
 					"url": "[parameters('Profisee REST API_properties_typeProperties_url')]",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
+				},
+				"connectVia": {
+					"referenceName": "AzureIREastUS",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/AzureIREastUS')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ProfiseeSql')]",
