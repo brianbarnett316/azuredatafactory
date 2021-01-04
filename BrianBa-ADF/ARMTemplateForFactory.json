@@ -27,6 +27,10 @@
 			"type": "string",
 			"defaultValue": "https://brianbastorageadlsgen2.dfs.core.windows.net"
 		},
+		"Profisee Preview REST API_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
+		},
 		"Profisee REST API_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
@@ -62,10 +66,6 @@
 		"NewJsonMemberFile_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
-		},
-		"Profisee Preview REST API_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
 		}
 	},
 	"variables": {
@@ -1717,7 +1717,7 @@
 			"properties": {
 				"description": "Profisee members get REST API call.",
 				"linkedServiceName": {
-					"referenceName": "Profisee Preview REST API",
+					"referenceName": "Profisee REST API",
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
@@ -1756,7 +1756,7 @@
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Profisee Preview REST API')]"
+				"[concat(variables('factoryId'), '/linkedServices/Profisee REST API')]"
 			]
 		},
 		{
@@ -2134,6 +2134,21 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Profisee Preview REST API')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('Profisee Preview REST API_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Profisee REST API')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -2273,21 +2288,6 @@
 							"timeToLive": 0
 						}
 					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Profisee Preview REST API')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "RestService",
-				"typeProperties": {
-					"url": "[parameters('Profisee Preview REST API_properties_typeProperties_url')]",
-					"enableServerCertificateValidation": true,
-					"authenticationType": "Anonymous"
 				}
 			},
 			"dependsOn": []

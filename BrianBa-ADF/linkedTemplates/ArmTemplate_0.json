@@ -27,11 +27,11 @@
 			"type": "string",
 			"defaultValue": "https://brianbastorageadlsgen2.dfs.core.windows.net"
 		},
-		"Profisee REST API_properties_typeProperties_url": {
+		"Profisee Preview REST API_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
 		},
-		"Profisee Preview REST API_properties_typeProperties_url": {
+		"Profisee REST API_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
 		},
@@ -62,6 +62,21 @@
 						"type": "SecureString",
 						"value": "[parameters('BlobStorageGen2_accountKey')]"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Profisee Preview REST API')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('Profisee Preview REST API_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
 				}
 			},
 			"dependsOn": []
@@ -110,21 +125,6 @@
 							"timeToLive": 0
 						}
 					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Profisee Preview REST API')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "RestService",
-				"typeProperties": {
-					"url": "[parameters('Profisee Preview REST API_properties_typeProperties_url')]",
-					"enableServerCertificateValidation": true,
-					"authenticationType": "Anonymous"
 				}
 			},
 			"dependsOn": []
@@ -364,7 +364,7 @@
 			"properties": {
 				"description": "Profisee members get REST API call.",
 				"linkedServiceName": {
-					"referenceName": "Profisee Preview REST API",
+					"referenceName": "Profisee REST API",
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
@@ -403,7 +403,7 @@
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Profisee Preview REST API')]"
+				"[concat(variables('factoryId'), '/linkedServices/Profisee REST API')]"
 			]
 		},
 		{

@@ -27,6 +27,10 @@
 			"type": "string",
 			"defaultValue": "https://brianbastorageadlsgen2.dfs.core.windows.net"
 		},
+		"Profisee Preview REST API_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
+		},
 		"Profisee REST API_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
@@ -62,10 +66,6 @@
 		"NewJsonMemberFile_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
-		},
-		"Profisee Preview REST API_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
 		},
 		"containerUri": {
 			"type": "string",
@@ -109,11 +109,11 @@
 					"BlobStorageGen2_properties_typeProperties_url": {
 						"value": "[parameters('BlobStorageGen2_properties_typeProperties_url')]"
 					},
-					"Profisee REST API_properties_typeProperties_url": {
-						"value": "[parameters('Profisee REST API_properties_typeProperties_url')]"
-					},
 					"Profisee Preview REST API_properties_typeProperties_url": {
 						"value": "[parameters('Profisee Preview REST API_properties_typeProperties_url')]"
+					},
+					"Profisee REST API_properties_typeProperties_url": {
+						"value": "[parameters('Profisee REST API_properties_typeProperties_url')]"
 					},
 					"Salesforce1_properties_typeProperties_environmentUrl": {
 						"value": "[parameters('Salesforce1_properties_typeProperties_environmentUrl')]"
