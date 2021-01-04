@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "http://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1",
+			"url": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
