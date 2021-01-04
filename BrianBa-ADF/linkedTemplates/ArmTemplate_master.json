@@ -29,7 +29,7 @@
 		},
 		"Profisee Preview REST API_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
+			"defaultValue": "http://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
 		},
 		"Profisee REST API_properties_typeProperties_url": {
 			"type": "string",
