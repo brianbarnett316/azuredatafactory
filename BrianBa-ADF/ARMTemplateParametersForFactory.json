@@ -21,7 +21,7 @@
 			"value": "https://brianbastorageadlsgen2.dfs.core.windows.net"
 		},
 		"Profisee REST API_properties_typeProperties_url": {
-			"value": "http://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest"
+			"value": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest"
 		},
 		"Salesforce1_properties_typeProperties_environmentUrl": {
 			"value": "https://login.salesforce.com"
