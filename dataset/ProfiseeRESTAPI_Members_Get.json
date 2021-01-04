@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Profisee members get REST API call.",
 		"linkedServiceName": {
-			"referenceName": "Profisee REST API",
+			"referenceName": "Profisee Preview REST API",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
