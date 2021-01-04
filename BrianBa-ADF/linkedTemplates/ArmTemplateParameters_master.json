@@ -21,7 +21,7 @@
 			"value": "https://brianbastorageadlsgen2.dfs.core.windows.net"
 		},
 		"Profisee Preview REST API_properties_typeProperties_url": {
-			"value": "http://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
+			"value": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
 		},
 		"Profisee REST API_properties_typeProperties_url": {
 			"value": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"

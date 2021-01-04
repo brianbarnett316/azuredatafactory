@@ -29,7 +29,7 @@
 		},
 		"Profisee Preview REST API_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "http://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
+			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
 		},
 		"Profisee REST API_properties_typeProperties_url": {
 			"type": "string",
@@ -115,7 +115,7 @@
 								"requestMethod": "PATCH",
 								"writeBatchSize": 10000,
 								"additionalHeaders": {
-									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+									"x-api-key": "93e4de0d436c4630ae0ca0a1780eee14"
 								},
 								"httpCompressionType": "none"
 							},
