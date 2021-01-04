@@ -1096,7 +1096,7 @@
 								"requestInterval": "00.00:00:00.010",
 								"requestMethod": "GET",
 								"additionalHeaders": {
-									"x-api-key": "4d506aeb27f540a0a042a65ebaa5ec81"
+									"x-api-key": "93e4de0d436c4630ae0ca0a1780eee14"
 								},
 								"paginationRules": {
 									"AbsoluteUrl": "$.nextPage"
