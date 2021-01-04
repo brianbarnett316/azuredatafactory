@@ -8,6 +8,10 @@
 			"url": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
+		},
+		"connectVia": {
+			"referenceName": "AzureIREastUS",
+			"type": "IntegrationRuntimeReference"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/linkedservices"
