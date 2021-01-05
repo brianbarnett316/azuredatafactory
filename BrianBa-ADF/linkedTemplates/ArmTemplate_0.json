@@ -1001,7 +1001,7 @@
 										"value": "@variables('EntityName')",
 										"type": "Expression"
 									},
-									"pageSize": 100,
+									"pageSize": 10000,
 									"attributes": " ",
 									"filter": " ",
 									"orderBy": " ",
