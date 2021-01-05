@@ -1005,8 +1005,12 @@
 										"value": "@variables('EntityName')",
 										"type": "Expression"
 									},
-									"pageSize": 10000,
-									"dbaFormat": 1
+									"pageSize": 100,
+									"attributes": " ",
+									"filter": " ",
+									"orderBy": " ",
+									"dbaFormat": 1,
+									"codes": " "
 								}
 							}
 						],
