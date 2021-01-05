@@ -15,20 +15,24 @@
 				"defaultValue": 1000
 			},
 			"attributes": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": " "
 			},
 			"filter": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": " "
 			},
 			"orderBy": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": " "
 			},
 			"dbaFormat": {
 				"type": "int",
 				"defaultValue": 1
 			},
 			"codes": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": " "
 			}
 		},
 		"annotations": [],
