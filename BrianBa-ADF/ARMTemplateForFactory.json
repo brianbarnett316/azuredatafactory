@@ -913,7 +913,7 @@
 										"value": "@variables('EntityName')",
 										"type": "Expression"
 									},
-									"pageSize": 10000,
+									"pageSize": 100,
 									"attributes": " ",
 									"filter": " ",
 									"orderBy": " ",
