@@ -18,12 +18,10 @@
 				"type": "string"
 			},
 			"filter": {
-				"type": "string",
-				"defaultValue": " "
+				"type": "string"
 			},
 			"orderBy": {
-				"type": "string",
-				"defaultValue": " "
+				"type": "string"
 			},
 			"dbaFormat": {
 				"type": "int",
