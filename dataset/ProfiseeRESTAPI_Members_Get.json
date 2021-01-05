@@ -15,8 +15,7 @@
 				"defaultValue": 1000
 			},
 			"attributes": {
-				"type": "string",
-				"defaultValue": " "
+				"type": "string"
 			},
 			"filter": {
 				"type": "string",
@@ -29,6 +28,9 @@
 			"dbaFormat": {
 				"type": "int",
 				"defaultValue": 1
+			},
+			"codes": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
