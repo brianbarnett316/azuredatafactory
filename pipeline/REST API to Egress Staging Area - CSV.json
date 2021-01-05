@@ -255,9 +255,6 @@
 								"type": "Expression"
 							},
 							"pageSize": 10000,
-							"attributes": " ",
-							"filter": " ",
-							"orderBy": " ",
 							"dbaFormat": 1
 						}
 					}
