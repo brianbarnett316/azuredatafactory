@@ -74,7 +74,8 @@
 									"attributes": " ",
 									"filter": " ",
 									"orderBy": " ",
-									"dbaFormat": 1
+									"dbaFormat": 1,
+									"codes": " "
 								}
 							}
 						],
@@ -83,6 +84,10 @@
 								"referenceName": "OutputBlobJson",
 								"type": "DatasetReference",
 								"parameters": {
+									"Container": {
+										"value": "@variables('OutputContainer')",
+										"type": "Expression"
+									},
 									"Directory": {
 										"value": "@variables('EntityName')",
 										"type": "Expression"
@@ -97,6 +102,10 @@
 					}
 				],
 				"variables": {
+					"OutputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-output"
+					},
 					"EntityName": {
 						"type": "String"
 					}
@@ -142,7 +151,11 @@
 					"dbaFormat": {
 						"type": "int",
 						"defaultValue": 1
-					}
+					},
+					"codes": {
+						"type": "string",
+						"defaultValue": " "
+					}					
 				},
 				"annotations": [],
 				"type": "RestResource",
