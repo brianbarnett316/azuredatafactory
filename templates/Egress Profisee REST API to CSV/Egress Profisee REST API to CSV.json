@@ -79,7 +79,8 @@
 									"attributes": " ",
 									"filter": " ",
 									"orderBy": " ",
-									"dbaFormat": 1
+									"dbaFormat": 1,
+									"codes": " "
 								}
 							}
 						],
@@ -155,7 +156,11 @@
 					"dbaFormat": {
 						"type": "int",
 						"defaultValue": 1
-					}
+					},
+					"codes": {
+						"type": "string",
+						"defaultValue": " "
+					}	
 				},
 				"annotations": [],
 				"type": "RestResource",
