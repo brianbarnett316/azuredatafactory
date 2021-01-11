@@ -24,7 +24,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Update JSON to REST API",
+						"name": "JSON to Profisee REST API",
 						"description": "Copy member data from ADLS Gen2 in JSON format to Profisee via the Profisee REST API.",
 						"type": "Copy",
 						"dependsOn": [
