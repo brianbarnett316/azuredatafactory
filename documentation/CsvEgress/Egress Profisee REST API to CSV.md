@@ -152,14 +152,18 @@ Source parameters
 
 -   filter - A filter to restrict the members returned.
 
-    -   &lt;attribute name&gt; &lt;operator&gt; &lt;value&gt;. E.g.
-        Color = ‘BLU’. **NOTE**: This syntax will be changing slightly
-        in the GA release.
+    -   \[&lt;attribute name&gt;\] &lt;operator&gt; &lt;value&gt;.
+
+        -   Example: \[Color\] eq ‘BLU’.
+
+    -   The filter can include multi-level attributes (MLAs).
+
+        -   Example: \[ProductSubCategory\]/\[ProductCategory\] eq '1'.
 
     -   You can group attributes together using parenthesis and ANDs and
         ORs.
 
-    -   You can also filter on AuditInfo columns.  Use the following
+    -   You can also filter on Audit Info columns.  Use the following
         property names:
 
         -   created On (datetime) - datetime the record was created, in
@@ -173,27 +177,26 @@ Source parameters
         -   changed By (string) - user that last changed the record
 
 -   attributes - A comma separated list of entity attribute names to
-    return.  Can include MLAs with dot notation. If blank, all
-    attributes are returned. Note: the attribute list determines the
-    result properties you will see in the **Mapping** tab.
+    return.  The list can include multi-level attributes (MLAs). If
+    blank, all attributes are returned. Note: the attribute list
+    determines the result properties you will see in the **Mapping**
+    tab.
 
-    -   Multi-level attributes are supported, using the dot notation
-        format to designate the MLA path
+    -   MLAs are supported, using the ‘/’ to separate each part of the
+        MLA path
 
-    -   Example: Color,Class,ProductSubCategory,SellStartDate,SellEndDate,Weight,ProductSubCategory.ProductCategory.ProductGroup
+    -   Example: \[Color\],\[Class\],\[ProductSubCategory\],\[SellStartDate\],\[SellEndDate\],\[Weight\],\[ProductSubCategory\]/\[ProductCategory\]/\[ProductGroup\]
 
 -   orderBy - A comma separated list of entity attribute names and
     direction to order the response
 
-    -   &lt;attribute name&gt; or &lt;attribute name&gt; asc - sorts
-        attribute in ascending order
+    -   \[&lt;attribute name&gt;\] or \[&lt;attribute name&gt;\] asc -
+        sorts attribute in ascending order
 
-    -   &lt;attribute name&gt; desc - sorts attribute in descending
+    -   \[&lt;attribute name&gt;\] desc - sorts attribute in descending
         order
 
-    -   Example: 
-
-        -   ProductSubCategory, SellStartDate desc
+    -   Example: \[ProductSubCategory\], \[SellStartDate\] desc
 
 -   dbaFormat - The domain-based attribute (DBA) format to return.
     Provides an option to indicate how to return the DBA's Code and
