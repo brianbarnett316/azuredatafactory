@@ -27,10 +27,6 @@
 			"type": "string",
 			"defaultValue": "https://brianbastorageadlsgen2.dfs.core.windows.net"
 		},
-		"Profisee Preview REST API_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
-		},
 		"Profisee REST API_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
@@ -108,9 +104,6 @@
 					},
 					"BlobStorageGen2_properties_typeProperties_url": {
 						"value": "[parameters('BlobStorageGen2_properties_typeProperties_url')]"
-					},
-					"Profisee Preview REST API_properties_typeProperties_url": {
-						"value": "[parameters('Profisee Preview REST API_properties_typeProperties_url')]"
 					},
 					"Profisee REST API_properties_typeProperties_url": {
 						"value": "[parameters('Profisee REST API_properties_typeProperties_url')]"
