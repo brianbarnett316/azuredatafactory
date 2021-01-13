@@ -155,7 +155,7 @@
 					"codes": {
 						"type": "string",
 						"defaultValue": " "
-					}					
+					}
 				},
 				"annotations": [],
 				"type": "RestResource",
