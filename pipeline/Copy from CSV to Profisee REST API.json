@@ -1,9 +1,9 @@
 {
-	"name": "Ingress Staging Area CSV to REST API",
+	"name": "Copy from CSV to Profisee REST API",
 	"properties": {
 		"activities": [
 			{
-				"name": "Update CSV to REST API",
+				"name": "Copy CSV to REST API",
 				"type": "Copy",
 				"dependsOn": [
 					{

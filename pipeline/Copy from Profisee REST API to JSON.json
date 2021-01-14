@@ -1,9 +1,9 @@
 {
-	"name": "REST API to Egress Staging Area - CSV",
+	"name": "Copy from Profisee REST API to JSON",
 	"properties": {
 		"activities": [
 			{
-				"name": "REST API Product to CSV",
+				"name": "Copy from REST API to JSON",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -28,14 +28,13 @@
 						}
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "JsonSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".csv"
+							"type": "JsonWriteSettings",
+							"filePattern": "arrayOfObjects"
 						}
 					},
 					"enableStaging": false,
@@ -47,8 +46,7 @@
 									"path": "['internalId']"
 								},
 								"sink": {
-									"name": "internalId",
-									"type": "Int32"
+									"path": "$.internalId"
 								}
 							},
 							{
@@ -56,8 +54,7 @@
 									"path": "['id']"
 								},
 								"sink": {
-									"name": "id",
-									"type": "Guid"
+									"path": "$.id"
 								}
 							},
 							{
@@ -65,8 +62,7 @@
 									"path": "['code']"
 								},
 								"sink": {
-									"name": "code",
-									"type": "String"
+									"path": "$.code"
 								}
 							},
 							{
@@ -74,8 +70,7 @@
 									"path": "['name']"
 								},
 								"sink": {
-									"name": "name",
-									"type": "String"
+									"path": "$.name"
 								}
 							},
 							{
@@ -83,44 +78,7 @@
 									"path": "['productSubCategory']"
 								},
 								"sink": {
-									"name": "productSubCategory",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "['color']"
-								},
-								"sink": {
-									"name": "color",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "['class']"
-								},
-								"sink": {
-									"name": "class",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "['style']"
-								},
-								"sink": {
-									"name": "style",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "['country']"
-								},
-								"sink": {
-									"name": "country",
-									"type": "String"
+									"path": "$.productSubCategory"
 								}
 							},
 							{
@@ -128,26 +86,7 @@
 									"path": "['standardCost']"
 								},
 								"sink": {
-									"name": "standardCost",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "['safetyStockLevel']"
-								},
-								"sink": {
-									"name": "safetyStockLevel",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "['reorderPoint']"
-								},
-								"sink": {
-									"name": "reorderPoint",
-									"type": "Double"
+									"path": "$.standardCost"
 								}
 							},
 							{
@@ -155,17 +94,7 @@
 									"path": "['msrp']"
 								},
 								"sink": {
-									"name": "msrp",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "['weight']"
-								},
-								"sink": {
-									"name": "weight",
-									"type": "Double"
+									"path": "$.msrp"
 								}
 							},
 							{
@@ -173,8 +102,7 @@
 									"path": "['dealerCost']"
 								},
 								"sink": {
-									"name": "dealerCost",
-									"type": "Double"
+									"path": "$.dealerCost"
 								}
 							},
 							{
@@ -182,8 +110,7 @@
 									"path": "['sellStartDate']"
 								},
 								"sink": {
-									"name": "sellStartDate",
-									"type": "DateTime"
+									"path": "$.sellStartDate"
 								}
 							},
 							{
@@ -191,26 +118,7 @@
 									"path": "['sellEndDate']"
 								},
 								"sink": {
-									"name": "sellEndDate",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"path": "['productLine']"
-								},
-								"sink": {
-									"name": "productLine",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "['size']"
-								},
-								"sink": {
-									"name": "size",
-									"type": "String"
+									"path": "$.sellEndDate"
 								}
 							},
 							{
@@ -218,8 +126,7 @@
 									"path": "['changedOn']"
 								},
 								"sink": {
-									"name": "changedOn",
-									"type": "DateTime"
+									"path": "$.changedOn"
 								}
 							},
 							{
@@ -227,8 +134,7 @@
 									"path": "['changedByUser']"
 								},
 								"sink": {
-									"name": "changedByUser",
-									"type": "String"
+									"path": "$.changedByUser"
 								}
 							},
 							{
@@ -236,13 +142,19 @@
 									"path": "['validationStatus']"
 								},
 								"sink": {
-									"name": "validationStatus",
-									"type": "Int32"
+									"path": "$.validationStatus"
+								}
+							},
+							{
+								"source": {
+									"path": "['weight']"
+								},
+								"sink": {
+									"path": "$.weight"
 								}
 							}
 						],
-						"collectionReference": "$['data']",
-						"mapComplexValuesToString": false
+						"collectionReference": "$['data']"
 					}
 				},
 				"inputs": [
@@ -265,7 +177,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "OutputBlobCsv",
+						"referenceName": "OutputBlobJson",
 						"type": "DatasetReference",
 						"parameters": {
 							"Container": {
@@ -277,7 +189,7 @@
 								"type": "Expression"
 							},
 							"FileName": {
-								"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.csv')",
+								"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.json')",
 								"type": "Expression"
 							}
 						}

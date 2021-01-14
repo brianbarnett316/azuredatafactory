@@ -1,9 +1,9 @@
 {
-	"name": "Ingress Staging Area JSON to REST API",
+	"name": "Copy from JSON to Profisee REST API",
 	"properties": {
 		"activities": [
 			{
-				"name": "Update JSON to REST API",
+				"name": "Copy from JSON to REST API",
 				"type": "Copy",
 				"dependsOn": [
 					{
