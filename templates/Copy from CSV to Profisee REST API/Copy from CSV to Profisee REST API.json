@@ -24,7 +24,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "CSV to Profisee REST API",
+						"name": "Copy from CSV to Profisee REST API",
 						"description": "Copy member data from ADLS Gen2 in CSV format to Profisee via the Profisee REST API.",
 						"type": "Copy",
 						"dependsOn": [
