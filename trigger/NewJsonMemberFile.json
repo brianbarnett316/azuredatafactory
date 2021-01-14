@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "Ingress Staging Area JSON to REST API",
+					"referenceName": "Copy from JSON to Profisee REST API",
 					"type": "PipelineReference"
 				},
 				"parameters": {
