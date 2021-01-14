@@ -2,8 +2,6 @@ param ($folderName, $documentName)
 
 write-host "Converting" $documentName
 
-$imageName = $folderName + "_"
-
 cd $folderName
 
 #Use pandoc to convert the Word doc to a GitHub Markdown doc.
@@ -13,6 +11,7 @@ pandoc "$documentName.docx" -f docx -t gfm -o "$documentName.md" --extract-media
 
 cd media
 #Since all image files will ultimately all be in one common media folder, we need to rename the files to keep them unique.
+$imageName = $folderName + "_"
 dir | rename-item -NewName {$_.name -replace "image", $imageName}
 
 #Copy the renamed image file to the combined media folder
