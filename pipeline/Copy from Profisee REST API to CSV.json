@@ -1,9 +1,9 @@
 {
-	"name": "REST API to Egress Staging Area - CSV",
+	"name": "Copy from Profisee REST API to CSV",
 	"properties": {
 		"activities": [
 			{
-				"name": "REST API Product to CSV",
+				"name": "Copy from REST API Product to CSV",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
