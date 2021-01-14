@@ -14,24 +14,24 @@ The template will create a folder for the entity and copy the file to
 that folder. The file name is composed of the entity name and date/time
 in UTC with the .json extension.
 
-<img src="./media/jsonegress_1.png" style="width:3.80106in;height:2.44509in" />
+<img src="./media/copyfrom_restapi_to_json_1.png" style="width:3.80106in;height:2.44509in" />
 
 **How to use this solution template**
 
 1.  Go to the **Egress Profisee REST API to JSON** template.
 
-> <img src="./media/jsonegress_2.png" style="width:3.18497in;height:2.18351in" />
+> <img src="./media/copyfrom_restapi_to_json_2.png" style="width:3.18497in;height:2.18351in" />
 
 1.  Create a **New** or use an existing connection to the source
     Profisee REST API.
 
-> <img src="./media/jsonegress_3.png" style="width:6.5in;height:3.32569in" />
+> <img src="./media/copyfrom_restapi_to_json_3.png" style="width:6.5in;height:3.32569in" />
 
 1.  Follow these steps if you need to create a new REST linked service.
 
 2.  Select “+ New" from the **REST** dropdown list.
 
-> <img src="./media/jsonegress_4.png" style="width:2.06135in;height:1.29089in" />
+> <img src="./media/copyfrom_restapi_to_json_4.png" style="width:2.06135in;height:1.29089in" />
 
 1.  Enter the following information for the REST linked service.
 
@@ -50,24 +50,24 @@ in UTC with the .json extension.
 
     5.  Authentication type: select **Anonymous**
 
-> <img src="./media/jsonegress_5.png" style="width:3.54601in;height:3.93413in" />
+> <img src="./media/copyfrom_restapi_to_json_5.png" style="width:3.54601in;height:3.93413in" />
 
 1.  Create a **New** or use an existing connection to the ADLS Gen2 sink
     data store that you are copying data to.
 
-> <img src="./media/jsonegress_6.png" style="width:6.5in;height:3.32569in" />
+> <img src="./media/copyfrom_restapi_to_json_6.png" style="width:6.5in;height:3.32569in" />
 
 1.  Select **Use this template**.
 
-> <img src="./media/jsonegress_7.png" style="width:6.5in;height:3.725in" />
+> <img src="./media/copyfrom_restapi_to_json_7.png" style="width:6.5in;height:3.725in" />
 
 1.  You will see a pipeline created as shown in the following example:
 
-> <img src="./media/jsonegress_8.png" style="width:3.86928in;height:4.53896in" />
+> <img src="./media/copyfrom_restapi_to_json_8.png" style="width:3.86928in;height:4.53896in" />
 >
 > You should also see the following template validation output.
 >
-> <img src="./media/jsonegress_9.png" style="width:2.44172in;height:0.57049in" />
+> <img src="./media/copyfrom_restapi_to_json_9.png" style="width:2.44172in;height:0.57049in" />
 >
 > There are three items needed for the pipeline, one of them are
 > mentioned above.
@@ -75,20 +75,20 @@ in UTC with the .json extension.
 1.  **EntityName:** The entity you are copying member data for. This is
     entered in the pipeline Variables tab.
 
-> <img src="./media/jsonegress_10.png" style="width:4.27103in;height:2.09034in" />
+> <img src="./media/copyfrom_restapi_to_json_10.png" style="width:4.27103in;height:2.09034in" />
 
 1.  **Container:** The output container where you are copying the file
     to. This is entered in the pipeline Variables tab. It defaults to
     “profisee-output”. You can update to another name based on your
     environment.
 
-> <img src="./media/jsonegress_11.png" style="width:3.07976in;height:1.03481in" />
+> <img src="./media/copyfrom_restapi_to_json_11.png" style="width:3.07976in;height:1.03481in" />
 
 1.  **x-api-key:** The Profisee API key, which is the Client Id for the
     user account you are using to connect to the Profisee API. This is
     entered in the Source tab.
 
-> <img src="./media/jsonegress_12.png" style="width:2.96789in;height:3.50613in" />
+> <img src="./media/copyfrom_restapi_to_json_12.png" style="width:2.96789in;height:3.50613in" />
 
 1.  Select **Mapping** tab to map the member data result properties to
     the corresponding JSON column.
@@ -97,23 +97,23 @@ in UTC with the .json extension.
 > confirm the value of the pipeline parameter for the EntityName. Click
 > **OK**.
 >
-> <img src="./media/jsonegress_13.png" style="width:3.72727in;height:3.12677in" />
+> <img src="./media/copyfrom_restapi_to_json_13.png" style="width:3.72727in;height:3.12677in" />
 >
 > After a couple of seconds, you will see a list of mapping fields
 > listed, as shown in the following example.
 >
-> <img src="./media/jsonegress_14.png" style="width:6.5in;height:4.37361in" />
+> <img src="./media/copyfrom_restapi_to_json_14.png" style="width:6.5in;height:4.37361in" />
 >
 > Next, select **data** from the **Collection reference** drop down
 > list. The **data** property is the array of member data.
 >
-> <img src="./media/jsonegress_15.png" style="width:3.70779in;height:0.45753in" />
+> <img src="./media/copyfrom_restapi_to_json_15.png" style="width:3.70779in;height:0.45753in" />
 >
 > Unselect the Include checkboxes for the pageNbr, pageSize,
 > resultCount, totalPages, totalRecords, and nextPage properties as we
 > do not want to copy them to the file.
 >
-> <img src="./media/jsonegress_16.png" style="width:5.29221in;height:1.43161in" />
+> <img src="./media/copyfrom_restapi_to_json_16.png" style="width:5.29221in;height:1.43161in" />
 >
 > After selecting the data collection reference, you need to correct the
 > Column names for each property you want to copy. **Note:** Microsoft
@@ -121,15 +121,15 @@ in UTC with the .json extension.
 >
 > From this
 >
-> <img src="./media/jsonegress_17.png" style="width:6.08442in;height:0.53369in" />
+> <img src="./media/copyfrom_restapi_to_json_17.png" style="width:6.08442in;height:0.53369in" />
 >
 > To this
 >
-> <img src="./media/jsonegress_18.png" style="width:6.06936in;height:0.55701in" />
+> <img src="./media/copyfrom_restapi_to_json_18.png" style="width:6.06936in;height:0.55701in" />
 
 1.  Once you are finished with all your changes, click Publish All.
 
-> <img src="./media/jsonegress_19.png" style="width:1.36994in;height:0.29043in" />
+> <img src="./media/copyfrom_restapi_to_json_19.png" style="width:1.36994in;height:0.29043in" />
 
 1.  To run the pipeline now, select **Add Trigger** and select **Trigger
     now**. Press **OK** at the Pipeline run prompt.
@@ -140,12 +140,12 @@ in UTC with the .json extension.
 3.  When the pipeline run completes successfully, you would see results
     like the following example:
 
-> <img src="./media/jsonegress_20.png" style="width:6.58743in;height:1.22388in" />
+> <img src="./media/copyfrom_restapi_to_json_20.png" style="width:6.58743in;height:1.22388in" />
 
 1.  You should also see the output file in the Container and Directory
     you entered.
 
-> <img src="./media/jsonegress_21.png" style="width:5.20896in;height:1.95756in" />
+> <img src="./media/copyfrom_restapi_to_json_21.png" style="width:5.20896in;height:1.95756in" />
 
 Source parameters
 -----------------
@@ -153,7 +153,7 @@ Source parameters
 > You can customize the member data get API query with the following
 > parameters.
 >
-> <img src="./media/jsonegress_22.png" style="width:4.71166in;height:2.27629in" />
+> <img src="./media/copyfrom_restapi_to_json_22.png" style="width:4.71166in;height:2.27629in" />
 
 -   pageSize - The page size to get.  Defaults to 1000 if not supplied.
 
@@ -233,7 +233,7 @@ Sink parameters
 > You can customize the directory and file name by changing the template
 > values for the following parameters.
 >
-> <img src="./media/jsonegress_23.png" style="width:4.4908in;height:1.48494in" />
+> <img src="./media/copyfrom_restapi_to_json_23.png" style="width:4.4908in;height:1.48494in" />
 
 Next steps
 ----------
