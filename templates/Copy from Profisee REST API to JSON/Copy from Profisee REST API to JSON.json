@@ -18,7 +18,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/Egress Profisee REST API to JSON')]",
+			"name": "[concat(parameters('factoryName'), '/Copy from Profisee REST API to JSON')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
