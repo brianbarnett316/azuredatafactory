@@ -39,11 +39,11 @@
 			"type": "string",
 			"defaultValue": "tye3950@yahoo.com"
 		},
-		"NewCsvMemberFile_properties_Ingress Staging Area CSV to REST API_parameters_FileName": {
+		"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FileName"
 		},
-		"NewCsvMemberFile_properties_Ingress Staging Area CSV to REST API_parameters_FileFolder": {
+		"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FolderPath"
 		},
@@ -51,11 +51,11 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		},
-		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName": {
+		"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FileName"
 		},
-		"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder": {
+		"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FolderPath"
 		},
@@ -132,20 +132,20 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"NewCsvMemberFile_properties_Ingress Staging Area CSV to REST API_parameters_FileName": {
-						"value": "[parameters('NewCsvMemberFile_properties_Ingress Staging Area CSV to REST API_parameters_FileName')]"
+					"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
+						"value": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName')]"
 					},
-					"NewCsvMemberFile_properties_Ingress Staging Area CSV to REST API_parameters_FileFolder": {
-						"value": "[parameters('NewCsvMemberFile_properties_Ingress Staging Area CSV to REST API_parameters_FileFolder')]"
+					"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder": {
+						"value": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder')]"
 					},
 					"NewCsvMemberFile_properties_typeProperties_scope": {
 						"value": "[parameters('NewCsvMemberFile_properties_typeProperties_scope')]"
 					},
-					"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName": {
-						"value": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileName')]"
+					"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName": {
+						"value": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName')]"
 					},
-					"NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder": {
-						"value": "[parameters('NewJsonMemberFile_properties_Ingress Staging Area JSON to REST API_parameters_FileFolder')]"
+					"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder": {
+						"value": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder')]"
 					},
 					"NewJsonMemberFile_properties_typeProperties_scope": {
 						"value": "[parameters('NewJsonMemberFile_properties_typeProperties_scope')]"
