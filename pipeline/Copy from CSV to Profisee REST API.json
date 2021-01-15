@@ -39,7 +39,10 @@
 						"requestMethod": "PATCH",
 						"writeBatchSize": 10000,
 						"additionalHeaders": {
-							"x-api-key": "93e4de0d436c4630ae0ca0a1780eee14"
+							"x-api-key": {
+								"value": "@pipeline().globalParameters.ApiKey",
+								"type": "Expression"
+							}
 						},
 						"httpCompressionType": "none"
 					},
