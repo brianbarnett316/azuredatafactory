@@ -21,7 +21,10 @@
 						"requestInterval": "00.00:00:00.010",
 						"requestMethod": "GET",
 						"additionalHeaders": {
-							"x-api-key": "93e4de0d436c4630ae0ca0a1780eee14"
+							"x-api-key": {
+								"value": "@pipeline().globalParameters.ApiKey",
+								"type": "Expression"
+							}
 						},
 						"paginationRules": {
 							"AbsoluteUrl": "$.nextPage"
@@ -127,7 +130,8 @@
 							"attributes": "Address Input,City Input,State Input,Zip Input,Phone,Website",
 							"filter": " ",
 							"orderBy": " ",
-							"dbaFormat": 1
+							"dbaFormat": 1,
+							"codes": " "
 						}
 					}
 				],
