@@ -7,13 +7,10 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"Container": {
-				"type": "string"
-			},
-			"Directory": {
-				"type": "string"
-			},
 			"FileName": {
+				"type": "string"
+			},
+			"FolderName": {
 				"type": "string"
 			}
 		},
@@ -27,7 +24,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat(dataset().Container, '/', dataset().Directory)",
+					"value": "@dataset().FolderName",
 					"type": "Expression"
 				}
 			},
