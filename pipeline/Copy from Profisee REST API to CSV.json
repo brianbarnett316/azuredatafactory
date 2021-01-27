@@ -271,12 +271,8 @@
 						"referenceName": "OutputBlobCsv",
 						"type": "DatasetReference",
 						"parameters": {
-							"Container": {
-								"value": "@variables('OutputContainer')",
-								"type": "Expression"
-							},
-							"Directory": {
-								"value": "@variables('EntityName')",
+							"FolderName": {
+								"value": "@concat(variables('OutputContainer'), '/', variables('EntityName'))",
 								"type": "Expression"
 							},
 							"FileName": {
