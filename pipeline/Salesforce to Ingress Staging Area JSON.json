@@ -116,11 +116,6 @@
 						"referenceName": "OutputBlobJson",
 						"type": "DatasetReference",
 						"parameters": {
-							"Container": {
-								"value": "@variables('InputContainer')",
-								"type": "Expression"
-							},
-							"Directory": "addresstest",
 							"FolderName": {
 								"value": "@concat('addresstest_', string(utcnow()), '.json')",
 								"type": "Expression"
@@ -141,7 +136,7 @@
 			}
 		},
 		"folder": {
-			"name": "REST API"
+			"name": "Salesforce"
 		},
 		"annotations": [],
 		"lastPublishTime": "2020-09-25T16:03:36Z"

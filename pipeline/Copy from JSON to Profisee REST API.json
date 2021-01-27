@@ -105,9 +105,6 @@
 				"type": "String"
 			}
 		},
-		"folder": {
-			"name": "REST API"
-		},
 		"annotations": [],
 		"lastPublishTime": "2020-09-25T15:29:08Z"
 	},
