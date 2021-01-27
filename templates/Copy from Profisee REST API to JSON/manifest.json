@@ -14,7 +14,7 @@
 					"RestService"
 				]
 			},
-			"BlobStorageGen2": {
+			"BlobStorageGen": {
 				"supportTypes": [
 					"AzureBlobFS"
 				]
