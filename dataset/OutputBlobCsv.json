@@ -10,7 +10,7 @@
 			"FileName": {
 				"type": "string"
 			},
-			"FolderName": {
+			"FolderName1": {
 				"type": "string"
 			}
 		},
