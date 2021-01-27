@@ -5,14 +5,7 @@
 			{
 				"name": "Copy CSV to REST API",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Set EntityName variable",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -39,7 +32,10 @@
 						"requestMethod": "PATCH",
 						"writeBatchSize": 10000,
 						"additionalHeaders": {
-							"x-api-key": "93e4de0d436c4630ae0ca0a1780eee14"
+							"x-api-key": {
+								"value": "@pipeline().globalParameters.ApiKey",
+								"type": "Expression"
+							}
 						},
 						"httpCompressionType": "none"
 					},
@@ -135,26 +131,13 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"entityId": {
-								"value": "@variables('EntityName')",
+								"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
 								"type": "Expression"
 							},
 							"isUpsert": true
 						}
 					}
 				]
-			},
-			{
-				"name": "Set EntityName variable",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "EntityName",
-					"value": {
-						"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
-						"type": "Expression"
-					}
-				}
 			}
 		],
 		"parameters": {
