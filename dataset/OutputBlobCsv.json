@@ -27,11 +27,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@dataset().Directory",
-					"type": "Expression"
-				},
-				"fileSystem": {
-					"value": "@dataset().Container",
+					"value": "@concat(dataset().Container, '/', dataset().Directory)",
 					"type": "Expression"
 				}
 			},
