@@ -9,7 +9,7 @@
 		"Profisee REST API": {
 			"type": "string"
 		},
-		"BlobStorageGen": {
+		"BlobStorageGen2": {
 			"type": "string"
 		}
 	},
@@ -169,7 +169,7 @@
 			"properties": {
 				"description": "Azure Data Lake Storage Gen2 container for JSON format.",
 				"linkedServiceName": {
-					"referenceName": "[parameters('BlobStorageGen')]",
+					"referenceName": "[parameters('BlobStorageGen2')]",
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
