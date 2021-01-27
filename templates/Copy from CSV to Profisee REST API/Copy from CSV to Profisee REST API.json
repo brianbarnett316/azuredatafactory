@@ -27,14 +27,7 @@
 						"name": "Copy from CSV to Profisee REST API",
 						"description": "Copy records from ADLS Gen2 in CSV format to Profisee via the Profisee REST API.",
 						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Set EntityName variable",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -89,26 +82,13 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
-										"value": "@variables('EntityName')",
+										"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
 										"type": "Expression"
 									},
 									"isUpsert": true
 								}
 							}
 						]
-					},
-					{
-						"name": "Set EntityName variable",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "EntityName",
-							"value": {
-								"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
-								"type": "Expression"
-							}
-						}
 					}
 				],
 				"parameters": {
@@ -117,11 +97,6 @@
 					},
 					"FileFolder": {
 						"type": "string"
-					}
-				},
-				"variables": {
-					"EntityName": {
-						"type": "String"
 					}
 				},
 				"annotations": [],
