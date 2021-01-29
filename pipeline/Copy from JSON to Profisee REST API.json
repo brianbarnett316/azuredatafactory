@@ -5,14 +5,7 @@
 			{
 				"name": "Copy from JSON to REST API",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Set EntityName variable",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -70,26 +63,13 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"entityId": {
-								"value": "@variables('EntityName')",
+								"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
 								"type": "Expression"
 							},
 							"isUpsert": true
 						}
 					}
 				]
-			},
-			{
-				"name": "Set EntityName variable",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "EntityName",
-					"value": {
-						"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
-						"type": "Expression"
-					}
-				}
 			}
 		],
 		"parameters": {
