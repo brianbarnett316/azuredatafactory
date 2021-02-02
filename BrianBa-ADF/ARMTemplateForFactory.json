@@ -691,7 +691,7 @@
 											"path": "[['internalId']"
 										},
 										"sink": {
-											"path": "$.internalId"
+											"path": "$.memberId.internalId"
 										}
 									},
 									{
@@ -699,7 +699,7 @@
 											"path": "[['id']"
 										},
 										"sink": {
-											"path": "$.id"
+											"path": "$.memberId.id"
 										}
 									},
 									{
@@ -707,7 +707,7 @@
 											"path": "[['code']"
 										},
 										"sink": {
-											"path": "$.code"
+											"path": "$.memberId.code"
 										}
 									},
 									{
@@ -715,7 +715,7 @@
 											"path": "[['name']"
 										},
 										"sink": {
-											"path": "$.name"
+											"path": "$.memberId.name"
 										}
 									},
 									{
