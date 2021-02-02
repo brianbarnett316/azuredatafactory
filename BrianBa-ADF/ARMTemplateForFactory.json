@@ -220,11 +220,6 @@
 						"type": "string"
 					}
 				},
-				"variables": {
-					"EntityName": {
-						"type": "String"
-					}
-				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
@@ -315,11 +310,6 @@
 					},
 					"FileFolder": {
 						"type": "string"
-					}
-				},
-				"variables": {
-					"EntityName": {
-						"type": "String"
 					}
 				},
 				"annotations": [],
@@ -691,7 +681,7 @@
 											"path": "[['internalId']"
 										},
 										"sink": {
-											"path": "$.memberId.internalId"
+											"path": "$.internalId"
 										}
 									},
 									{
@@ -699,7 +689,7 @@
 											"path": "[['id']"
 										},
 										"sink": {
-											"path": "$.memberId.id"
+											"path": "$.id"
 										}
 									},
 									{
@@ -707,7 +697,7 @@
 											"path": "[['code']"
 										},
 										"sink": {
-											"path": "$.memberId.code"
+											"path": "$.code"
 										}
 									},
 									{
@@ -715,7 +705,7 @@
 											"path": "[['name']"
 										},
 										"sink": {
-											"path": "$.memberId.name"
+											"path": "$.name"
 										}
 									},
 									{
