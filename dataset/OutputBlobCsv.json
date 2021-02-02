@@ -14,6 +14,9 @@
 				"type": "string"
 			}
 		},
+		"folder": {
+			"name": "CSV Format"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

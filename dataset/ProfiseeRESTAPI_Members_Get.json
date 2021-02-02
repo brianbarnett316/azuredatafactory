@@ -35,6 +35,9 @@
 				"defaultValue": " "
 			}
 		},
+		"folder": {
+			"name": "Profisee REST API"
+		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
