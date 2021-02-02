@@ -821,7 +821,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "OutputBlobJson",
+								"referenceName": "InputBlobJson",
 								"type": "DatasetReference",
 								"parameters": {
 									"FolderName": {
@@ -855,7 +855,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Get')]",
-				"[concat(variables('factoryId'), '/datasets/OutputBlobJson')]"
+				"[concat(variables('factoryId'), '/datasets/InputBlobJson')]"
 			]
 		},
 		{
