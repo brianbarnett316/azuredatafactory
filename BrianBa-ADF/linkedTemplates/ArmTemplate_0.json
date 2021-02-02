@@ -729,75 +729,7 @@
 								},
 								"httpCompressionType": "none"
 							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "code",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['code']"
-										}
-									},
-									{
-										"source": {
-											"name": "name",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['name']"
-										}
-									},
-									{
-										"source": {
-											"name": "productSubCategory",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['productSubCategory']"
-										}
-									},
-									{
-										"source": {
-											"name": "color",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['color']"
-										}
-									},
-									{
-										"source": {
-											"name": "class",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['class']"
-										}
-									},
-									{
-										"source": {
-											"name": "weight",
-											"type": "Double"
-										},
-										"sink": {
-											"path": "$['weight']"
-										}
-									},
-									{
-										"source": {
-											"name": "sellEndDate",
-											"type": "DateTime"
-										},
-										"sink": {
-											"path": "$['sellEndDate']"
-										}
-									}
-								]
-							}
+							"enableStaging": false
 						},
 						"inputs": [
 							{
