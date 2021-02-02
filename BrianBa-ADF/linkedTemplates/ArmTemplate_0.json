@@ -187,10 +187,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
-					"Container": {
-						"type": "string"
-					},
-					"Directory": {
+					"FolderName": {
 						"type": "string"
 					},
 					"FileName": {
@@ -206,12 +203,8 @@
 							"value": "@dataset().FileName",
 							"type": "Expression"
 						},
-						"folderPath": {
-							"value": "@dataset().Directory",
-							"type": "Expression"
-						},
 						"fileSystem": {
-							"value": "@dataset().Container",
+							"value": "@dataset().FolderName",
 							"type": "Expression"
 						}
 					},
@@ -237,10 +230,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
-					"Container": {
-						"type": "string"
-					},
-					"Directory": {
+					"FolderName": {
 						"type": "string"
 					},
 					"FileName": {
@@ -256,12 +246,8 @@
 							"value": "@dataset().FileName",
 							"type": "Expression"
 						},
-						"folderPath": {
-							"value": "@dataset().Directory",
-							"type": "Expression"
-						},
 						"fileSystem": {
-							"value": "@dataset().Container",
+							"value": "@dataset().FolderName",
 							"type": "Expression"
 						}
 					}
@@ -839,9 +825,6 @@
 						"type": "String"
 					}
 				},
-				"folder": {
-					"name": "REST API"
-				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
@@ -859,14 +842,7 @@
 					{
 						"name": "Copy from JSON to REST API",
 						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Set EntityName variable",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -924,26 +900,13 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
-										"value": "@variables('EntityName')",
+										"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
 										"type": "Expression"
 									},
 									"isUpsert": true
 								}
 							}
 						]
-					},
-					{
-						"name": "Set EntityName variable",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "EntityName",
-							"value": {
-								"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
-								"type": "Expression"
-							}
-						}
 					}
 				],
 				"parameters": {
@@ -958,9 +921,6 @@
 					"EntityName": {
 						"type": "String"
 					}
-				},
-				"folder": {
-					"name": "REST API"
 				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
@@ -977,7 +937,8 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy from REST API to CSV",
+						"name": "Copy from Profisee REST API to CSV",
+						"description": "Copy records from Profisee via the Profisee REST API to ADLS Gen2 in CSV format.",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -1245,12 +1206,8 @@
 								"referenceName": "OutputBlobCsv",
 								"type": "DatasetReference",
 								"parameters": {
-									"Container": {
-										"value": "@variables('OutputContainer')",
-										"type": "Expression"
-									},
-									"Directory": {
-										"value": "@variables('EntityName')",
+									"FolderName": {
+										"value": "@concat(variables('OutputContainer'), '/', variables('EntityName'))",
 										"type": "Expression"
 									},
 									"FileName": {
@@ -1272,9 +1229,6 @@
 						"defaultValue": "product"
 					}
 				},
-				"folder": {
-					"name": "REST API"
-				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
@@ -1290,7 +1244,8 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy from REST API to JSON",
+						"name": "Copy from Profisee REST API to JSON",
+						"description": "Copy records from Profisee via the Profisee REST API to ADLS Gen2 in JSON format.",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -1470,12 +1425,8 @@
 								"referenceName": "OutputBlobJson",
 								"type": "DatasetReference",
 								"parameters": {
-									"Container": {
-										"value": "@variables('OutputContainer')",
-										"type": "Expression"
-									},
-									"Directory": {
-										"value": "@variables('EntityName')",
+									"FolderName": {
+										"value": "@concat(variables('OutputContainer'), '/', variables('EntityName'))",
 										"type": "Expression"
 									},
 									"FileName": {
@@ -1496,9 +1447,6 @@
 						"type": "String",
 						"defaultValue": "product"
 					}
-				},
-				"folder": {
-					"name": "REST API"
 				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
@@ -1639,7 +1587,7 @@
 										"type": "Expression"
 									},
 									"pageSize": 100,
-									"attributes": "Address Input,City Input,State Input,Zip Input,Phone,Website",
+									"attributes": "[[Address Input],[City Input],[State Input],[Zip Input],[Phone],[Website]",
 									"filter": " ",
 									"orderBy": " ",
 									"dbaFormat": 1,
@@ -1662,7 +1610,7 @@
 					}
 				},
 				"folder": {
-					"name": "REST API"
+					"name": "Salesforce"
 				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
@@ -1806,7 +1754,7 @@
 					}
 				],
 				"folder": {
-					"name": "REST API"
+					"name": "Salesforce"
 				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T16:03:36Z"
@@ -1937,11 +1885,10 @@
 								"referenceName": "OutputBlobJson",
 								"type": "DatasetReference",
 								"parameters": {
-									"Container": {
-										"value": "@variables('InputContainer')",
+									"FolderName": {
+										"value": "@concat(variables('OutputContainer'), '/addresstest')",
 										"type": "Expression"
 									},
-									"Directory": "addresstest",
 									"FileName": {
 										"value": "@concat('addresstest_', string(utcnow()), '.json')",
 										"type": "Expression"
@@ -1962,7 +1909,7 @@
 					}
 				},
 				"folder": {
-					"name": "REST API"
+					"name": "Salesforce"
 				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T16:03:36Z"

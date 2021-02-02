@@ -6,62 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "BrianBa-ADF"
-		},
-		"BlobStorageGen2_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'BlobStorageGen2'"
-		},
-		"ProfiseeSql_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ProfiseeSql'"
-		},
-		"Salesforce1_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Salesforce1'"
-		},
-		"Salesforce1_securityToken": {
-			"type": "secureString",
-			"metadata": "Secure string for 'securityToken' of 'Salesforce1'"
-		},
-		"BlobStorageGen2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://brianbastorageadlsgen2.dfs.core.windows.net"
-		},
-		"Profisee REST API_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1"
-		},
-		"Salesforce1_properties_typeProperties_environmentUrl": {
-			"type": "string",
-			"defaultValue": "https://login.salesforce.com"
-		},
-		"Salesforce1_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "tye3950@yahoo.com"
-		},
-		"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FileName"
-		},
-		"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FolderPath"
-		},
-		"NewCsvMemberFile_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
-		},
-		"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FileName"
-		},
-		"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FolderPath"
-		},
-		"NewJsonMemberFile_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		}
 	},
 	"variables": {
@@ -228,10 +172,7 @@
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/InputBlobCsv')]",
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Update')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Copy from JSON to Profisee REST API')]",
@@ -325,10 +266,7 @@
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/InputBlobJson')]",
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Update')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Copy from Profisee REST API to CSV')]",
@@ -633,7 +571,6 @@
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Get')]",
 				"[concat(variables('factoryId'), '/datasets/OutputBlobCsv')]"
 			]
 		},
@@ -852,7 +789,6 @@
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Get')]",
 				"[concat(variables('factoryId'), '/datasets/OutputBlobJson')]"
 			]
 		},
@@ -998,8 +934,7 @@
 						"outputs": [
 							{
 								"referenceName": "SalesforceAccount",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -1015,10 +950,7 @@
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Get')]",
-				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Salesforce direct to REST API')]",
@@ -1137,8 +1069,7 @@
 						"inputs": [
 							{
 								"referenceName": "SalesforceAccount",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
@@ -1159,10 +1090,7 @@
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T16:03:36Z"
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]",
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Update')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Salesforce to Ingress Staging Area JSON')]",
@@ -1276,8 +1204,7 @@
 						"inputs": [
 							{
 								"referenceName": "SalesforceAccount",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
@@ -1315,90 +1242,7 @@
 				"lastPublishTime": "2020-09-25T16:03:36Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]",
 				"[concat(variables('factoryId'), '/datasets/OutputBlobJson')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/InputBlobCsv')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Azure Data Lake Storage Gen2 container for CSV format.",
-				"linkedServiceName": {
-					"referenceName": "BlobStorageGen2",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"FolderName": {
-						"type": "string"
-					},
-					"FileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": {
-							"value": "@dataset().FileName",
-							"type": "Expression"
-						},
-						"fileSystem": {
-							"value": "@dataset().FolderName",
-							"type": "Expression"
-						}
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BlobStorageGen2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/InputBlobJson')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Azure Data Lake Storage Gen2 container for JSON format.",
-				"linkedServiceName": {
-					"referenceName": "BlobStorageGen2",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"FolderName": {
-						"type": "string"
-					},
-					"FileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": {
-							"value": "@dataset().FileName",
-							"type": "Expression"
-						},
-						"fileSystem": {
-							"value": "@dataset().FolderName",
-							"type": "Expression"
-						}
-					}
-				},
-				"schema": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BlobStorageGen2')]"
 			]
 		},
 		{
@@ -1440,9 +1284,7 @@
 				},
 				"schema": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BlobStorageGen2')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/OutputBlobJson')]",
@@ -1478,536 +1320,6 @@
 					}
 				},
 				"schema": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BlobStorageGen2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Members_Get')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Profisee members get REST API call.",
-				"linkedServiceName": {
-					"referenceName": "Profisee REST API",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"entityId": {
-						"type": "string"
-					},
-					"pageSize": {
-						"type": "int",
-						"defaultValue": 1000
-					},
-					"attributes": {
-						"type": "string",
-						"defaultValue": " "
-					},
-					"filter": {
-						"type": "string",
-						"defaultValue": " "
-					},
-					"orderBy": {
-						"type": "string",
-						"defaultValue": " "
-					},
-					"dbaFormat": {
-						"type": "int",
-						"defaultValue": 1
-					},
-					"codes": {
-						"type": "string",
-						"defaultValue": " "
-					}
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {
-					"relativeUrl": {
-						"value": "@concat('members/',\ndataset().entityId, \n'/?pageSize=', string(dataset().pageSize),\n'&attributes=', dataset().attributes,\n'&filter=', dataset().filter,\n'&orderBy=', dataset().orderBy,\n'&codes=', dataset().codes,\n'&dbaFormat=', string(dataset().dbaFormat)\n)",
-						"type": "Expression"
-					}
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Profisee REST API')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Members_Update')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Profisee members update REST API call.",
-				"linkedServiceName": {
-					"referenceName": "Profisee REST API",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"entityId": {
-						"type": "string"
-					},
-					"isUpsert": {
-						"type": "bool",
-						"defaultValue": false
-					}
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {
-					"relativeUrl": {
-						"value": "@concat('members/',\ndataset().entityId, \n'/?isUpsert=',string(dataset().isUpsert)\n)",
-						"type": "Expression"
-					}
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Profisee REST API')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ProfiseeTable')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ProfiseeSql",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"TableName": {
-						"type": "string"
-					},
-					"SchemaName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Code",
-						"type": "nvarchar"
-					},
-					{
-						"name": "NewCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductMergeParent",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductSubCategory",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Color",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Class",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Style",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Country",
-						"type": "nvarchar"
-					},
-					{
-						"name": "StandardCost",
-						"type": "decimal",
-						"precision": 36,
-						"scale": 2
-					},
-					{
-						"name": "SafetyStockLevel",
-						"type": "decimal",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "ReorderPoint",
-						"type": "decimal",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "MSRP",
-						"type": "decimal",
-						"precision": 34,
-						"scale": 4
-					},
-					{
-						"name": "Weight",
-						"type": "decimal",
-						"precision": 34,
-						"scale": 4
-					},
-					{
-						"name": "DaysToManufacture",
-						"type": "decimal",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "DealerCost",
-						"type": "decimal",
-						"precision": 36,
-						"scale": 2
-					},
-					{
-						"name": "DocumentationURL",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SellStartDate",
-						"type": "date"
-					},
-					{
-						"name": "SellEndDate",
-						"type": "datetime2",
-						"scale": 3
-					},
-					{
-						"name": "SizeUoM",
-						"type": "nvarchar"
-					},
-					{
-						"name": "WeightUoM",
-						"type": "nvarchar"
-					},
-					{
-						"name": "InHouseManufacture",
-						"type": "nvarchar"
-					},
-					{
-						"name": "FinishedGoodIndicator",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DiscontinuedItemInd",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DiscontiuedDate",
-						"type": "date"
-					},
-					{
-						"name": "ProductLine",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DealerCostCurrencyCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MSRPCurrencyCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Size",
-						"type": "nvarchar"
-					},
-					{
-						"name": "testMaster",
-						"type": "nvarchar"
-					},
-					{
-						"name": "productMaster",
-						"type": "nvarchar"
-					},
-					{
-						"name": "productScore",
-						"type": "decimal",
-						"precision": 31,
-						"scale": 7
-					},
-					{
-						"name": "productStatus",
-						"type": "nvarchar"
-					},
-					{
-						"name": "productRecordSource",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ApprovedMatchCount",
-						"type": "decimal",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "ProposedMatchCount",
-						"type": "decimal",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "Picture",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match Status",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match Group",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match Member",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match Strategy",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match DateTime",
-						"type": "date"
-					},
-					{
-						"name": "Match MultiGroup",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match User",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SA1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SA2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SA3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MergeStatus",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": {
-						"value": "@dataset().SchemaName",
-						"type": "Expression"
-					},
-					"table": {
-						"value": "@dataset().TableName",
-						"type": "Expression"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ProfiseeSql')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SalesforceAccount')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Salesforce1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SalesforceObject",
-				"schema": [],
-				"typeProperties": {
-					"objectApiName": "Account"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Salesforce1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BlobStorageGen2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Azure Data Lake Storage Gen2 container.",
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('BlobStorageGen2_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('BlobStorageGen2_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Profisee REST API')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Profisee REST API",
-				"annotations": [],
-				"type": "RestService",
-				"typeProperties": {
-					"url": "[parameters('Profisee REST API_properties_typeProperties_url')]",
-					"enableServerCertificateValidation": true,
-					"authenticationType": "Anonymous"
-				},
-				"connectVia": {
-					"referenceName": "AzureIREastUS",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AzureIREastUS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ProfiseeSql')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('ProfiseeSql_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Salesforce1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "Salesforce",
-				"typeProperties": {
-					"environmentUrl": "[parameters('Salesforce1_properties_typeProperties_environmentUrl')]",
-					"username": "[parameters('Salesforce1_properties_typeProperties_username')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Salesforce1_password')]"
-					},
-					"securityToken": {
-						"type": "SecureString",
-						"value": "[parameters('Salesforce1_securityToken')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "AzureIREastUS",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AzureIREastUS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/NewCsvMemberFile')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Copy from CSV to Profisee REST API",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"FileName": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName')]",
-							"FileFolder": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/profisee-input/blobs/",
-					"blobPathEndsWith": ".csv",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('NewCsvMemberFile_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Copy from CSV to Profisee REST API')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/NewJsonMemberFile')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Copy from JSON to Profisee REST API",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"FileName": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName')]",
-							"FileFolder": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/profisee-input/blobs/",
-					"blobPathEndsWith": ".json",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('NewJsonMemberFile_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Copy from JSON to Profisee REST API')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureIREastUS')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "Managed",
-				"typeProperties": {
-					"computeProperties": {
-						"location": "East US",
-						"dataFlowProperties": {
-							"computeType": "General",
-							"coreCount": 8,
-							"timeToLive": 0
-						}
-					}
-				}
 			},
 			"dependsOn": []
 		}
