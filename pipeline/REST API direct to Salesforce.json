@@ -145,7 +145,8 @@
 		],
 		"parameters": {
 			"EntityName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "addresstest"
 			}
 		},
 		"folder": {
