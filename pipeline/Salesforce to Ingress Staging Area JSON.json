@@ -117,7 +117,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FolderName": {
-								"value": "@concat('addresstest_', string(utcnow()), '.json')",
+								"value": "@concat(variables('OutputContainer'), '/addresstest')",
 								"type": "Expression"
 							},
 							"FileName": {
