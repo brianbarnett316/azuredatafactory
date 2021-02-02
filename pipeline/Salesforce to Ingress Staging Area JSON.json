@@ -119,6 +119,10 @@
 							"FolderName": {
 								"value": "@concat('addresstest_', string(utcnow()), '.json')",
 								"type": "Expression"
+							},
+							"FileName": {
+								"value": "@concat('addresstest_', string(utcnow()), '.json')",
+								"type": "Expression"
 							}
 						}
 					}
