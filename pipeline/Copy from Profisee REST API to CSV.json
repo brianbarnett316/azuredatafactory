@@ -1,5 +1,5 @@
 {
-	"name": "1 Copy from Profisee REST API to CSV",
+	"name": "Copy from Profisee REST API to CSV",
 	"properties": {
 		"activities": [
 			{
