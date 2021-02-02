@@ -295,6 +295,9 @@
 				"defaultValue": "product"
 			}
 		},
+		"folder": {
+			"name": "CSV Format"
+		},
 		"annotations": [],
 		"lastPublishTime": "2020-09-25T15:29:08Z"
 	},
