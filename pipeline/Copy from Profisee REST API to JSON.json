@@ -181,7 +181,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "OutputBlobJson",
+						"referenceName": "InputBlobJson",
 						"type": "DatasetReference",
 						"parameters": {
 							"FolderName": {
