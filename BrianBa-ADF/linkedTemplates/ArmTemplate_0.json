@@ -820,6 +820,9 @@
 						"type": "string"
 					}
 				},
+				"folder": {
+					"name": "CSV Format"
+				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
@@ -911,6 +914,9 @@
 					"FileFolder": {
 						"type": "string"
 					}
+				},
+				"folder": {
+					"name": "JSON Format"
 				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
@@ -1219,6 +1225,9 @@
 						"defaultValue": "product"
 					}
 				},
+				"folder": {
+					"name": "CSV Format"
+				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
 			},
@@ -1437,6 +1446,9 @@
 						"type": "String",
 						"defaultValue": "product"
 					}
+				},
+				"folder": {
+					"name": "JSON Format"
 				},
 				"annotations": [],
 				"lastPublishTime": "2020-09-25T15:29:08Z"
