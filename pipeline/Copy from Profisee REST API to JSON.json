@@ -50,7 +50,7 @@
 									"path": "['internalId']"
 								},
 								"sink": {
-									"path": "$[internalId]"
+									"path": "$['internalId']"
 								}
 							},
 							{
@@ -58,7 +58,7 @@
 									"path": "['code']"
 								},
 								"sink": {
-									"path": "$[code]"
+									"path": "$['code']"
 								}
 							},
 							{
