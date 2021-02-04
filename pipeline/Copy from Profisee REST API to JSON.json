@@ -66,7 +66,7 @@
 									"path": "['name']"
 								},
 								"sink": {
-									"path": "$[name]"
+									"path": "$['name']"
 								}
 							},
 							{
@@ -74,7 +74,7 @@
 									"path": "['productSubCategory']"
 								},
 								"sink": {
-									"path": "$[product Sub Category]"
+									"path": "$['product Sub Category']"
 								}
 							},
 							{
@@ -82,7 +82,7 @@
 									"path": "['standardCost']"
 								},
 								"sink": {
-									"path": "$[standardCost]"
+									"path": "$['standardCost']"
 								}
 							},
 							{
@@ -90,7 +90,7 @@
 									"path": "['msrp']"
 								},
 								"sink": {
-									"path": "$[msrp]"
+									"path": "$['msrp']"
 								}
 							},
 							{
@@ -98,7 +98,7 @@
 									"path": "['dealerCost']"
 								},
 								"sink": {
-									"path": "$[dealerCost]"
+									"path": "$['dealerCost']"
 								}
 							},
 							{
@@ -106,7 +106,7 @@
 									"path": "['sellStartDate']"
 								},
 								"sink": {
-									"path": "$[sellStartDate]"
+									"path": "$['sellStartDate']"
 								}
 							},
 							{
@@ -114,7 +114,7 @@
 									"path": "['sellEndDate']"
 								},
 								"sink": {
-									"path": "$[sellEndDate]"
+									"path": "$['sellEndDate']"
 								}
 							},
 							{
@@ -122,7 +122,7 @@
 									"path": "['changedOn']"
 								},
 								"sink": {
-									"path": "$[changedOn]"
+									"path": "$['changedOn']"
 								}
 							},
 							{
@@ -130,7 +130,7 @@
 									"path": "['changedByUser']"
 								},
 								"sink": {
-									"path": "$[changedByUser]"
+									"path": "$['changedByUser']"
 								}
 							},
 							{
@@ -138,7 +138,7 @@
 									"path": "['validationStatus']"
 								},
 								"sink": {
-									"path": "$[validationStatus]"
+									"path": "$['validationStatus']"
 								}
 							},
 							{
@@ -146,7 +146,7 @@
 									"path": "['weight']"
 								},
 								"sink": {
-									"path": "$[weight]"
+									"path": "$['weight']"
 								}
 							}
 						],
