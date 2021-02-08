@@ -60,7 +60,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ProfiseeRESTAPI_Members_Update",
+						"referenceName": "ProfiseeRESTAPI_Members_Upsert",
 						"type": "DatasetReference",
 						"parameters": {
 							"entityId": {
