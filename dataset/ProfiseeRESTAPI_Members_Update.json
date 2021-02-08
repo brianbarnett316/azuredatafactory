@@ -18,7 +18,7 @@
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "@concat(\n'members/',\ndataset().entityId, \n'/?isUpsert=true'\n)\n",
+				"value": "@concat(\n'records/',\ndataset().entityId, \n'/?isUpsert=true'\n)\n",
 				"type": "Expression"
 			}
 		},
