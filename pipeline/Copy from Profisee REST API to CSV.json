@@ -269,7 +269,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "OutputBlobCsv",
+						"referenceName": "AdlsGen2BlobCsv",
 						"type": "DatasetReference",
 						"parameters": {
 							"FolderName": {
