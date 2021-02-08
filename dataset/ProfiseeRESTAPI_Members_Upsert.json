@@ -1,5 +1,5 @@
 {
-	"name": "ProfiseeRESTAPI_Members_Update",
+	"name": "ProfiseeRESTAPI_Members_Upsert",
 	"properties": {
 		"description": "Profisee members update REST API call.",
 		"linkedServiceName": {
@@ -9,10 +9,6 @@
 		"parameters": {
 			"entityId": {
 				"type": "string"
-			},
-			"isUpsert": {
-				"type": "bool",
-				"defaultValue": false
 			}
 		},
 		"folder": {
@@ -22,7 +18,7 @@
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "@concat('members/',\ndataset().entityId, \n'/?isUpsert=',string(dataset().isUpsert)\n)",
+				"value": "@concat(\n'records/',\ndataset().entityId, \n'/?isUpsert=true'\n)\n",
 				"type": "Expression"
 			}
 		},

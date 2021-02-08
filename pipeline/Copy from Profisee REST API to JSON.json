@@ -21,12 +21,6 @@
 						"httpRequestTimeout": "00:01:40",
 						"requestInterval": "00.00:00:00.010",
 						"requestMethod": "GET",
-						"additionalHeaders": {
-							"x-api-key": {
-								"value": "@pipeline().globalParameters.ApiKey",
-								"type": "Expression"
-							}
-						},
 						"paginationRules": {
 							"AbsoluteUrl": "$.nextPage"
 						}
@@ -41,117 +35,7 @@
 							"filePattern": "arrayOfObjects"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "['internalId']"
-								},
-								"sink": {
-									"path": "$['internalId']"
-								}
-							},
-							{
-								"source": {
-									"path": "['code']"
-								},
-								"sink": {
-									"path": "$['code']"
-								}
-							},
-							{
-								"source": {
-									"path": "['name']"
-								},
-								"sink": {
-									"path": "$['name']"
-								}
-							},
-							{
-								"source": {
-									"path": "['productSubCategory']"
-								},
-								"sink": {
-									"path": "$['productSubCategory']"
-								}
-							},
-							{
-								"source": {
-									"path": "['standardCost']"
-								},
-								"sink": {
-									"path": "$['standardCost']"
-								}
-							},
-							{
-								"source": {
-									"path": "['msrp']"
-								},
-								"sink": {
-									"path": "$['msrp']"
-								}
-							},
-							{
-								"source": {
-									"path": "['dealerCost']"
-								},
-								"sink": {
-									"path": "$['dealerCost']"
-								}
-							},
-							{
-								"source": {
-									"path": "['sellStartDate']"
-								},
-								"sink": {
-									"path": "$['sellStartDate']"
-								}
-							},
-							{
-								"source": {
-									"path": "['sellEndDate']"
-								},
-								"sink": {
-									"path": "$['sellEndDate']"
-								}
-							},
-							{
-								"source": {
-									"path": "['changedOn']"
-								},
-								"sink": {
-									"path": "$['changedOn']"
-								}
-							},
-							{
-								"source": {
-									"path": "['changedByUser']"
-								},
-								"sink": {
-									"path": "$['changedByUser']"
-								}
-							},
-							{
-								"source": {
-									"path": "['validationStatus']"
-								},
-								"sink": {
-									"path": "$['validationStatus']"
-								}
-							},
-							{
-								"source": {
-									"path": "['weight']"
-								},
-								"sink": {
-									"path": "$['weight']"
-								}
-							}
-						],
-						"collectionReference": "$['data']"
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -159,10 +43,10 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"entityId": {
-								"value": "@variables('EntityName')",
+								"value": "@variables('EntityId')",
 								"type": "Expression"
 							},
-							"pageSize": 100,
+							"pageSize": 1000,
 							"attributes": " ",
 							"filter": " ",
 							"orderBy": " ",
@@ -177,11 +61,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FolderName": {
-								"value": "@concat(variables('OutputContainer'), '/', variables('EntityName'))",
+								"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'))",
 								"type": "Expression"
 							},
 							"FileName": {
-								"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.json')",
+								"value": "@concat(variables('EntityId'), '_', string(utcnow()), '.json')",
 								"type": "Expression"
 							}
 						}
@@ -194,7 +78,7 @@
 				"type": "String",
 				"defaultValue": "profisee-output"
 			},
-			"EntityName": {
+			"EntityId": {
 				"type": "String",
 				"defaultValue": "product"
 			}

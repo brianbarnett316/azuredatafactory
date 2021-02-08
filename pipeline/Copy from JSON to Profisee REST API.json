@@ -3,7 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy from JSON to REST API",
+				"name": "Copy from JSON to Profisee REST API",
+				"description": "Copy records from ADLS Gen2 in JSON format to Profisee via the Profisee REST API.",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -31,12 +32,6 @@
 						"requestInterval": 10,
 						"requestMethod": "PATCH",
 						"writeBatchSize": 10000,
-						"additionalHeaders": {
-							"x-api-key": {
-								"value": "@pipeline().globalParameters.ApiKey",
-								"type": "Expression"
-							}
-						},
 						"httpCompressionType": "none"
 					},
 					"enableStaging": false
@@ -59,14 +54,13 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ProfiseeRESTAPI_Members_Update",
+						"referenceName": "ProfiseeRESTAPI_Members_Upsert",
 						"type": "DatasetReference",
 						"parameters": {
 							"entityId": {
 								"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
 								"type": "Expression"
-							},
-							"isUpsert": true
+							}
 						}
 					}
 				]
