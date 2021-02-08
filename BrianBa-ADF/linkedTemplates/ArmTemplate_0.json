@@ -579,10 +579,6 @@
 				"parameters": {
 					"entityId": {
 						"type": "string"
-					},
-					"isUpsert": {
-						"type": "bool",
-						"defaultValue": false
 					}
 				},
 				"folder": {
@@ -592,7 +588,7 @@
 				"type": "RestResource",
 				"typeProperties": {
 					"relativeUrl": {
-						"value": "@concat('members/',\ndataset().entityId, \n'/?isUpsert=',string(dataset().isUpsert)\n)",
+						"value": "@concat(\n'members/',\ndataset().entityId, \n'/?isUpsert=true'\n)\n",
 						"type": "Expression"
 					}
 				},
@@ -629,7 +625,8 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy CSV to REST API",
+						"name": "Copy from CSV to Profisee REST API",
+						"description": "Copy records from ADLS Gen2 in CSV format to Profisee via the Profisee REST API.",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -691,8 +688,7 @@
 									"entityId": {
 										"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
 										"type": "Expression"
-									},
-									"isUpsert": true
+									}
 								}
 							}
 						]
@@ -724,7 +720,8 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy from JSON to REST API",
+						"name": "Copy from JSON to Profisee REST API",
+						"description": "Copy records from ADLS Gen2 in JSON format to Profisee via the Profisee REST API.",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -786,8 +783,7 @@
 									"entityId": {
 										"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
 										"type": "Expression"
-									},
-									"isUpsert": true
+									}
 								}
 							}
 						]
@@ -1071,7 +1067,7 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
-										"value": "@variables('EntityName')",
+										"value": "@variables('EntityId')",
 										"type": "Expression"
 									},
 									"pageSize": 100,
@@ -1089,11 +1085,11 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"FolderName": {
-										"value": "@concat(variables('OutputContainer'), '/', variables('EntityName'))",
+										"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'))",
 										"type": "Expression"
 									},
 									"FileName": {
-										"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.csv')",
+										"value": "@concat(variables('EntityId'), '_', string(utcnow()), '.csv')",
 										"type": "Expression"
 									}
 								}
@@ -1106,7 +1102,7 @@
 						"type": "String",
 						"defaultValue": "profisee-output"
 					},
-					"EntityName": {
+					"EntityId": {
 						"type": "String",
 						"defaultValue": "product"
 					}
@@ -1285,7 +1281,7 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
-										"value": "@variables('EntityName')",
+										"value": "@variables('EntityId')",
 										"type": "Expression"
 									},
 									"pageSize": 100,
@@ -1303,11 +1299,11 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"FolderName": {
-										"value": "@concat(variables('OutputContainer'), '/', variables('EntityName'))",
+										"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'))",
 										"type": "Expression"
 									},
 									"FileName": {
-										"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.json')",
+										"value": "@concat(variables('EntityId'), '_', string(utcnow()), '.json')",
 										"type": "Expression"
 									}
 								}
@@ -1320,7 +1316,7 @@
 						"type": "String",
 						"defaultValue": "profisee-output"
 					},
-					"EntityName": {
+					"EntityId": {
 						"type": "String",
 						"defaultValue": "product"
 					}
@@ -1627,8 +1623,7 @@
 								"referenceName": "ProfiseeRESTAPI_Members_Update",
 								"type": "DatasetReference",
 								"parameters": {
-									"entityId": "addresstest",
-									"isUpsert": true
+									"entityId": "addresstest"
 								}
 							}
 						]
