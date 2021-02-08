@@ -654,12 +654,6 @@
 								"requestInterval": 10,
 								"requestMethod": "PATCH",
 								"writeBatchSize": 10000,
-								"additionalHeaders": {
-									"x-api-key": {
-										"value": "@pipeline().globalParameters.ApiKey",
-										"type": "Expression"
-									}
-								},
 								"httpCompressionType": "none"
 							},
 							"enableStaging": false
@@ -749,12 +743,6 @@
 								"requestInterval": 10,
 								"requestMethod": "PATCH",
 								"writeBatchSize": 10000,
-								"additionalHeaders": {
-									"x-api-key": {
-										"value": "@pipeline().globalParameters.ApiKey",
-										"type": "Expression"
-									}
-								},
 								"httpCompressionType": "none"
 							},
 							"enableStaging": false
@@ -833,12 +821,6 @@
 								"httpRequestTimeout": "00:01:40",
 								"requestInterval": "00.00:00:00.010",
 								"requestMethod": "GET",
-								"additionalHeaders": {
-									"x-api-key": {
-										"value": "@pipeline().globalParameters.ApiKey",
-										"type": "Expression"
-									}
-								},
 								"paginationRules": {
 									"AbsoluteUrl": "$.nextPage"
 								}
@@ -857,207 +839,6 @@
 							"enableStaging": false,
 							"translator": {
 								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "[['internalId']"
-										},
-										"sink": {
-											"name": "internalId",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"path": "[['id']"
-										},
-										"sink": {
-											"name": "id",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"path": "[['code']"
-										},
-										"sink": {
-											"name": "code",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['name']"
-										},
-										"sink": {
-											"name": "name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['productSubCategory']"
-										},
-										"sink": {
-											"name": "productSubCategory",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['color']"
-										},
-										"sink": {
-											"name": "color",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['class']"
-										},
-										"sink": {
-											"name": "class",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['style']"
-										},
-										"sink": {
-											"name": "style",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['country']"
-										},
-										"sink": {
-											"name": "country",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['standardCost']"
-										},
-										"sink": {
-											"name": "standardCost",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['safetyStockLevel']"
-										},
-										"sink": {
-											"name": "safetyStockLevel",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['reorderPoint']"
-										},
-										"sink": {
-											"name": "reorderPoint",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['msrp']"
-										},
-										"sink": {
-											"name": "msrp",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['weight']"
-										},
-										"sink": {
-											"name": "weight",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['dealerCost']"
-										},
-										"sink": {
-											"name": "dealerCost",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['sellStartDate']"
-										},
-										"sink": {
-											"name": "sellStartDate",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"path": "[['sellEndDate']"
-										},
-										"sink": {
-											"name": "sellEndDate",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"path": "[['productLine']"
-										},
-										"sink": {
-											"name": "productLine",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['size']"
-										},
-										"sink": {
-											"name": "size",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['changedOn']"
-										},
-										"sink": {
-											"name": "changedOn",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"path": "[['changedByUser']"
-										},
-										"sink": {
-											"name": "changedByUser",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['validationStatus']"
-										},
-										"sink": {
-											"name": "validationStatus",
-											"type": "Int32"
-										}
-									}
-								],
-								"collectionReference": "$['data']",
 								"mapComplexValuesToString": false
 							}
 						},
@@ -1070,7 +851,7 @@
 										"value": "@variables('EntityId')",
 										"type": "Expression"
 									},
-									"pageSize": 100,
+									"pageSize": 1000,
 									"attributes": " ",
 									"filter": " ",
 									"orderBy": " ",
@@ -1103,8 +884,7 @@
 						"defaultValue": "profisee-output"
 					},
 					"EntityId": {
-						"type": "String",
-						"defaultValue": "product"
+						"type": "String"
 					}
 				},
 				"folder": {
@@ -1143,12 +923,6 @@
 								"httpRequestTimeout": "00:01:40",
 								"requestInterval": "00.00:00:00.010",
 								"requestMethod": "GET",
-								"additionalHeaders": {
-									"x-api-key": {
-										"value": "@pipeline().globalParameters.ApiKey",
-										"type": "Expression"
-									}
-								},
 								"paginationRules": {
 									"AbsoluteUrl": "$.nextPage"
 								}
@@ -1163,117 +937,7 @@
 									"filePattern": "arrayOfObjects"
 								}
 							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "[['internalId']"
-										},
-										"sink": {
-											"path": "$['internalId']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['code']"
-										},
-										"sink": {
-											"path": "$['code']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['name']"
-										},
-										"sink": {
-											"path": "$['name']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['productSubCategory']"
-										},
-										"sink": {
-											"path": "$['productSubCategory']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['standardCost']"
-										},
-										"sink": {
-											"path": "$['standardCost']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['msrp']"
-										},
-										"sink": {
-											"path": "$['msrp']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['dealerCost']"
-										},
-										"sink": {
-											"path": "$['dealerCost']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['sellStartDate']"
-										},
-										"sink": {
-											"path": "$['sellStartDate']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['sellEndDate']"
-										},
-										"sink": {
-											"path": "$['sellEndDate']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['changedOn']"
-										},
-										"sink": {
-											"path": "$['changedOn']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['changedByUser']"
-										},
-										"sink": {
-											"path": "$['changedByUser']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['validationStatus']"
-										},
-										"sink": {
-											"path": "$['validationStatus']"
-										}
-									},
-									{
-										"source": {
-											"path": "[['weight']"
-										},
-										"sink": {
-											"path": "$['weight']"
-										}
-									}
-								],
-								"collectionReference": "$['data']"
-							}
+							"enableStaging": false
 						},
 						"inputs": [
 							{
@@ -1284,7 +948,7 @@
 										"value": "@variables('EntityId')",
 										"type": "Expression"
 									},
-									"pageSize": 100,
+									"pageSize": 1000,
 									"attributes": " ",
 									"filter": " ",
 									"orderBy": " ",
@@ -1317,8 +981,7 @@
 						"defaultValue": "profisee-output"
 					},
 					"EntityId": {
-						"type": "String",
-						"defaultValue": "product"
+						"type": "String"
 					}
 				},
 				"folder": {
