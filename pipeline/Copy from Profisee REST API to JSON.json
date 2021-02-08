@@ -46,7 +46,7 @@
 								"value": "@variables('EntityId')",
 								"type": "Expression"
 							},
-							"pageSize": 100,
+							"pageSize": 1000,
 							"attributes": " ",
 							"filter": " ",
 							"orderBy": " ",
