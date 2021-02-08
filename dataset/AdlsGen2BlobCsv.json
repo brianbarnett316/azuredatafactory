@@ -1,5 +1,5 @@
 {
-	"name": "InputBlobCsv",
+	"name": "AdlsGen2BlobCsv",
 	"properties": {
 		"description": "Azure Data Lake Storage Gen2 container for CSV format.",
 		"linkedServiceName": {
