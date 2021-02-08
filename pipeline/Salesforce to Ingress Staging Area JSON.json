@@ -113,7 +113,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "OutputBlobJson",
+						"referenceName": "AdlsGen2BlobJson",
 						"type": "DatasetReference",
 						"parameters": {
 							"FolderName": {
