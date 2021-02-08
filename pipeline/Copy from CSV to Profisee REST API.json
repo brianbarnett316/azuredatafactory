@@ -66,8 +66,7 @@
 							"entityId": {
 								"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
 								"type": "Expression"
-							},
-							"isUpsert": true
+							}
 						}
 					}
 				]
