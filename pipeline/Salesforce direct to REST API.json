@@ -121,8 +121,7 @@
 						"referenceName": "ProfiseeRESTAPI_Members_Update",
 						"type": "DatasetReference",
 						"parameters": {
-							"entityId": "addresstest",
-							"isUpsert": true
+							"entityId": "addresstest"
 						}
 					}
 				]
