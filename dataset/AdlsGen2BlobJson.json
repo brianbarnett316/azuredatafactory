@@ -1,5 +1,5 @@
 {
-	"name": "InputBlobJson",
+	"name": "AdlsGen2BlobJson",
 	"properties": {
 		"description": "Azure Data Lake Storage Gen2 container for JSON format.",
 		"linkedServiceName": {
