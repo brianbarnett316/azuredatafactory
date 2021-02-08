@@ -1,5 +1,5 @@
 {
-	"name": "ProfiseeRESTAPI_Members_Update",
+	"name": "ProfiseeRESTAPI_Members_Upsert",
 	"properties": {
 		"description": "Profisee members update REST API call.",
 		"linkedServiceName": {
