@@ -9,10 +9,6 @@
 		"parameters": {
 			"entityId": {
 				"type": "string"
-			},
-			"isUpsert": {
-				"type": "bool",
-				"defaultValue": false
 			}
 		},
 		"folder": {
@@ -22,7 +18,7 @@
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "@concat('members/',\ndataset().entityId, \n'/?isUpsert=',string(dataset().isUpsert)\n)",
+				"value": "@concat(\n'members/',\ndataset().entityId, \n'/?isUpsert=true'\n)\n",
 				"type": "Expression"
 			}
 		},
