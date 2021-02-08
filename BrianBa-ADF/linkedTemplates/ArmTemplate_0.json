@@ -567,7 +567,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Members_Update')]",
+			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Members_Upsert')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -682,7 +682,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Members_Update",
+								"referenceName": "ProfiseeRESTAPI_Members_Upsert",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
@@ -710,7 +710,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AdlsGen2BlobCsv')]",
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Update')]"
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Upsert')]"
 			]
 		},
 		{
@@ -777,7 +777,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Members_Update",
+								"referenceName": "ProfiseeRESTAPI_Members_Upsert",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": {
@@ -805,7 +805,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AdlsGen2BlobJson')]",
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Update')]"
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Upsert')]"
 			]
 		},
 		{
@@ -1620,7 +1620,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Members_Update",
+								"referenceName": "ProfiseeRESTAPI_Members_Upsert",
 								"type": "DatasetReference",
 								"parameters": {
 									"entityId": "addresstest"
@@ -1637,7 +1637,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]",
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Update')]"
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Members_Upsert')]"
 			]
 		},
 		{
