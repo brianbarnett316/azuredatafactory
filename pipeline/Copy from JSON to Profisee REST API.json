@@ -3,7 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy from JSON to REST API",
+				"name": "Copy from JSON to Profisee REST API",
+				"description": "Copy records from ADLS Gen2 in JSON format to Profisee via the Profisee REST API.",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -65,8 +66,7 @@
 							"entityId": {
 								"value": "@replace(pipeline().parameters.FileFolder, 'profisee-input/', '')",
 								"type": "Expression"
-							},
-							"isUpsert": true
+							}
 						}
 					}
 				]
