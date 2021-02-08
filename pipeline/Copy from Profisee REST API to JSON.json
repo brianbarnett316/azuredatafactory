@@ -159,7 +159,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"entityId": {
-								"value": "@variables('EntityName')",
+								"value": "@variables('EntityId')",
 								"type": "Expression"
 							},
 							"pageSize": 100,
@@ -177,11 +177,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FolderName": {
-								"value": "@concat(variables('OutputContainer'), '/', variables('EntityName'))",
+								"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'))",
 								"type": "Expression"
 							},
 							"FileName": {
-								"value": "@concat(variables('EntityName'), '_', string(utcnow()), '.json')",
+								"value": "@concat(variables('EntityId'), '_', string(utcnow()), '.json')",
 								"type": "Expression"
 							}
 						}
@@ -194,7 +194,7 @@
 				"type": "String",
 				"defaultValue": "profisee-output"
 			},
-			"EntityName": {
+			"EntityId": {
 				"type": "String",
 				"defaultValue": "product"
 			}
