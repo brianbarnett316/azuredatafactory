@@ -54,7 +54,7 @@
 								"requestMethod": "PATCH",
 								"writeBatchSize": 10000,
 								"additionalHeaders": {
-									"x-api-key": "add key"
+									"x-api-key": ""
 								},
 								"httpCompressionType": "none"
 							},
