@@ -1,5 +1,15 @@
-# azuredatafactory
+# **<span class="underline">Profisee Azure Data Factory</span>**
 
-## Templates
+This repository contains all the Profisee Azure Data Factory (ADF) templates and how to clone them wth Git or import them directly into ADF.
 
-The template documentation is maintained in Word documents and converted to Markdown with a tool called [pandoc](https://pandoc.org/).  PowerShell scripts convert and copy images needed.
+## templates
+
+[Home](https://github.com/profiseedev/azuredatafactory/tree/master/templates) for all the templates that can be cloned into your azuredatafactory GitHub repository.
+
+## templates-exported
+
+[Home](https://github.com/profiseedev/azuredatafactory/tree/master/templates-exported) for all the exported templates that you can import directly into ADF.
+
+## documentation
+
+For all the Profisee ADF template documentation.
