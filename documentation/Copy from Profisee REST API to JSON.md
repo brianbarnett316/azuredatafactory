@@ -36,35 +36,35 @@ How to use this solution template
 
     <img src="./media/copyfrom_restapi_to_json_2.png" style="width:2.62292in;height:1.79097in" />
 
-2.  Create a **New** or use an existing connection to the source
+1.  Create a **New** or use an existing connection to the source
     Profisee REST API.
 
-    <img src="./media/copyfrom_restapi_to_json_3.png" style="width:5.328in;height:3.13532in" />
+    <img src="./media/copyfrom_restapi_to_json_3.png" style="width:4.376in;height:2.78549in" />
 
     Follow these steps if you need to create a new REST linked service.
     
-        1.  Select “+ New" from the **REST** dropdown list.
-        
-            <img src="./media/copyfrom_restapi_to_json_4.png" style="width:2.06135in;height:1.29089in" />
-        
-        2.  Enter the following information for the REST linked service.
-        
-            1.  Name: Enter a unique name within your ADF.
-        
-            2.  Description: Enter an optional description.
-        
-            3.  Integration runtime: You can select the auto resolve option or
-                create a custom integration runtime. Some linked services that
-                ADF integrates with requires the ADF integration runtime be in
-                the same region as the service. In this case you will need to
-                create a custom integration runtime in the same region as that
-                linked service.
-        
-            4.  Base URL: enter the base URL to your deployed Profisee REST API.
-        
-            5.  Authentication type: select **Anonymous**
-        
-            <img src="./media/copyfrom_restapi_to_json_5.png" style="width:3.54601in;height:3.93413in" />
+    1.  Select “+ New" from the **REST** dropdown list.
+    
+        <img src="./media/copyfrom_restapi_to_json_4.png" style="width:2.06135in;height:1.29089in" />
+    
+    2.  Enter the following information for the REST linked service.
+    
+        1.  Name: Enter a unique name within your ADF.
+    
+        2.  Description: Enter an optional description.
+    
+        3.  Integration runtime: You can select the auto resolve option or
+            create a custom integration runtime. Some linked services that
+            ADF integrates with requires the ADF integration runtime be in
+            the same region as the service. In this case you will need to
+            create a custom integration runtime in the same region as that
+            linked service.
+    
+        4.  Base URL: enter the base URL to your deployed Profisee REST API.
+    
+        5.  Authentication type: select **Anonymous**
+    
+        <img src="./media/copyfrom_restapi_to_json_5.png" style="width:3.54601in;height:3.93413in" />
 
 3.  Create a **New** or use an existing connection to the ADLS Gen2 sink
     data store that you are copying data to.
