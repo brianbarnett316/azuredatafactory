@@ -41,30 +41,30 @@ How to use this solution template
 
     <img src="./media/copyfrom_restapi_to_json_3.png" style="width:5.328in;height:3.13532in" />
 
-Follow these steps if you need to create a new REST linked service.
-
-    1.  Select “+ New" from the **REST** dropdown list.
+    Follow these steps if you need to create a new REST linked service.
     
-        <img src="./media/copyfrom_restapi_to_json_4.png" style="width:2.06135in;height:1.29089in" />
-    
-    2.  Enter the following information for the REST linked service.
-    
-        1.  Name: Enter a unique name within your ADF.
-    
-        2.  Description: Enter an optional description.
-    
-        3.  Integration runtime: You can select the auto resolve option or
-            create a custom integration runtime. Some linked services that
-            ADF integrates with requires the ADF integration runtime be in
-            the same region as the service. In this case you will need to
-            create a custom integration runtime in the same region as that
-            linked service.
-    
-        4.  Base URL: enter the base URL to your deployed Profisee REST API.
-    
-        5.  Authentication type: select **Anonymous**
-    
-        <img src="./media/copyfrom_restapi_to_json_5.png" style="width:3.54601in;height:3.93413in" />
+        1.  Select “+ New" from the **REST** dropdown list.
+        
+            <img src="./media/copyfrom_restapi_to_json_4.png" style="width:2.06135in;height:1.29089in" />
+        
+        2.  Enter the following information for the REST linked service.
+        
+            1.  Name: Enter a unique name within your ADF.
+        
+            2.  Description: Enter an optional description.
+        
+            3.  Integration runtime: You can select the auto resolve option or
+                create a custom integration runtime. Some linked services that
+                ADF integrates with requires the ADF integration runtime be in
+                the same region as the service. In this case you will need to
+                create a custom integration runtime in the same region as that
+                linked service.
+        
+            4.  Base URL: enter the base URL to your deployed Profisee REST API.
+        
+            5.  Authentication type: select **Anonymous**
+        
+            <img src="./media/copyfrom_restapi_to_json_5.png" style="width:3.54601in;height:3.93413in" />
 
 3.  Create a **New** or use an existing connection to the ADLS Gen2 sink
     data store that you are copying data to.
@@ -106,15 +106,10 @@ Copy Activity
     2.  **pageSize** - The page size to get.  Defaults to 1000 if not supplied.
     
     3.  **filter** - A filter to restrict the members returned.
-    
         1.  \[&lt;attribute name&gt;\] &lt;operator&gt; &lt;value&gt;.
-    
             -   Example: \[Color\] eq ‘BLU’.
-    
         2.  The filter can include multi-level attributes (MLAs).
-    
             -   Example: \[ProductSubCategory\]/\[ProductCategory\] eq '1'.
-    
         3.  You can group attributes together using parenthesis and ANDs and ORs.
     
     4.  **attributes** - A comma separated list of entity attribute names to
@@ -122,12 +117,10 @@ Copy Activity
         blank, all attributes are returned. Note: the attribute list
         determines the result properties you will see in the **Mapping**
         tab.
-    
         1.  MLAs are supported, using the ‘/’ to separate each part of the MLA path
         2.  Example: \[Color\],\[Class\],\[ProductSubCategory\],\[SellStartDate\],\[SellEndDate\],\[Weight\],\[ProductSubCategory\]/\[ProductCategory\]/\[ProductGroup\]
     
     5.  **orderBy** - A comma separated list of entity attribute names and direction to order the response
-    
         1.  \[&lt;attribute name&gt;\] or \[&lt;attribute name&gt;\] asc - sorts attribute in ascending order
         2.  \[&lt;attribute name&gt;\] desc - sorts attribute in descending order
         3.  Example: \[ProductSubCategory\], \[SellStartDate\] desc
@@ -136,11 +129,9 @@ Copy Activity
         Provides an option to indicate how to return the DBA's Code and
         Name.  Note: a DBA is an attribute that points to, or references,
         another entity, called a domain entity. 
-    
         1.  Code only (default) - Only return the code value.
             -   Example: 
                 -   "Source System": "SF",
-    
         2.  Code and Name simple properties.  The name property is returned as DBA.Name.
             -   Example: 
                 -   "Source System": "SF",
