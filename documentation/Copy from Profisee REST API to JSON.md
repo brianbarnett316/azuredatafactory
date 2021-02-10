@@ -209,10 +209,9 @@ the Replace all button. Once done replacing, press the OK button.
 
   <img src="./media/copyfrom_restapi_to_json_19.png" style="width:4.864in;height:2.97037in" />
 
-Go back into the Copy data Mapping tab and now your Column names
-should all be updated.
+Go back into the Copy data Mapping tab and now your Column names should all be updated.
 
-    <img src="./media/copyfrom_restapi_to_json_20.png" style="width:5.008in;height:2.94166in" />
+  <img src="./media/copyfrom_restapi_to_json_20.png" style="width:5.008in;height:2.94166in" />
 
 Publish
 -------
