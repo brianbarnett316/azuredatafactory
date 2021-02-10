@@ -11,12 +11,12 @@ About this solution template
 This template retrieves records from Profisee REST API. It then copies
 the records, in CSV format, to a file in an output container. The
 template is designed to work with a folder structure consisting of
-folders named for each entity within the input container. Create a
+folders named for each entity within the output container. Create a
 folder for each entity you wish to integrate with. CSV files for an
 entity will get created to the profisee-output\\&lt;entity&gt; folder.
 
 When the pipeline created by the template is run, it will create a
-folder for the entity, if it doesn’t exists, and copy the file to that
+folder for the entity, if it doesn’t exist, and copy the file to that
 folder. The file name is composed of the entity name and date/time in
 UTC with the .csv extension.
 

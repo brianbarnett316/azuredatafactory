@@ -42,10 +42,10 @@ How to use this solution template
     API.
 
 > <img src="./media/copyfrom_csv_to_restapi_3.png" style="width:5.576in;height:3.4576in" />
+>
+> Follow these steps if you need to create a new REST linked service.
 
-1.  Follow these steps if you need to create a new REST linked service.
-
-2.  Select “+ New" from the **REST** dropdown list.
+1.  Select “+ New" from the **REST** dropdown list.
 
 > <img src="./media/copyfrom_csv_to_restapi_4.png" style="width:2.06135in;height:1.29089in" />
 
@@ -84,7 +84,8 @@ Pipeline
 
 ### Parameters
 
-1.  The FileFolder within the AdlsGen2Blob container.
+1.  The FileFolder containing the file, includes the container name
+    (e.g. profisee-input/product).
 
 2.  The FileName of the file containing the records in CSV format which
     the Profisee REST Update API expects. Must end in .CSV file

@@ -11,12 +11,12 @@ About this solution template
 This template retrieves records from Profisee REST API. It then copies
 the records, in JSON format, to a file in an output container. The
 template is designed to work with a folder structure consisting of
-folders named for each entity within the input container. Create a
+folders named for each entity within the output container. Create a
 folder for each entity you wish to integrate with. JSON files for an
 entity will get created to the profisee-output\\&lt;entity&gt; folder.
 
 When the pipeline created by the template is run, it will create a
-folder for the entity, if it doesn’t exists, and copy the file to that
+folder for the entity, if it doesn’t exist, and copy the file to that
 folder. The file name is composed of the entity name and date/time in
 UTC with the .json extension.
 
@@ -230,7 +230,7 @@ Copy Activity
 >
 > To this
 >
-> <img src="./media/copyfrom_restapi_to_json_17.png" style="width:6.07222in;height:0.55208in" />
+> <img src="./media/copyfrom_restapi_to_json_17.png" style="width:4.76in;height:0.52228in" />
 >
 > **Quick Tip:** Depending on the number of fields, correcting the
 > column name may take several minutes. Click the { } (Code) icon in the

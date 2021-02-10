@@ -19,11 +19,8 @@ profisee-input\\&lt;entity&gt; folder.
 For example:
 
 -   profisee-input
-
     -   account
-
     -   customer
-
     -   product
 
 <img src="./media/copyfrom_csv_to_restapi_1.png" style="width:3.784in;height:1.75212in" />
@@ -33,23 +30,21 @@ How to use this solution template
 
 1.  Go to the **Copy from CSV to Profisee REST API** template.
 
-> <img src="./media/copyfrom_csv_to_restapi_2.png" style="width:2.11763in;height:1.45399in" />
+    <img src="./media/copyfrom_csv_to_restapi_2.png" style="width:2.11763in;height:1.45399in" />
 
-1.  Create a **New** or use an existing connection to the
-    BlobStorageGen2 data store that you are copying CSV data from.
+2.  Create a **New** or use an existing connection to the BlobStorageGen2 data store that you are copying CSV data from.
 
-2.  Create a **New** or use an existing connection to the Profisee REST
-    API.
+3.  Create a **New** or use an existing connection to the Profisee REST API.
 
-> <img src="./media/copyfrom_csv_to_restapi_3.png" style="width:5.576in;height:3.4576in" />
+    <img src="./media/copyfrom_csv_to_restapi_3.png" style="width:5.576in;height:3.4576in" />
 
-1.  Follow these steps if you need to create a new REST linked service.
+  Follow these steps if you need to create a new REST linked service.
 
-2.  Select “+ New" from the **REST** dropdown list.
+  1.  Select “+ New" from the **REST** dropdown list.
 
-> <img src="./media/copyfrom_csv_to_restapi_4.png" style="width:2.06135in;height:1.29089in" />
+      <img src="./media/copyfrom_csv_to_restapi_4.png" style="width:2.06135in;height:1.29089in" />
 
-1.  Enter the following information for the REST linked service.
+  2.  Enter the following information for the REST linked service.
 
     1.  Name: Enter a unique name within your ADF.
 
@@ -68,14 +63,13 @@ How to use this solution template
 
 > <img src="./media/copyfrom_csv_to_restapi_5.png" style="width:3.54601in;height:3.93413in" />
 
-1.  Select **Use this template**.
+4.  Select **Use this template**.
 
-2.  You will see a pipeline created as shown in the following example:
+5.  You will see a pipeline created as shown in the following example:
 
 > <img src="./media/copyfrom_csv_to_restapi_6.png" style="width:4.66462in;height:3.032in" />
 >
-> You should also see the following template validation output. We will
-> correct that below.
+> You should also see the following template validation output. We will correct that below.
 >
 > <img src="./media/copyfrom_csv_to_restapi_7.png" style="width:3.02985in;height:0.64356in" />
 
@@ -84,14 +78,11 @@ Pipeline
 
 ### Parameters
 
-1.  The FileFolder within the AdlsGen2Blob container.
+1.  The FileFolder containing the file, includes the container name (e.g. profisee-input/product).
 
-2.  The FileName of the file containing the records in CSV format which
-    the Profisee REST Update API expects. Must end in .CSV file
-    extension.
+2.  The FileName of the file containing the records in CSV format which the Profisee REST Update API expects. Must end in .CSV file extension.
 
-3.  If you plan on creating an Event trigger on the storage container,
-    then you can leave the Default Values blank.
+3.  If you plan on creating an Event trigger on the storage container, then you can leave the Default Values blank.
 
 > <img src="./media/copyfrom_csv_to_restapi_8.png" style="width:3.8913in;height:1.30251in" />
 
@@ -100,8 +91,7 @@ Copy Activity
 
 ### Source
 
-1.  The Source dataset properties, FolderName and FileName, are set from
-    the two pipeline parameters mentioned above.
+1.  The Source dataset properties, FolderName and FileName, are set from the two pipeline parameters mentioned above.
 
 > <img src="./media/copyfrom_csv_to_restapi_9.png" style="width:4.46906in;height:1.928in" />
 
