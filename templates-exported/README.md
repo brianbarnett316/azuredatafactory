@@ -22,7 +22,7 @@ This page describes how to import the Profisee ADF templates to your ADF.
 
     2.  Select Open
 
-    3.  <img src="./media/image3.png" style="width:4.856in;height:1.50816in" />
+        <img src="./media/image3.png" style="width:4.856in;height:1.50816in" />
 
 5.  The templates should appear in the bottom left.
 
