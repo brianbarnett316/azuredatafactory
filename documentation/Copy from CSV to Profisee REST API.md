@@ -61,17 +61,17 @@ How to use this solution template
 
     5.  Authentication type: select **Anonymous**
 
-> <img src="./media/copyfrom_csv_to_restapi_5.png" style="width:3.54601in;height:3.93413in" />
+        <img src="./media/copyfrom_csv_to_restapi_5.png" style="width:3.54601in;height:3.93413in" />
 
 4.  Select **Use this template**.
 
 5.  You will see a pipeline created as shown in the following example:
 
-> <img src="./media/copyfrom_csv_to_restapi_6.png" style="width:4.66462in;height:3.032in" />
->
-> You should also see the following template validation output. We will correct that below.
->
-> <img src="./media/copyfrom_csv_to_restapi_7.png" style="width:3.02985in;height:0.64356in" />
+    <img src="./media/copyfrom_csv_to_restapi_6.png" style="width:4.66462in;height:3.032in" />
+
+    You should also see the following template validation output. We will correct that below.
+
+    <img src="./media/copyfrom_csv_to_restapi_7.png" style="width:3.02985in;height:0.64356in" />
 
 Pipeline
 --------
@@ -84,7 +84,7 @@ Pipeline
 
 3.  If you plan on creating an Event trigger on the storage container, then you can leave the Default Values blank.
 
-> <img src="./media/copyfrom_csv_to_restapi_8.png" style="width:3.8913in;height:1.30251in" />
+    <img src="./media/copyfrom_csv_to_restapi_8.png" style="width:3.8913in;height:1.30251in" />
 
 Copy Activity
 -------------
@@ -93,28 +93,28 @@ Copy Activity
 
 1.  The Source dataset properties, FolderName and FileName, are set from the two pipeline parameters mentioned above.
 
-> <img src="./media/copyfrom_csv_to_restapi_9.png" style="width:4.46906in;height:1.928in" />
+    <img src="./media/copyfrom_csv_to_restapi_9.png" style="width:4.46906in;height:1.928in" />
 
 ### Sink
 
 1.  The Sink dataset property, **entityId**, is set using the FileFolder
-    > path. It assumes a container name of **profisee-input** however
-    > you can use a different name. For example, a FileFolder path of
-    > **profisee-input/product** will result in an entityId of
-    > **product**. Note, the entityId can be either the entity’s Name,
-    > UID, or InternalId value.
+    path. It assumes a container name of **profisee-input** however
+    you can use a different name. For example, a FileFolder path of
+    **profisee-input/product** will result in an entityId of
+    **product**. Note, the entityId can be either the entity’s Name,
+    UID, or InternalId value.
 
-<img src="./media/copyfrom_csv_to_restapi_10.png" style="width:4.568in;height:1.49436in" />
+    <img src="./media/copyfrom_csv_to_restapi_10.png" style="width:4.568in;height:1.49436in" />
 
 1.  The **Request method** must be set to **PATCH**.
 
 2.  **x-api-key:** The Profisee API key, which is the Client Id for the
-    > user account you are using to connect to the Profisee API. The
-    > Client Id can be found in the FastApp Studio Accounts screen,
-    > within the Accounts and Teams admin area. This is entered in the
-    > Source tab.
+    user account you are using to connect to the Profisee API. The
+    Client Id can be found in the FastApp Studio Accounts screen,
+    within the Accounts and Teams admin area. This is entered in the
+    Source tab.
 
-> <img src="./media/copyfrom_csv_to_restapi_11.png" style="width:2.96792in;height:1.90184in" />
+    <img src="./media/copyfrom_csv_to_restapi_11.png" style="width:2.96792in;height:1.90184in" />
 
 ### Mapping
 
@@ -137,11 +137,11 @@ Trigger
         Note: the Container name must match the input container name
         entered in the **Set EntityName variable** activity above.
 
-> <img src="./media/copyfrom_csv_to_restapi_12.png" style="width:3.5384in;height:5.15951in" />
+        <img src="./media/copyfrom_csv_to_restapi_12.png" style="width:3.5384in;height:5.15951in" />
 
 1.  Click **Continue** on the **Data preview** page.
 
-> <img src="./media/copyfrom_csv_to_restapi_13.png" style="width:3.63634in;height:2.8773in" />
+    <img src="./media/copyfrom_csv_to_restapi_13.png" style="width:3.63634in;height:2.8773in" />
 
 1.  Enter the following **Trigger Run Parameters**.
 
@@ -151,34 +151,30 @@ Trigger
         properties in a pipeline, you must map the properties to
         pipeline parameters.
 
-> <img src="./media/copyfrom_csv_to_restapi_14.png" style="width:4.10067in;height:2.79949in" />
+        <img src="./media/copyfrom_csv_to_restapi_14.png" style="width:4.10067in;height:2.79949in" />
 
 Publish
 -------
 
-> Once you are finished with all your changes, click Publish All.
->
-> <img src="./media/copyfrom_csv_to_restapi_15.png" style="width:1.36994in;height:0.29043in" />
+Once you are finished with all your changes, click Publish All.
+
+<img src="./media/copyfrom_csv_to_restapi_15.png" style="width:1.36994in;height:0.29043in" />
 
 Triggering
 ----------
 
-1.  If you added an event trigger, upload a file to an entity folder
-    within your input container. The file must contain the members in
-    CSV format. An example is shown below.
+1.  If you added an event trigger, upload a file to an entity folder within your input container. The file must contain the members in CSV format. An example is shown below.
 
-> <img src="./media/copyfrom_csv_to_restapi_16.png" style="width:3.63804in;height:1.45401in" />
->
-> <img src="./media/copyfrom_csv_to_restapi_17.png" style="width:4.88957in;height:0.50724in" />
+    <img src="./media/copyfrom_csv_to_restapi_16.png" style="width:3.63804in;height:1.45401in" />
 
-1.  Select **Monitor** tab in the left navigation panel and wait for
-    about 20 seconds. Click **Refresh** to get the updated run status.
+    Sample contents
+    <img src="./media/copyfrom_csv_to_restapi_17.png" style="width:4.88957in;height:0.50724in" />
 
-2.  When the pipeline run completes successfully, you would see results
-    like the following example. Notice the pipeline was triggered by the
-    event trigger.
+2.  Select **Monitor** tab in the left navigation panel and wait for about 20 seconds. Click **Refresh** to get the updated run status.
 
-> <img src="./media/copyfrom_csv_to_restapi_18.png" style="width:5.46626in;height:1.0734in" />
+3.  When the pipeline run completes successfully, you would see results like the following example. Notice the pipeline was triggered by the event trigger.
+
+    <img src="./media/copyfrom_csv_to_restapi_18.png" style="width:5.46626in;height:1.0734in" />
 
 Next steps
 ----------
