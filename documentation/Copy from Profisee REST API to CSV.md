@@ -157,10 +157,9 @@ Copy Activity
 1.  Dataset properties
 
     1.  FolderName – A concatenation of the OutputContainer and the EntityId.
-
     2.  FileName – A concatenation of the EntityId and a timestamp.
 
-### <img src="./media/copyfrom_restapi_to_csv_11.png" style="width:4.98747in;height:1.76in" />
+    <img src="./media/copyfrom_restapi_to_csv_11.png" style="width:4.98747in;height:1.76in" />
 
 ### Mapping
 
