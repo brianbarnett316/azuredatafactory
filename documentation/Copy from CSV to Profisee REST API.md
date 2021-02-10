@@ -46,22 +46,22 @@ How to use this solution template
 
   2.  Enter the following information for the REST linked service.
 
-    1.  Name: Enter a unique name within your ADF.
+      1.  Name: Enter a unique name within your ADF.
 
-    2.  Description: Enter an optional description.
+      2.  Description: Enter an optional description.
 
-    3.  Integration runtime: You can select the auto resolve option or
-        create a custom integration runtime. Some linked services that
-        ADF integrates with requires the ADF integration runtime be in
-        the same region as the service. In this case you will need to
-        create a custom integration runtime in the same region as that
-        linked service.
+      3.  Integration runtime: You can select the auto resolve option or
+          create a custom integration runtime. Some linked services that
+          ADF integrates with requires the ADF integration runtime be in
+          the same region as the service. In this case you will need to
+          create a custom integration runtime in the same region as that
+          linked service.
 
-    4.  Base URL: enter the base URL to your deployed Profisee REST API.
+      4.  Base URL: enter the base URL to your deployed Profisee REST API.
 
-    5.  Authentication type: select **Anonymous**
+      5.  Authentication type: select **Anonymous**
 
-        <img src="./media/copyfrom_csv_to_restapi_5.png" style="width:3.54601in;height:3.93413in" />
+          <img src="./media/copyfrom_csv_to_restapi_5.png" style="width:3.54601in;height:3.93413in" />
 
 4.  Select **Use this template**.
 
@@ -167,7 +167,6 @@ Triggering
 
     <img src="./media/copyfrom_csv_to_restapi_16.png" style="width:3.63804in;height:1.45401in" />
 
-    Sample contents
     <img src="./media/copyfrom_csv_to_restapi_17.png" style="width:4.88957in;height:0.50724in" />
 
 2.  Select **Monitor** tab in the left navigation panel and wait for about 20 seconds. Click **Refresh** to get the updated run status.
