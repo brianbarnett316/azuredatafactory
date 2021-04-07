@@ -35,7 +35,469 @@
 							"filePattern": "arrayOfObjects"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['internalId']"
+								},
+								"sink": {
+									"path": "$['internalId']"
+								}
+							},
+							{
+								"source": {
+									"path": "['id']"
+								},
+								"sink": {
+									"path": "$['id']"
+								}
+							},
+							{
+								"source": {
+									"path": "['code']"
+								},
+								"sink": {
+									"path": "$['code']"
+								}
+							},
+							{
+								"source": {
+									"path": "['name']"
+								},
+								"sink": {
+									"path": "$['name']"
+								}
+							},
+							{
+								"source": {
+									"path": "['productSubCategory']"
+								},
+								"sink": {
+									"path": "$['productSubCategory']"
+								}
+							},
+							{
+								"source": {
+									"path": "['color']"
+								},
+								"sink": {
+									"path": "$['color']"
+								}
+							},
+							{
+								"source": {
+									"path": "['class']"
+								},
+								"sink": {
+									"path": "$['class']"
+								}
+							},
+							{
+								"source": {
+									"path": "['style']"
+								},
+								"sink": {
+									"path": "$['style']"
+								}
+							},
+							{
+								"source": {
+									"path": "['country']"
+								},
+								"sink": {
+									"path": "$['country']"
+								}
+							},
+							{
+								"source": {
+									"path": "['standardCost']"
+								},
+								"sink": {
+									"path": "$['standardCost']"
+								}
+							},
+							{
+								"source": {
+									"path": "['safetyStockLevel']"
+								},
+								"sink": {
+									"path": "$['safetyStockLevel']"
+								}
+							},
+							{
+								"source": {
+									"path": "['reorderPoint']"
+								},
+								"sink": {
+									"path": "$['reorderPoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "['msrp']"
+								},
+								"sink": {
+									"path": "$['msrp']"
+								}
+							},
+							{
+								"source": {
+									"path": "['weight']"
+								},
+								"sink": {
+									"path": "$['weight']"
+								}
+							},
+							{
+								"source": {
+									"path": "['daysToManufacture']"
+								},
+								"sink": {
+									"path": "$['daysToManufacture']"
+								}
+							},
+							{
+								"source": {
+									"path": "['dealerCost']"
+								},
+								"sink": {
+									"path": "$['dealerCost']"
+								}
+							},
+							{
+								"source": {
+									"path": "['documentationURL']"
+								},
+								"sink": {
+									"path": "$['documentationURL']"
+								}
+							},
+							{
+								"source": {
+									"path": "['sellStartDate']"
+								},
+								"sink": {
+									"path": "$['sellStartDate']"
+								}
+							},
+							{
+								"source": {
+									"path": "['sellEndDate']"
+								},
+								"sink": {
+									"path": "$['sellEndDate']"
+								}
+							},
+							{
+								"source": {
+									"path": "['sizeUoM']"
+								},
+								"sink": {
+									"path": "$['sizeUoM']"
+								}
+							},
+							{
+								"source": {
+									"path": "['weightUoM']"
+								},
+								"sink": {
+									"path": "$['weightUoM']"
+								}
+							},
+							{
+								"source": {
+									"path": "['inHouseManufacture']"
+								},
+								"sink": {
+									"path": "$['inHouseManufacture']"
+								}
+							},
+							{
+								"source": {
+									"path": "['finishedGoodIndicator']"
+								},
+								"sink": {
+									"path": "$['finishedGoodIndicator']"
+								}
+							},
+							{
+								"source": {
+									"path": "['discontinuedItemInd']"
+								},
+								"sink": {
+									"path": "$['discontinuedItemInd']"
+								}
+							},
+							{
+								"source": {
+									"path": "['discontiuedDate']"
+								},
+								"sink": {
+									"path": "$['discontiuedDate']"
+								}
+							},
+							{
+								"source": {
+									"path": "['productLine']"
+								},
+								"sink": {
+									"path": "$['productLine']"
+								}
+							},
+							{
+								"source": {
+									"path": "['dealerCostCurrencyCode']"
+								},
+								"sink": {
+									"path": "$['dealerCostCurrencyCode']"
+								}
+							},
+							{
+								"source": {
+									"path": "['msrpCurrencyCode']"
+								},
+								"sink": {
+									"path": "$['msrpCurrencyCode']"
+								}
+							},
+							{
+								"source": {
+									"path": "['size']"
+								},
+								"sink": {
+									"path": "$['size']"
+								}
+							},
+							{
+								"source": {
+									"path": "['testMaster']"
+								},
+								"sink": {
+									"path": "$['testMaster']"
+								}
+							},
+							{
+								"source": {
+									"path": "['productMaster']"
+								},
+								"sink": {
+									"path": "$['productMaster']"
+								}
+							},
+							{
+								"source": {
+									"path": "['productScore']"
+								},
+								"sink": {
+									"path": "$['productScore']"
+								}
+							},
+							{
+								"source": {
+									"path": "['productStatus']"
+								},
+								"sink": {
+									"path": "$['productStatus']"
+								}
+							},
+							{
+								"source": {
+									"path": "['productRecordSource']"
+								},
+								"sink": {
+									"path": "$['productRecordSource']"
+								}
+							},
+							{
+								"source": {
+									"path": "['approvedMatchCount']"
+								},
+								"sink": {
+									"path": "$['approvedMatchCount']"
+								}
+							},
+							{
+								"source": {
+									"path": "['proposedMatchCount']"
+								},
+								"sink": {
+									"path": "$['proposedMatchCount']"
+								}
+							},
+							{
+								"source": {
+									"path": "['picture']"
+								},
+								"sink": {
+									"path": "$['picture']"
+								}
+							},
+							{
+								"source": {
+									"path": "['match Status']"
+								},
+								"sink": {
+									"path": "$['match Status']"
+								}
+							},
+							{
+								"source": {
+									"path": "['match Group']"
+								},
+								"sink": {
+									"path": "$['match Group']"
+								}
+							},
+							{
+								"source": {
+									"path": "['match Member']"
+								},
+								"sink": {
+									"path": "$['match Member']"
+								}
+							},
+							{
+								"source": {
+									"path": "['match Strategy']"
+								},
+								"sink": {
+									"path": "$['match Strategy']"
+								}
+							},
+							{
+								"source": {
+									"path": "['match DateTime']"
+								},
+								"sink": {
+									"path": "$['match DateTime']"
+								}
+							},
+							{
+								"source": {
+									"path": "['match MultiGroup']"
+								},
+								"sink": {
+									"path": "$['match MultiGroup']"
+								}
+							},
+							{
+								"source": {
+									"path": "['match User']"
+								},
+								"sink": {
+									"path": "$['match User']"
+								}
+							},
+							{
+								"source": {
+									"path": "['sA1']"
+								},
+								"sink": {
+									"path": "$['sA1']"
+								}
+							},
+							{
+								"source": {
+									"path": "['sA2']"
+								},
+								"sink": {
+									"path": "$['sA2']"
+								}
+							},
+							{
+								"source": {
+									"path": "['sA3']"
+								},
+								"sink": {
+									"path": "$['sA3']"
+								}
+							},
+							{
+								"source": {
+									"path": "['mergeStatus']"
+								},
+								"sink": {
+									"path": "$['mergeStatus']"
+								}
+							},
+							{
+								"source": {
+									"path": "['productMergeParent']"
+								},
+								"sink": {
+									"path": "$['productMergeParent']"
+								}
+							},
+							{
+								"source": {
+									"path": "['lastOrderDate']"
+								},
+								"sink": {
+									"path": "$['lastOrderDate']"
+								}
+							},
+							{
+								"source": {
+									"path": "['enterDTM']"
+								},
+								"sink": {
+									"path": "$['enterDTM']"
+								}
+							},
+							{
+								"source": {
+									"path": "['enterUserName']"
+								},
+								"sink": {
+									"path": "$['enterUserName']"
+								}
+							},
+							{
+								"source": {
+									"path": "['lastChgDTM']"
+								},
+								"sink": {
+									"path": "$['lastChgDTM']"
+								}
+							},
+							{
+								"source": {
+									"path": "['lastChgUserName']"
+								},
+								"sink": {
+									"path": "$['lastChgUserName']"
+								}
+							},
+							{
+								"source": {
+									"path": "['validationStatusID']"
+								},
+								"sink": {
+									"path": "$['validationStatusID']"
+								}
+							},
+							{
+								"source": {
+									"path": "['canUpdate']"
+								},
+								"sink": {
+									"path": "$['canUpdate']"
+								}
+							},
+							{
+								"source": {
+									"path": "['canDelete']"
+								},
+								"sink": {
+									"path": "$['canDelete']"
+								}
+							}
+						],
+						"collectionReference": "$['data']"
+					}
 				},
 				"inputs": [
 					{
