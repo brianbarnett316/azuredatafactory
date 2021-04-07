@@ -21,9 +21,6 @@
 						"httpRequestTimeout": "00:01:40",
 						"requestInterval": "00.00:00:00.010",
 						"requestMethod": "GET",
-						"additionalHeaders": {
-							"x-api-key": "add key"
-						},
 						"paginationRules": {
 							"AbsoluteUrl": "$.nextPage"
 						}
@@ -82,7 +79,8 @@
 				"defaultValue": "profisee-output"
 			},
 			"EntityId": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "product"
 			}
 		},
 		"folder": {
