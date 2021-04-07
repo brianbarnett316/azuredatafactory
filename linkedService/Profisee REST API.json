@@ -1,5 +1,6 @@
 {
 	"name": "Profisee REST API",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"description": "Profisee REST API",
 		"annotations": [],
@@ -7,12 +8,17 @@
 		"typeProperties": {
 			"url": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1",
 			"enableServerCertificateValidation": true,
-			"authenticationType": "Anonymous"
+			"authenticationType": "Anonymous",
+			"authHeaders": {
+				"X-API-Key": {
+					"type": "SecureString",
+					"value": "**********"
+				}
+			}
 		},
 		"connectVia": {
 			"referenceName": "AzureIREastUS",
 			"type": "IntegrationRuntimeReference"
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/linkedservices"
+	}
 }
