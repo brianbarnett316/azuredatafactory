@@ -47,20 +47,19 @@ How to use this solution template
     2.  Enter the following information for the REST linked service.
 
         1.  Name: Enter a unique name within your ADF.
-
         2.  Description: Enter an optional description.
-
         3.  Integration runtime: You can select the auto resolve option or
             create a custom integration runtime. Some linked services that
             ADF integrates with requires the ADF integration runtime be in
             the same region as the service. In this case you will need to
             create a custom integration runtime in the same region as that
             linked service.
-
         4.  Base URL: enter the base URL to your deployed Profisee REST API.
-
         5.  Authentication type: select **Anonymous**
-
+		6.  Add a new Auth header for the **X-API-Key**.  The Profisee API key, which is the Client Id for the user account you are using to connect to the Profisee API. The Client Id can be found in the FastApp Studio Accounts screen, within the Accounts and Teams admin area.  You have two options.
+			1.  Enter the API Key value directly into the Value field.  
+			2.  Store the API Key in Azure Key Vault.  Click in the value field then click **Add Azure Key Vault** to start the process to your ADF to key vault.
+	
             <img src="./media/copyfrom_csv_to_restapi_5.png" style="width:3.54601in;height:3.93413in" />
 
 4.  Select **Use this template**.
@@ -107,12 +106,6 @@ Copy Activity
     <img src="./media/copyfrom_csv_to_restapi_10.png" style="width:4.568in;height:1.49436in" />
 
 2.  The **Request method** must be set to **PATCH**.
-
-3.  **x-api-key:** The Profisee API key, which is the Client Id for the
-    user account you are using to connect to the Profisee API. The
-    Client Id can be found in the FastApp Studio Accounts screen,
-    within the Accounts and Teams admin area. This is entered in the
-    Source tab.
 
     <img src="./media/copyfrom_csv_to_restapi_11.png" style="width:2.96792in;height:1.90184in" />
 
