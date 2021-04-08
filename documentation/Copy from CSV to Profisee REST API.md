@@ -67,11 +67,7 @@ How to use this solution template
 5.  You will see a pipeline created as shown in the following example:
 
     <img src="./media/copyfrom_csv_to_restapi_6.png" style="width:4.66462in;height:3.032in" />
-
-    You should also see the following template validation output. We will correct that below.
-
-    <img src="./media/copyfrom_csv_to_restapi_7.png" style="width:3.02985in;height:0.64356in" />
-
+    
 Pipeline
 --------
 
