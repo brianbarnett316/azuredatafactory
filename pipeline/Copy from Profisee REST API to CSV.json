@@ -39,6 +39,138 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['code']"
+								},
+								"sink": {
+									"name": "code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['name']"
+								},
+								"sink": {
+									"name": "name"
+								}
+							},
+							{
+								"source": {
+									"path": "['productSubCategory']"
+								},
+								"sink": {
+									"name": "productSubCategory"
+								}
+							},
+							{
+								"source": {
+									"path": "['color']"
+								},
+								"sink": {
+									"name": "color"
+								}
+							},
+							{
+								"source": {
+									"path": "['class']"
+								},
+								"sink": {
+									"name": "class"
+								}
+							},
+							{
+								"source": {
+									"path": "['style']"
+								},
+								"sink": {
+									"name": "style"
+								}
+							},
+							{
+								"source": {
+									"path": "['country']"
+								},
+								"sink": {
+									"name": "country"
+								}
+							},
+							{
+								"source": {
+									"path": "['standardCost']"
+								},
+								"sink": {
+									"name": "standardCost"
+								}
+							},
+							{
+								"source": {
+									"path": "['safetyStockLevel']"
+								},
+								"sink": {
+									"name": "safetyStockLevel"
+								}
+							},
+							{
+								"source": {
+									"path": "['reorderPoint']"
+								},
+								"sink": {
+									"name": "reorderPoint"
+								}
+							},
+							{
+								"source": {
+									"path": "['msrp']"
+								},
+								"sink": {
+									"name": "msrp"
+								}
+							},
+							{
+								"source": {
+									"path": "['weight']"
+								},
+								"sink": {
+									"name": "weight"
+								}
+							},
+							{
+								"source": {
+									"path": "['daysToManufacture']"
+								},
+								"sink": {
+									"name": "daysToManufacture"
+								}
+							},
+							{
+								"source": {
+									"path": "['dealerCost']"
+								},
+								"sink": {
+									"name": "dealerCost"
+								}
+							},
+							{
+								"source": {
+									"path": "['sellStartDate']"
+								},
+								"sink": {
+									"name": "sellStartDate"
+								}
+							},
+							{
+								"source": {
+									"path": "['sellEndDate']"
+								},
+								"sink": {
+									"name": "sellEndDate"
+								}
+							}
+						],
+						"collectionReference": "$['data']",
 						"mapComplexValuesToString": false
 					}
 				},
