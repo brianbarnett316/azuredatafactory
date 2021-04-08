@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'securityToken' of 'Salesforce1'"
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://BrianBa.vault.azure.net/"
+		},
 		"BlobStorageGen2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://brianbastorageadlsgen2.dfs.core.windows.net"
@@ -102,6 +106,9 @@
 					"Salesforce1_securityToken": {
 						"value": "[parameters('Salesforce1_securityToken')]"
 					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
 					"BlobStorageGen2_properties_typeProperties_url": {
 						"value": "[parameters('BlobStorageGen2_properties_typeProperties_url')]"
 					},
@@ -113,6 +120,15 @@
 					},
 					"Salesforce1_properties_typeProperties_username": {
 						"value": "[parameters('Salesforce1_properties_typeProperties_username')]"
+					},
+					"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
+						"value": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName')]"
+					},
+					"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder": {
+						"value": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder')]"
+					},
+					"NewCsvMemberFile_properties_typeProperties_scope": {
+						"value": "[parameters('NewCsvMemberFile_properties_typeProperties_scope')]"
 					}
 				}
 			},
@@ -131,15 +147,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
-						"value": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName')]"
-					},
-					"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder": {
-						"value": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder')]"
-					},
-					"NewCsvMemberFile_properties_typeProperties_scope": {
-						"value": "[parameters('NewCsvMemberFile_properties_typeProperties_scope')]"
 					},
 					"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName": {
 						"value": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName')]"
