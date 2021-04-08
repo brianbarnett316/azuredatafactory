@@ -54,7 +54,8 @@
 									"path": "['name']"
 								},
 								"sink": {
-									"name": "name"
+									"name": "name",
+									"type": "String"
 								}
 							},
 							{
@@ -62,7 +63,8 @@
 									"path": "['productSubCategory']"
 								},
 								"sink": {
-									"name": "productSubCategory"
+									"name": "productSubCategory",
+									"type": "String"
 								}
 							},
 							{
@@ -70,7 +72,8 @@
 									"path": "['color']"
 								},
 								"sink": {
-									"name": "color"
+									"name": "color",
+									"type": "String"
 								}
 							},
 							{
@@ -78,7 +81,8 @@
 									"path": "['class']"
 								},
 								"sink": {
-									"name": "class"
+									"name": "class",
+									"type": "String"
 								}
 							},
 							{
@@ -86,7 +90,8 @@
 									"path": "['style']"
 								},
 								"sink": {
-									"name": "style"
+									"name": "style",
+									"type": "String"
 								}
 							},
 							{
@@ -94,7 +99,8 @@
 									"path": "['country']"
 								},
 								"sink": {
-									"name": "country"
+									"name": "country",
+									"type": "String"
 								}
 							},
 							{
@@ -102,7 +108,8 @@
 									"path": "['standardCost']"
 								},
 								"sink": {
-									"name": "standardCost"
+									"name": "standardCost",
+									"type": "Double"
 								}
 							},
 							{
@@ -110,7 +117,8 @@
 									"path": "['safetyStockLevel']"
 								},
 								"sink": {
-									"name": "safetyStockLevel"
+									"name": "safetyStockLevel",
+									"type": "Double"
 								}
 							},
 							{
@@ -118,7 +126,8 @@
 									"path": "['reorderPoint']"
 								},
 								"sink": {
-									"name": "reorderPoint"
+									"name": "reorderPoint",
+									"type": "Double"
 								}
 							},
 							{
@@ -135,7 +144,8 @@
 									"path": "['weight']"
 								},
 								"sink": {
-									"name": "weight"
+									"name": "weight",
+									"type": "Double"
 								}
 							},
 							{
@@ -143,7 +153,8 @@
 									"path": "['daysToManufacture']"
 								},
 								"sink": {
-									"name": "daysToManufacture"
+									"name": "daysToManufacture",
+									"type": "Double"
 								}
 							},
 							{
@@ -151,7 +162,8 @@
 									"path": "['dealerCost']"
 								},
 								"sink": {
-									"name": "dealerCost"
+									"name": "dealerCost",
+									"type": "Double"
 								}
 							},
 							{
@@ -168,7 +180,8 @@
 									"path": "['sellEndDate']"
 								},
 								"sink": {
-									"name": "sellEndDate"
+									"name": "sellEndDate",
+									"type": "DateTime"
 								}
 							}
 						],
