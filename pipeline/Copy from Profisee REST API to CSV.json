@@ -84,7 +84,8 @@
 				"defaultValue": "profisee-output"
 			},
 			"EntityId": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "product"
 			}
 		},
 		"folder": {
