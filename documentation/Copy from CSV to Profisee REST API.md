@@ -58,7 +58,7 @@ How to use this solution template
         5.  Authentication type: select **Anonymous**
 		6.  Add a new Auth header for the **X-API-Key**.  The Profisee API key, which is the Client Id for the user account you are using to connect to the Profisee API. The Client Id can be found in the FastApp Studio Accounts screen, within the Accounts and Teams admin area.  You have two options.
 			1.  Enter the API Key value directly into the Value field.  
-			2.  Store the API Key in Azure Key Vault.  Click in the value field then click **Add Azure Key Vault** to start the process to your ADF to key vault.
+			2.  Store the API Key in Azure Key Vault.  Click in the value field then click **Add Azure Key Vault** to start the process to your store the value in Azure Key Vault.  After selecting the Azure key value name, click on the **Grant Data Factory service managed identity access to your Azure Key Vault.** link, which will navigate to your key vault's Access Policy screen to add the necessary access policy.  See [Store credential in Azure Key Vault] (https://docs.microsoft.com/en-us/azure/data-factory/store-credentials-in-key-vault)
 	
             <img src="./media/copyfrom_csv_to_restapi_5.png" style="width:3.54601in;height:3.93413in" />
 
