@@ -81,7 +81,8 @@
 									"path": "['productSubCategory']"
 								},
 								"sink": {
-									"name": "productSubCategory"
+									"name": "productSubCategory",
+									"type": "String"
 								}
 							},
 							{
