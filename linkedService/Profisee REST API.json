@@ -7,17 +7,7 @@
 		"typeProperties": {
 			"url": "https://profiseepreview.eastus.cloudapp.azure.com/Profisee/rest/v1",
 			"enableServerCertificateValidation": true,
-			"authenticationType": "Anonymous",
-			"authHeaders": {
-				"X-API-Key": {
-					"type": "AzureKeyVaultSecret",
-					"store": {
-						"referenceName": "AzureKeyVault1",
-						"type": "LinkedServiceReference"
-					},
-					"secretName": "adf-rest-api-key"
-				}
-			}
+			"authenticationType": "Anonymous"
 		},
 		"connectVia": {
 			"referenceName": "AzureIREastUS",
