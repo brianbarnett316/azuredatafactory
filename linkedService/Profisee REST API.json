@@ -15,7 +15,7 @@
 						"referenceName": "AzureKeyVault1",
 						"type": "LinkedServiceReference"
 					},
-					"secretName": "adf-rest-api-key"
+					"secretName": "profisee-rest-api-key"
 				}
 			}
 		},
