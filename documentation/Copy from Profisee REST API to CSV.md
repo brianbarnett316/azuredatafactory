@@ -81,7 +81,7 @@ How to use this solution template
 				   6. Click **Create**.
 				6. You may need to refresh your Data Factory in the browser to pick up the new Key Vault settings.
 				7. See [Store credential in Azure Key Vault](https://docs.microsoft.com/en-us/azure/data-factory/store-credentials-in-key-vault) for more information on the necessary steps.
-			3. Should you need to use different API Keys with differing permissions to records in Profisee, you will need to create a REST link service for each API Key you need to use.  And if storing the API Key in Key Vault, create a secret for each API Key.
+			3. Should you need to use different API Keys with differing permissions to records in Profisee, you will need to create a REST linked service for each API Key you need to use.  And if storing the API Key in Key Vault, create a secret for each API Key.  You could also use one REST linked service; however, then you would need to instead add the API Key header in each Copy Activity's Source or Sink.
     
         <img src="./media/copyfrom_restapi_to_csv_5.png" style="width:3.54601in;height:3.93413in" />
 
