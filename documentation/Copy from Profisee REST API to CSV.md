@@ -92,9 +92,6 @@ How to use this solution template
 
     <img src="./media/copyfrom_restapi_to_csv_6.png" style="width:3.69939in;height:2.41883in" />
 
-    You should also see the following template validation output. We will correct that below.
-   
-    <img src="./media/copyfrom_restapi_to_csv_7.png" style="width:2.44172in;height:0.57049in" />
 
 Pipeline
 --------
