@@ -1,4 +1,4 @@
-Copy from CSV Format to Profisee REST API
+Storing API Key in Azure Key Vault
 =========================================
 
 This article describes a solution template that you can use to copy
@@ -46,7 +46,23 @@ How to use this solution template
 
     2.  Enter the following information for the REST linked service.
 
-        1.  See [REST Linked Service](REST%20Linked%20Service.md) for more information.
+        1.  Name: Enter a unique name within your ADF.
+        2.  Description: Enter an optional description.
+        3.  Integration runtime: You can select the auto resolve option or
+            create a custom integration runtime. Some linked services that
+            ADF integrates with requires the ADF integration runtime be in
+            the same region as the service. In this case you will need to
+            create a custom integration runtime in the same region as that
+            linked service.
+        4.  Base URL: enter the base URL to your deployed Profisee REST API.
+        5.  Authentication type: select **Anonymous**
+		6.  Add a new Auth header for the **X-API-Key**.  The Profisee API key, which is the Client Id for the user account you are using to connect to the Profisee API. The Client Id can be found in the FastApp Studio Accounts screen, within the Accounts and Teams admin area.  You have two options.
+			1.  Enter the API Key value directly into the Value field.  
+			2.  Store the API Key in Azure Key Vault.  Although there are more steps involved, this is the preferred, more secure option.  
+				1. Link...
+			3. Should you need to use different API Keys with differing permissions to records in Profisee, you will need to create a REST linked service for each API Key you need to use.  And if storing the API Key in Key Vault, create a secret for each API Key.  You could also use one REST linked service.  You would need to instead add the API Key header in each Copy Activity's Source or Sink.  However, you would not be able to store the value in Key Vault.
+	
+            <img src="./media/copyfrom_csv_to_restapi_5.png" style="width:3.54601in;height:3.93413in" />
 
 4.  Select **Use this template**.
 
@@ -155,8 +171,6 @@ Next steps
 
 -   [Introduction to Azure Data
     Factory](https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/data-factory/introduction.md)
-
--	[Copy data from and to a REST endpoint by using Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-rest)
 
 -   [Create event-based triggers in Azure Data
     Factory](https://docs.microsoft.com/en-us/azure/data-factory/how-to-create-event-trigger)
