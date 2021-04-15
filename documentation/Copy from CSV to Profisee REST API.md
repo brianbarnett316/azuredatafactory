@@ -148,8 +148,8 @@ Triggering
 
     <img src="./media/copyfrom_csv_to_restapi_18.png" style="width:5.46626in;height:1.0734in" />
 
-Next steps
-----------
+More Information
+----------------
 
 -   [Introduction to Azure Data
     Factory](https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/data-factory/introduction.md)

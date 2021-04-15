@@ -30,8 +30,8 @@ Steps
 7. See [Store credential in Azure Key Vault](https://docs.microsoft.com/en-us/azure/data-factory/store-credentials-in-key-vault) for more information on the necessary steps.
 
 
-Next steps
-----------
+More Information
+----------------
 
 -	[Store credential in Azure Key Vault](https://docs.microsoft.com/en-us/azure/data-factory/store-credentials-in-key-vault)
 
