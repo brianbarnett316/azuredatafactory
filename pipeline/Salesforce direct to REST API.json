@@ -61,7 +61,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"path": "$['Address Input']"
+									"path": "$['Address Line 1']"
 								}
 							},
 							{
@@ -70,7 +70,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"path": "$['City Input']"
+									"path": "$['City']"
 								}
 							},
 							{
@@ -79,7 +79,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"path": "$['State Input']"
+									"path": "$['State']"
 								}
 							},
 							{
@@ -88,7 +88,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"path": "$['Zip Input']"
+									"path": "$['Zip']"
 								}
 							},
 							{
@@ -96,7 +96,7 @@
 									"name": "Phone"
 								},
 								"sink": {
-									"path": "$['Phone']"
+									"path": "$['Phone Number']"
 								}
 							},
 							{
