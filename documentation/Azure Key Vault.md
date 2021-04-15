@@ -1,176 +1,39 @@
 Storing API Key in Azure Key Vault
 =========================================
 
-This article describes a solution template that you can use to copy
-records from Azure Data Lake Storage Gen2 storage, in CSV format, to
-Profisee REST API.
+You can store your Profisee REST Gateway API keys in an Azure Key Vault. Azure Data Factory retrieves the API key when executing an activity that uses the REST linked service.
 
-About this solution template
-----------------------------
-
-This template copies records from ADLS Gen2 in CSV format to Profisee
-via the REST API. The file name must have the .csv extension. The
-template is designed to work with a folder structure consisting of
-folders named for each entity within the input container. Create a
-folder for each entity you wish to integrate with. CSV files containing
-updates for an entity would get uploaded to the
-profisee-input\\&lt;entity&gt; folder.
-
-For example:
-
--   profisee-input
-    -   account
-    -   customer
-    -   product
-
-<img src="./media/copyfrom_csv_to_restapi_1.png" style="width:3.784in;height:1.75212in" />
-
-How to use this solution template
----------------------------------
-
-1.  Go to the **Copy from CSV to Profisee REST API** template.
-
-    <img src="./media/copyfrom_csv_to_restapi_2.png" style="width:2.11763in;height:1.45399in" />
-
-2.  Create a **New** or use an existing connection to the BlobStorageGen2 data store that you are copying CSV data from.
-
-3.  Create a **New** or use an existing connection to the Profisee REST API.
-
-    <img src="./media/copyfrom_csv_to_restapi_3.png" style="width:5.576in;height:3.4576in" />
-
-    Follow these steps if you need to create a new REST linked service.
-
-    1.  Select “+ New" from the **REST** dropdown list.
-
-        <img src="./media/copyfrom_csv_to_restapi_4.png" style="width:2.06135in;height:1.29089in" />
-
-    2.  Enter the following information for the REST linked service.
-
-        1.  Name: Enter a unique name within your ADF.
-        2.  Description: Enter an optional description.
-        3.  Integration runtime: You can select the auto resolve option or
-            create a custom integration runtime. Some linked services that
-            ADF integrates with requires the ADF integration runtime be in
-            the same region as the service. In this case you will need to
-            create a custom integration runtime in the same region as that
-            linked service.
-        4.  Base URL: enter the base URL to your deployed Profisee REST API.
-        5.  Authentication type: select **Anonymous**
-		6.  Add a new Auth header for the **X-API-Key**.  The Profisee API key, which is the Client Id for the user account you are using to connect to the Profisee API. The Client Id can be found in the FastApp Studio Accounts screen, within the Accounts and Teams admin area.  You have two options.
-			1.  Enter the API Key value directly into the Value field.  
-			2.  Store the API Key in Azure Key Vault.  Although there are more steps involved, this is the preferred, more secure option.  
-				1. Link...
-			3. Should you need to use different API Keys with differing permissions to records in Profisee, you will need to create a REST linked service for each API Key you need to use.  And if storing the API Key in Key Vault, create a secret for each API Key.  You could also use one REST linked service.  You would need to instead add the API Key header in each Copy Activity's Source or Sink.  However, you would not be able to store the value in Key Vault.
-	
-            <img src="./media/copyfrom_csv_to_restapi_5.png" style="width:3.54601in;height:3.93413in" />
-
-4.  Select **Use this template**.
-
-5.  You will see a pipeline created as shown in the following example:
-
-    <img src="./media/copyfrom_csv_to_restapi_6.png" style="width:4.66462in;height:3.032in" />
-    
-Pipeline
---------
-
-### Parameters
-
-1.  The FileFolder containing the file, includes the container name (e.g. profisee-input/product).
-
-2.  The FileName of the file containing the records in CSV format which the Profisee REST Update API expects. Must end in .CSV file extension.
-
-3.  If you plan on creating an Event trigger on the storage container, then you can leave the Default Values blank.
-
-    <img src="./media/copyfrom_csv_to_restapi_8.png" style="width:3.8913in;height:1.30251in" />
-
-Copy Activity
+Prerequisites
 -------------
+This feature relies on the data factory managed identity. Learn how it works from [Managed identity for Data factory](https://docs.microsoft.com/en-us/azure/data-factory/data-factory-service-identity) and make sure your data factory have an associated one.
 
-### Source
+Steps
+-----
+1. Click in the value field then click **Add Azure Key Vault** to start the process to your store the value in Azure Key Vault.  
+2. Select **+ New** to create a new Key Vault, or select an existing Key Vault to use. 
+3. Your Key Vault will need an Access Policy allowing the Data Factory's managed identity access.
+   1. If not done during the create new process, after selecting the Key Vault name, click on the **Grant Data Factory service managed identity access to your Azure Key Vault.** link.
+   2. This will navigate to your key vault's Access Policies screen to add the necessary access policy.
+	  1. Secret permissions: Get
+	  2. Select principal: Click on **None selected**.  Search for the name of your Data Factory.  Click on it then click on **Select**.
+	  3. Click on **Add**
+	  4. Click on **Save** on the Access policies screen.
+4. Enter the Secret name you are going to use (e.g. profisee-rest-gateway-api-key).
+5. Navigate to your key vault to add the API Key as a secret. 
+   1. Click on **Secrets** in the left nav panel.
+   2. Click on **Generate/Import**.
+   3. Leave **Upload options** set to **Manual**.
+   4. Give your secret a name (e.g. profisee-rest-gateway-api-key).
+   5. Enter the API Key value in the Value field.
+   6. Click **Create**.
+6. You may need to refresh your Data Factory in the browser to pick up the new Key Vault settings.
+7. See [Store credential in Azure Key Vault](https://docs.microsoft.com/en-us/azure/data-factory/store-credentials-in-key-vault) for more information on the necessary steps.
 
-1.  The Source dataset properties, FolderName and FileName, are set from the two pipeline parameters mentioned above.
-
-    <img src="./media/copyfrom_csv_to_restapi_9.png" style="width:4.46906in;height:1.928in" />
-
-### Sink
-
-1.  The Sink dataset property, **entityId**, is set using the FileFolder
-    path. It assumes a container name of **profisee-input** however
-    you can use a different name. For example, a FileFolder path of
-    **profisee-input/product** will result in an entityId of
-    **product**. Note, the entityId can be either the entity’s Name,
-    UID, or InternalId value.
-
-    <img src="./media/copyfrom_csv_to_restapi_10.png" style="width:4.568in;height:1.49436in" />
-
-2.  The **Request method** must be set to **PATCH**.
-
-    <img src="./media/copyfrom_csv_to_restapi_11.png" style="width:2.96792in;height:1.90184in" />
-
-### Mapping
-
-If you are copying all the fields in the file, no mapping is required.
-You will only need to provide mappings if you wish to only copy a subset
-of the fields in the file.
-
-Trigger
--------
-
-1.  You can trigger the pipeline manually, but you can also create an
-    Event trigger to trigger the pipeline to run any time a new file is
-    uploaded to the container. See this
-    [link](https://docs.microsoft.com/en-us/azure/data-factory/how-to-create-event-trigger)
-    for a full description about creating them.
-
-    1.  Set up your trigger pointing to your input container. Enter the
-        **Container name** in this format **/&lt;container name&gt;/**.
-        For example: **/profisee-input/**. Click **Continue** when done.
-        Note: the Container name must match the input container name
-        entered in the **Set EntityName variable** activity above.
-
-        <img src="./media/copyfrom_csv_to_restapi_12.png" style="width:3.5384in;height:5.15951in" />
-
-1.  Click **Continue** on the **Data preview** page.
-
-    <img src="./media/copyfrom_csv_to_restapi_13.png" style="width:3.63634in;height:2.8773in" />
-
-1.  Enter the following **Trigger Run Parameters**.
-
-    1.  The event trigger captures the folder path and file name of the
-        blob into the properties **@triggerBody().folderPath** and
-        **@triggerBody().fileName**. To use the values of these
-        properties in a pipeline, you must map the properties to
-        pipeline parameters.
-
-        <img src="./media/copyfrom_csv_to_restapi_14.png" style="width:4.10067in;height:2.79949in" />
-
-Publish
--------
-
-Once you are finished with all your changes, click Publish All.
-
-<img src="./media/copyfrom_csv_to_restapi_15.png" style="width:1.36994in;height:0.29043in" />
-
-Triggering
-----------
-
-1.  If you added an event trigger, upload a file to an entity folder within your input container. The file must contain the members in CSV format. An example is shown below.
-
-    <img src="./media/copyfrom_csv_to_restapi_16.png" style="width:3.63804in;height:1.45401in" />
-
-    <img src="./media/copyfrom_csv_to_restapi_17.png" style="width:4.88957in;height:0.50724in" />
-
-2.  Select **Monitor** tab in the left navigation panel and wait for about 20 seconds. Click **Refresh** to get the updated run status.
-
-3.  When the pipeline run completes successfully, you would see results like the following example. Notice the pipeline was triggered by the event trigger.
-
-    <img src="./media/copyfrom_csv_to_restapi_18.png" style="width:5.46626in;height:1.0734in" />
 
 Next steps
 ----------
 
--   [Introduction to Azure Data
-    Factory](https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/data-factory/introduction.md)
+-	[Store credential in Azure Key Vault](https://docs.microsoft.com/en-us/azure/data-factory/store-credentials-in-key-vault)
 
--   [Create event-based triggers in Azure Data
-    Factory](https://docs.microsoft.com/en-us/azure/data-factory/how-to-create-event-trigger)
+-   [Managed identity for Data factory](https://docs.microsoft.com/en-us/azure/data-factory/data-factory-service-identity) 
+
