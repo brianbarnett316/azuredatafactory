@@ -44,9 +44,7 @@ How to use this solution template
 
         <img src="./media/copyfrom_csv_to_restapi_4.png" style="width:2.06135in;height:1.29089in" />
 
-    2.  Enter the following information for the REST linked service.
-
-        1.  See [REST Linked Service](REST%20Linked%20Service.md) for more information.
+    2.  See [REST Linked Service](REST%20Linked%20Service.md) for information on setting up the REST linked service.
 
 4.  Select **Use this template**.
 
