@@ -17,6 +17,8 @@ To use API key authentication, you will need to select authentication type as â€
 
 Enter the following information for the REST linked service to connect to the Profisee REST Gateway API. 
 
+<img src="./media/copyfrom_csv_to_restapi_5.png" style="width:3.54601in;height:3.93413in" />
+
 Steps
 -----
 
@@ -34,7 +36,6 @@ Steps
 		1. See [Azure Key Vault](Azure%20Key%20Vault.md) for more information.
 	3. Should you need to use different API Keys with differing permissions to records in Profisee, you will need to create a REST linked service for each API Key you need to use.  And if storing the API Key in Key Vault, create a secret for each API Key.  You could also use one REST linked service.  You would need to instead add the API Key header in each Copy Activity's Source or Sink.  However, you would not be able to store the value in Key Vault.
 
-<img src="./media/copyfrom_csv_to_restapi_5.png" style="width:3.54601in;height:3.93413in" />
 			
 Next steps
 ----------
