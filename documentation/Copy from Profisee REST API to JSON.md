@@ -71,15 +71,17 @@ How to use this solution template
 					  2. Select principal: Click on **None selected**.  Search for the name of your Data Factory.  Click on it then click on **Select**.
 					  3. Click on **Add**
 					  4. Click on **Save** on the Access policies screen.
-				4. Enter the Secret name you are going to use (e.g. profisee-rest-api-key).
-				5. Navigate to your key vault to add the API Key as a secret
+				4. Enter the Secret name you are going to use (e.g. profisee-rest-gateway-api-key).
+				5. Navigate to your key vault to add the API Key as a secret. 
 				   1. Click on **Secrets** in the left nav panel.
 				   2. Click on **Generate/Import**.
 				   3. Leave **Upload options** set to **Manual**.
-				   4. Give your secret a name (e.g. profisee-rest-api-key).
+				   4. Give your secret a name (e.g. profisee-rest-gateway-api-key).
 				   5. Enter the API Key value in the Value field.
 				   6. Click **Create**.
-				6. See [Store credential in Azure Key Vault](https://docs.microsoft.com/en-us/azure/data-factory/store-credentials-in-key-vault) for more information on the necessary steps.
+				6. You may need to refresh your Data Factory in the browser to pick up the new Key Vault settings.
+				7. See [Store credential in Azure Key Vault](https://docs.microsoft.com/en-us/azure/data-factory/store-credentials-in-key-vault) for more information on the necessary steps.
+			3. Should you need to use different API Keys with differing permissions to records in Profisee, you will need to create a REST linked service for each API Key you need to use.  And if storing the API Key in Key Vault, create a secret for each API Key.  You could also use one REST linked service.  You would need to instead add the API Key header in each Copy Activity's Source or Sink.  However, you would not be able to store the value in Key Vault.
     
         <img src="./media/copyfrom_restapi_to_json_5.png" style="width:3.54601in;height:3.93413in" />
 
