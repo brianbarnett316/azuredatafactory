@@ -54,7 +54,7 @@
 							},
 							{
 								"source": {
-									"name": "BillingStreet"
+									"name": "ShippingStreet"
 								},
 								"sink": {
 									"path": "$['Address Line 1']"
@@ -62,7 +62,7 @@
 							},
 							{
 								"source": {
-									"name": "BillingCity"
+									"name": "ShippingCity"
 								},
 								"sink": {
 									"path": "$['City']"
@@ -70,7 +70,7 @@
 							},
 							{
 								"source": {
-									"name": "BillingState"
+									"name": "ShippingState"
 								},
 								"sink": {
 									"path": "$['State']"
@@ -78,7 +78,7 @@
 							},
 							{
 								"source": {
-									"name": "BillingPostalCode"
+									"name": "ShippingPostalCode"
 								},
 								"sink": {
 									"path": "$['Zip']"
