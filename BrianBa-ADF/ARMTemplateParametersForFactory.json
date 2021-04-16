@@ -8,9 +8,6 @@
 		"BlobStorageGen2_accountKey": {
 			"value": ""
 		},
-		"ProfiseeSql_connectionString": {
-			"value": ""
-		},
 		"Salesforce1_password": {
 			"value": ""
 		},
