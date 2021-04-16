@@ -155,7 +155,7 @@
 		"parameters": {
 			"EntityName": {
 				"type": "string",
-				"defaultValue": "addresstest"
+				"defaultValue": "Customer"
 			}
 		},
 		"folder": {
