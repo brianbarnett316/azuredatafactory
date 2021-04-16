@@ -18,6 +18,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "SalesforceSource",
+						"additionalColumns": [
+							{
+								"name": "SourceSystem",
+								"value": "Salesforce"
+							}
+						],
 						"readBehavior": "query"
 					},
 					"sink": {
