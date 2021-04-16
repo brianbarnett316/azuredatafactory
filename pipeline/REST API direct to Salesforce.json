@@ -61,7 +61,7 @@
 							},
 							{
 								"source": {
-									"path": "['address line 1']"
+									"path": "['address Line 1']"
 								},
 								"sink": {
 									"name": "ShippingStreet",
@@ -97,7 +97,7 @@
 							},
 							{
 								"source": {
-									"path": "['phone number']"
+									"path": "['phone Number']"
 								},
 								"sink": {
 									"name": "Phone",
