@@ -57,7 +57,7 @@
 									"name": "BillingStreet"
 								},
 								"sink": {
-									"path": "$['Address Input']"
+									"path": "$['Address Line 1']"
 								}
 							},
 							{
@@ -65,7 +65,7 @@
 									"name": "BillingCity"
 								},
 								"sink": {
-									"path": "$['City Input']"
+									"path": "$['City']"
 								}
 							},
 							{
@@ -73,7 +73,7 @@
 									"name": "BillingState"
 								},
 								"sink": {
-									"path": "$['State Input']"
+									"path": "$['State']"
 								}
 							},
 							{
@@ -81,7 +81,7 @@
 									"name": "BillingPostalCode"
 								},
 								"sink": {
-									"path": "$['Zip Input']"
+									"path": "$['Zip']"
 								}
 							},
 							{
@@ -90,7 +90,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"path": "$['Phone']"
+									"path": "$['Phone Number']"
 								}
 							},
 							{
@@ -117,11 +117,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FolderName": {
-								"value": "@concat(variables('OutputContainer'), '/addresstest')",
+								"value": "@concat(variables('OutputContainer'), '/customer')",
 								"type": "Expression"
 							},
 							"FileName": {
-								"value": "@concat('addresstest_', string(utcnow()), '.json')",
+								"value": "@concat('customer_', string(utcnow()), '.json')",
 								"type": "Expression"
 							}
 						}
