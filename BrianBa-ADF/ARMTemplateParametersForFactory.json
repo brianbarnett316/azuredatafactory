@@ -18,7 +18,7 @@
 			"value": ""
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
-			"value": "https://BrianBa.vault.azure.net/"
+			"value": "https://BrianBa-ADF-KV.vault.azure.net/"
 		},
 		"BlobStorageGen2_properties_typeProperties_url": {
 			"value": "https://brianbastorageadlsgen2.dfs.core.windows.net"

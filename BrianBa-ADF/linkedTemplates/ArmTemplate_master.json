@@ -25,7 +25,7 @@
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
-			"defaultValue": "https://BrianBa.vault.azure.net/"
+			"defaultValue": "https://BrianBa-ADF-KV.vault.azure.net/"
 		},
 		"BlobStorageGen2_properties_typeProperties_url": {
 			"type": "string",
@@ -120,15 +120,6 @@
 					},
 					"Salesforce1_properties_typeProperties_username": {
 						"value": "[parameters('Salesforce1_properties_typeProperties_username')]"
-					},
-					"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
-						"value": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName')]"
-					},
-					"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder": {
-						"value": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder')]"
-					},
-					"NewCsvMemberFile_properties_typeProperties_scope": {
-						"value": "[parameters('NewCsvMemberFile_properties_typeProperties_scope')]"
 					}
 				}
 			},
@@ -147,6 +138,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
+						"value": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName')]"
+					},
+					"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder": {
+						"value": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder')]"
+					},
+					"NewCsvMemberFile_properties_typeProperties_scope": {
+						"value": "[parameters('NewCsvMemberFile_properties_typeProperties_scope')]"
 					},
 					"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName": {
 						"value": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName')]"

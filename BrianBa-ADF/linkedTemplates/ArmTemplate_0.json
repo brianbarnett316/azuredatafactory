@@ -25,7 +25,7 @@
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
-			"defaultValue": "https://BrianBa.vault.azure.net/"
+			"defaultValue": "https://BrianBa-ADF-KV.vault.azure.net/"
 		},
 		"BlobStorageGen2_properties_typeProperties_url": {
 			"type": "string",
@@ -42,18 +42,6 @@
 		"Salesforce1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "tye3950@yahoo.com"
-		},
-		"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FileName"
-		},
-		"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FolderPath"
-		},
-		"NewCsvMemberFile_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		}
 	},
 	"variables": {
@@ -125,6 +113,52 @@
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AdlsGen2BlobCsv')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Data Lake Storage Gen2 container for CSV format.",
+				"linkedServiceName": {
+					"referenceName": "BlobStorageGen2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FolderName": {
+						"type": "string"
+					},
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "CSV Format"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().FolderName",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BlobStorageGen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AdlsGen2BlobCsv1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -484,7 +518,7 @@
 								"referenceName": "AzureKeyVault1",
 								"type": "LinkedServiceReference"
 							},
-							"secretName": "adf-rest-api-key"
+							"secretName": "profisee-rest-api-key"
 						}
 					}
 				},
@@ -532,6 +566,62 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"description": "Profisee records get REST API call.",
+				"linkedServiceName": {
+					"referenceName": "Profisee REST API",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"entityId": {
+						"type": "string"
+					},
+					"pageSize": {
+						"type": "int",
+						"defaultValue": 1000
+					},
+					"attributes": {
+						"type": "string",
+						"defaultValue": " "
+					},
+					"filter": {
+						"type": "string",
+						"defaultValue": " "
+					},
+					"orderBy": {
+						"type": "string",
+						"defaultValue": " "
+					},
+					"dbaFormat": {
+						"type": "int",
+						"defaultValue": 1
+					},
+					"recordCodes": {
+						"type": "string",
+						"defaultValue": " "
+					}
+				},
+				"folder": {
+					"name": "Profisee REST API"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@concat(\n'records/',\ndataset().entityId, \n'/?pageSize=', string(dataset().pageSize),\n'&attributes=', dataset().attributes,\n'&filter=', dataset().filter,\n'&orderBy=', dataset().orderBy,\n'&recordCodes=', dataset().recordCodes,\n'&dbaFormat=', string(dataset().dbaFormat)\n)",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Profisee REST API')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ProfiseeRESTAPI_Records_Get1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Profisee members get REST API call.",
 				"linkedServiceName": {
 					"referenceName": "Profisee REST API",
 					"type": "LinkedServiceReference"
@@ -813,6 +903,256 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AdlsGen2BlobJson')]",
 				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Records_Upsert')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copy from Profisee REST API to CSV')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy from Profisee REST API to CSV",
+						"description": "Copy records from Profisee via the Profisee REST API to ADLS Gen2 in CSV format.",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"AbsoluteUrl": "$.nextPage"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['code']"
+										},
+										"sink": {
+											"name": "code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['name']"
+										},
+										"sink": {
+											"name": "name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['productSubCategory']"
+										},
+										"sink": {
+											"name": "productSubCategory",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['color']"
+										},
+										"sink": {
+											"name": "color",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['class']"
+										},
+										"sink": {
+											"name": "class",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['style']"
+										},
+										"sink": {
+											"name": "style",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['productLine']"
+										},
+										"sink": {
+											"name": "productLine",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['standardCost']"
+										},
+										"sink": {
+											"name": "standardCost",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['safetyStockLevel']"
+										},
+										"sink": {
+											"name": "safetyStockLevel",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['reorderPoint']"
+										},
+										"sink": {
+											"name": "reorderPoint",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['msrp']"
+										},
+										"sink": {
+											"name": "msrp",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['weight']"
+										},
+										"sink": {
+											"name": "weight",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['daysToManufacture']"
+										},
+										"sink": {
+											"name": "daysToManufacture",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['dealerCost']"
+										},
+										"sink": {
+											"name": "dealerCost",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellStartDate']"
+										},
+										"sink": {
+											"name": "sellStartDate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellEndDate']"
+										},
+										"sink": {
+											"name": "sellEndDate",
+											"type": "DateTime"
+										}
+									}
+								],
+								"collectionReference": "$['data']",
+								"mapComplexValuesToString": false
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Records_Get",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": {
+										"value": "@variables('EntityId')",
+										"type": "Expression"
+									},
+									"pageSize": 1000,
+									"attributes": " ",
+									"filter": " ",
+									"orderBy": " ",
+									"dbaFormat": 1,
+									"recordCodes": " "
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AdlsGen2BlobCsv",
+								"type": "DatasetReference",
+								"parameters": {
+									"FolderName": {
+										"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'))",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@concat(variables('EntityId'), '_', string(utcnow()), '.csv')",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"variables": {
+					"OutputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-output"
+					},
+					"EntityId": {
+						"type": "String",
+						"defaultValue": "product"
+					}
+				},
+				"folder": {
+					"name": "CSV Format"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Records_Get')]",
+				"[concat(variables('factoryId'), '/datasets/AdlsGen2BlobCsv')]"
 			]
 		},
 		{
@@ -1413,7 +1753,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"path": "$['Address Input']"
+											"path": "$['Address Line 1']"
 										}
 									},
 									{
@@ -1422,7 +1762,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"path": "$['City Input']"
+											"path": "$['City']"
 										}
 									},
 									{
@@ -1431,7 +1771,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"path": "$['State Input']"
+											"path": "$['State']"
 										}
 									},
 									{
@@ -1440,7 +1780,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"path": "$['Zip Input']"
+											"path": "$['Zip']"
 										}
 									},
 									{
@@ -1448,7 +1788,7 @@
 											"name": "Phone"
 										},
 										"sink": {
-											"path": "$['Phone']"
+											"path": "$['Phone Number']"
 										}
 									},
 									{
@@ -1457,6 +1797,14 @@
 										},
 										"sink": {
 											"path": "$['Website']"
+										}
+									},
+									{
+										"source": {
+											"name": "Industry"
+										},
+										"sink": {
+											"path": "$['Industry']"
 										}
 									}
 								]
@@ -1474,7 +1822,7 @@
 								"referenceName": "ProfiseeRESTAPI_Records_Upsert",
 								"type": "DatasetReference",
 								"parameters": {
-									"entityId": "addresstest"
+									"entityId": "Customer"
 								}
 							}
 						]
@@ -1489,445 +1837,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]",
 				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Records_Upsert')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Salesforce to Ingress Staging Area JSON')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Salesforce Accounts to JSON",
-						"description": "Note, the sink is the AddressTest entity.  Used for testing only.",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SalesforceSource",
-								"readBehavior": "query"
-							},
-							"sink": {
-								"type": "JsonSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "JsonWriteSettings",
-									"filePattern": "arrayOfObjects"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Id",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['Code']"
-										}
-									},
-									{
-										"source": {
-											"name": "Name",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['Name']"
-										}
-									},
-									{
-										"source": {
-											"name": "BillingStreet"
-										},
-										"sink": {
-											"path": "$['Address Input']"
-										}
-									},
-									{
-										"source": {
-											"name": "BillingCity"
-										},
-										"sink": {
-											"path": "$['City Input']"
-										}
-									},
-									{
-										"source": {
-											"name": "BillingState"
-										},
-										"sink": {
-											"path": "$['State Input']"
-										}
-									},
-									{
-										"source": {
-											"name": "BillingPostalCode"
-										},
-										"sink": {
-											"path": "$['Zip Input']"
-										}
-									},
-									{
-										"source": {
-											"name": "Phone",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['Phone']"
-										}
-									},
-									{
-										"source": {
-											"name": "Website",
-											"type": "String"
-										},
-										"sink": {
-											"path": "$['Website']"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "SalesforceAccount",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AdlsGen2BlobJson",
-								"type": "DatasetReference",
-								"parameters": {
-									"FolderName": {
-										"value": "@concat(variables('OutputContainer'), '/addresstest')",
-										"type": "Expression"
-									},
-									"FileName": {
-										"value": "@concat('addresstest_', string(utcnow()), '.json')",
-										"type": "Expression"
-									}
-								}
-							}
-						]
-					}
-				],
-				"variables": {
-					"InputContainer": {
-						"type": "String",
-						"defaultValue": "profisee-input"
-					},
-					"OutputContainer": {
-						"type": "String",
-						"defaultValue": "profisee-output"
-					}
-				},
-				"folder": {
-					"name": "Salesforce"
-				},
-				"annotations": [],
-				"lastPublishTime": "2020-09-25T16:03:36Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]",
-				"[concat(variables('factoryId'), '/datasets/AdlsGen2BlobJson')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Copy from Profisee REST API to CSV')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy from Profisee REST API to CSV",
-						"description": "Copy records from Profisee via the Profisee REST API to ADLS Gen2 in CSV format.",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "RestSource",
-								"httpRequestTimeout": "00:01:40",
-								"requestInterval": "00.00:00:00.010",
-								"requestMethod": "GET",
-								"paginationRules": {
-									"AbsoluteUrl": "$.nextPage"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".csv"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "[['code']"
-										},
-										"sink": {
-											"name": "code",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['name']"
-										},
-										"sink": {
-											"name": "name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['productSubCategory']"
-										},
-										"sink": {
-											"name": "productSubCategory",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['color']"
-										},
-										"sink": {
-											"name": "color",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['class']"
-										},
-										"sink": {
-											"name": "class",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['style']"
-										},
-										"sink": {
-											"name": "style",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['country']"
-										},
-										"sink": {
-											"name": "country",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "[['standardCost']"
-										},
-										"sink": {
-											"name": "standardCost",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['safetyStockLevel']"
-										},
-										"sink": {
-											"name": "safetyStockLevel",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['reorderPoint']"
-										},
-										"sink": {
-											"name": "reorderPoint",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['msrp']"
-										},
-										"sink": {
-											"name": "msrp",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['weight']"
-										},
-										"sink": {
-											"name": "weight",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['daysToManufacture']"
-										},
-										"sink": {
-											"name": "daysToManufacture",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['dealerCost']"
-										},
-										"sink": {
-											"name": "dealerCost",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "[['sellStartDate']"
-										},
-										"sink": {
-											"name": "sellStartDate",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"path": "[['sellEndDate']"
-										},
-										"sink": {
-											"name": "sellEndDate",
-											"type": "DateTime"
-										}
-									}
-								],
-								"collectionReference": "$['data']",
-								"mapComplexValuesToString": false
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "ProfiseeRESTAPI_Records_Get",
-								"type": "DatasetReference",
-								"parameters": {
-									"entityId": {
-										"value": "@variables('EntityId')",
-										"type": "Expression"
-									},
-									"pageSize": 1000,
-									"attributes": " ",
-									"filter": " ",
-									"orderBy": " ",
-									"dbaFormat": 1,
-									"recordCodes": " "
-								}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AdlsGen2BlobCsv",
-								"type": "DatasetReference",
-								"parameters": {
-									"FolderName": {
-										"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'))",
-										"type": "Expression"
-									},
-									"FileName": {
-										"value": "@concat(variables('EntityId'), '_', string(utcnow()), '.csv')",
-										"type": "Expression"
-									}
-								}
-							}
-						]
-					}
-				],
-				"variables": {
-					"OutputContainer": {
-						"type": "String",
-						"defaultValue": "profisee-output"
-					},
-					"EntityId": {
-						"type": "String",
-						"defaultValue": "product"
-					}
-				},
-				"folder": {
-					"name": "CSV Format"
-				},
-				"annotations": [],
-				"lastPublishTime": "2020-09-25T15:29:08Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Records_Get')]",
-				"[concat(variables('factoryId'), '/datasets/AdlsGen2BlobCsv')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/NewCsvMemberFile')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Copy from CSV to Profisee REST API",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"FileName": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName')]",
-							"FileFolder": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/profisee-input/blobs/",
-					"blobPathEndsWith": ".csv",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('NewCsvMemberFile_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Copy from CSV to Profisee REST API')]"
 			]
 		}
 	]
