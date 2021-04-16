@@ -112,6 +112,15 @@
 									"name": "Website",
 									"type": "String"
 								}
+							},
+							{
+								"source": {
+									"path": "['industry']"
+								},
+								"sink": {
+									"name": "Industry",
+									"type": "String"
+								}
 							}
 						],
 						"collectionReference": "$['data']"
