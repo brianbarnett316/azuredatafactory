@@ -21,7 +21,10 @@
 						"additionalColumns": [
 							{
 								"name": "SourceSystem",
-								"value": "Salesforce"
+								"value": {
+									"value": "Salesforce",
+									"type": "Expression"
+								}
 							}
 						],
 						"readBehavior": "query"
@@ -120,8 +123,7 @@
 							},
 							{
 								"source": {
-									"name": "SourceSystem",
-									"type": "String"
+									"name": "SourceSystem"
 								},
 								"sink": {
 									"path": "$['SourceSystem']"
