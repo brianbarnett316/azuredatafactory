@@ -127,7 +127,7 @@
 								"type": "Expression"
 							},
 							"pageSize": 100,
-							"attributes": "[Address Input],[City Input],[State Input],[Zip Input],[Phone],[Website]",
+							"attributes": "[Address Line 1],[City],[State],[Zip],[Phone Number],[Website],[Industry]",
 							"filter": " ",
 							"orderBy": " ",
 							"dbaFormat": 1,
