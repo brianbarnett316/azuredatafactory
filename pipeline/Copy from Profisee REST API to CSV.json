@@ -200,7 +200,7 @@
 							},
 							"pageSize": 1000,
 							"attributes": " ",
-							"filter": " ",
+							"filter": " [productSubCategory] eq 1",
 							"orderBy": " ",
 							"dbaFormat": 1,
 							"recordCodes": " "
