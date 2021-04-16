@@ -1068,7 +1068,7 @@
 								"type": "SalesforceSource",
 								"additionalColumns": [
 									{
-										"name": "SourceSystem",
+										"name": "Source System",
 										"value": {
 											"value": "Salesforce",
 											"type": "Expression"
@@ -1171,7 +1171,7 @@
 									},
 									{
 										"source": {
-											"name": "SourceSystem"
+											"name": "Source System"
 										},
 										"sink": {
 											"path": "$['Source System']"
