@@ -96,10 +96,10 @@
 							},
 							{
 								"source": {
-									"path": "['country']"
+									"path": "['productLine']"
 								},
 								"sink": {
-									"name": "country",
+									"name": "productLine",
 									"type": "String"
 								}
 							},
