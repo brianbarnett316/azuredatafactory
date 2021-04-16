@@ -122,24 +122,6 @@
 					},
 					"NewCsvMemberFile_properties_typeProperties_scope": {
 						"value": "[parameters('NewCsvMemberFile_properties_typeProperties_scope')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "BrianBa-ADF_ArmTemplate_1",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
 					},
 					"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName": {
 						"value": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName')]"
@@ -152,9 +134,7 @@
 					}
 				}
 			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'BrianBa-ADF_ArmTemplate_0')]"
-			]
+			"dependsOn": []
 		}
 	]
 }
