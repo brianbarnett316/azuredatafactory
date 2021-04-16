@@ -20,7 +20,7 @@
 						"type": "DelimitedTextSource",
 						"additionalColumns": [
 							{
-								"name": "SourceSystem",
+								"name": "Source System",
 								"value": {
 									"value": "@replace(pipeline().parameters.FileName, '.csv', '')",
 									"type": "Expression"
