@@ -246,260 +246,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ProfiseeTable')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ProfiseeSql",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"TableName": {
-						"type": "string"
-					},
-					"SchemaName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Code",
-						"type": "nvarchar"
-					},
-					{
-						"name": "NewCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductMergeParent",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductSubCategory",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Color",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Class",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Style",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Country",
-						"type": "nvarchar"
-					},
-					{
-						"name": "StandardCost",
-						"type": "decimal",
-						"precision": 36,
-						"scale": 2
-					},
-					{
-						"name": "SafetyStockLevel",
-						"type": "decimal",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "ReorderPoint",
-						"type": "decimal",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "MSRP",
-						"type": "decimal",
-						"precision": 34,
-						"scale": 4
-					},
-					{
-						"name": "Weight",
-						"type": "decimal",
-						"precision": 34,
-						"scale": 4
-					},
-					{
-						"name": "DaysToManufacture",
-						"type": "decimal",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "DealerCost",
-						"type": "decimal",
-						"precision": 36,
-						"scale": 2
-					},
-					{
-						"name": "DocumentationURL",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SellStartDate",
-						"type": "date"
-					},
-					{
-						"name": "SellEndDate",
-						"type": "datetime2",
-						"scale": 3
-					},
-					{
-						"name": "SizeUoM",
-						"type": "nvarchar"
-					},
-					{
-						"name": "WeightUoM",
-						"type": "nvarchar"
-					},
-					{
-						"name": "InHouseManufacture",
-						"type": "nvarchar"
-					},
-					{
-						"name": "FinishedGoodIndicator",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DiscontinuedItemInd",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DiscontiuedDate",
-						"type": "date"
-					},
-					{
-						"name": "ProductLine",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DealerCostCurrencyCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MSRPCurrencyCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Size",
-						"type": "nvarchar"
-					},
-					{
-						"name": "testMaster",
-						"type": "nvarchar"
-					},
-					{
-						"name": "productMaster",
-						"type": "nvarchar"
-					},
-					{
-						"name": "productScore",
-						"type": "decimal",
-						"precision": 31,
-						"scale": 7
-					},
-					{
-						"name": "productStatus",
-						"type": "nvarchar"
-					},
-					{
-						"name": "productRecordSource",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ApprovedMatchCount",
-						"type": "decimal",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "ProposedMatchCount",
-						"type": "decimal",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "Picture",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match Status",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match Group",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match Member",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match Strategy",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match DateTime",
-						"type": "date"
-					},
-					{
-						"name": "Match MultiGroup",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Match User",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SA1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SA2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SA3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MergeStatus",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": {
-						"value": "@dataset().SchemaName",
-						"type": "Expression"
-					},
-					"table": {
-						"value": "@dataset().TableName",
-						"type": "Expression"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ProfiseeSql')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Profisee REST API')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1698,6 +1444,171 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Records_Get')]",
 				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Salesforce direct to REST API')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Salesforce Accounts to REST API",
+						"description": "",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SalesforceSource",
+								"additionalColumns": [
+									{
+										"name": "SourceSystem",
+										"value": {
+											"value": "Salesforce",
+											"type": "Expression"
+										}
+									}
+								],
+								"readBehavior": "query"
+							},
+							"sink": {
+								"type": "RestSink",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": 10,
+								"requestMethod": "PATCH",
+								"writeBatchSize": 10000,
+								"httpCompressionType": "none"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ProfiseeCode__c"
+										},
+										"sink": {
+											"path": "$['Code']"
+										}
+									},
+									{
+										"source": {
+											"name": "Name",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['Name']"
+										}
+									},
+									{
+										"source": {
+											"name": "ShippingStreet",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['Address Line 1']"
+										}
+									},
+									{
+										"source": {
+											"name": "ShippingCity",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['City']"
+										}
+									},
+									{
+										"source": {
+											"name": "ShippingState",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['State']"
+										}
+									},
+									{
+										"source": {
+											"name": "ShippingPostalCode",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['Zip']"
+										}
+									},
+									{
+										"source": {
+											"name": "Phone",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['Phone Number']"
+										}
+									},
+									{
+										"source": {
+											"name": "Website",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['Website']"
+										}
+									},
+									{
+										"source": {
+											"name": "Industry",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['Industry']"
+										}
+									},
+									{
+										"source": {
+											"name": "SourceSystem"
+										},
+										"sink": {
+											"path": "$['Source System']"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SalesforceAccount",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Records_Upsert",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": "Customer"
+								}
+							}
+						]
+					}
+				],
+				"folder": {
+					"name": "Salesforce"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T16:03:36Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]",
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Records_Upsert')]"
 			]
 		},
 		{
