@@ -61,7 +61,7 @@
 							},
 							{
 								"source": {
-									"path": "['address Input']"
+									"path": "['address line 1']"
 								},
 								"sink": {
 									"name": "ShippingStreet",
@@ -70,7 +70,7 @@
 							},
 							{
 								"source": {
-									"path": "['city Input']"
+									"path": "['city']"
 								},
 								"sink": {
 									"name": "ShippingCity",
@@ -79,7 +79,7 @@
 							},
 							{
 								"source": {
-									"path": "['state Input']"
+									"path": "['state']"
 								},
 								"sink": {
 									"name": "ShippingState",
@@ -88,7 +88,7 @@
 							},
 							{
 								"source": {
-									"path": "['zip Input']"
+									"path": "['zip']"
 								},
 								"sink": {
 									"name": "ShippingPostalCode",
@@ -97,7 +97,7 @@
 							},
 							{
 								"source": {
-									"path": "['phone']"
+									"path": "['phone number']"
 								},
 								"sink": {
 									"name": "Phone",
