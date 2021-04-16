@@ -457,7 +457,7 @@
 									},
 									"pageSize": 1000,
 									"attributes": " ",
-									"filter": " ",
+									"filter": " [productSubCategory] eq '1'",
 									"orderBy": " ",
 									"dbaFormat": 1,
 									"recordCodes": " "
@@ -936,7 +936,7 @@
 									},
 									{
 										"source": {
-											"path": "[['address Input']"
+											"path": "[['address Line 1']"
 										},
 										"sink": {
 											"name": "ShippingStreet",
@@ -945,7 +945,7 @@
 									},
 									{
 										"source": {
-											"path": "[['city Input']"
+											"path": "[['city']"
 										},
 										"sink": {
 											"name": "ShippingCity",
@@ -954,7 +954,7 @@
 									},
 									{
 										"source": {
-											"path": "[['state Input']"
+											"path": "[['state']"
 										},
 										"sink": {
 											"name": "ShippingState",
@@ -963,7 +963,7 @@
 									},
 									{
 										"source": {
-											"path": "[['zip Input']"
+											"path": "[['zip']"
 										},
 										"sink": {
 											"name": "ShippingPostalCode",
@@ -972,7 +972,7 @@
 									},
 									{
 										"source": {
-											"path": "[['phone']"
+											"path": "[['phone Number']"
 										},
 										"sink": {
 											"name": "Phone",
@@ -985,6 +985,15 @@
 										},
 										"sink": {
 											"name": "Website",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['industry']"
+										},
+										"sink": {
+											"name": "Industry",
 											"type": "String"
 										}
 									}
@@ -1002,7 +1011,7 @@
 										"type": "Expression"
 									},
 									"pageSize": 100,
-									"attributes": "[[Address Input],[City Input],[State Input],[Zip Input],[Phone],[Website]",
+									"attributes": "[[Address Line 1],[City],[State],[Zip],[Phone Number],[Website],[Industry]",
 									"filter": " ",
 									"orderBy": " ",
 									"dbaFormat": 1,
@@ -1022,7 +1031,7 @@
 				"parameters": {
 					"EntityName": {
 						"type": "string",
-						"defaultValue": "addresstest"
+						"defaultValue": "Customer"
 					}
 				},
 				"folder": {
