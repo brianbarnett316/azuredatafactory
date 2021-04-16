@@ -129,7 +129,7 @@
 						"referenceName": "ProfiseeRESTAPI_Records_Upsert",
 						"type": "DatasetReference",
 						"parameters": {
-							"entityId": "addresstest"
+							"entityId": "Customer"
 						}
 					}
 				]
