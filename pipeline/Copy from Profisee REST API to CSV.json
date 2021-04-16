@@ -96,10 +96,10 @@
 							},
 							{
 								"source": {
-									"path": "['country']"
+									"path": "['productLine']"
 								},
 								"sink": {
-									"name": "country",
+									"name": "productLine",
 									"type": "String"
 								}
 							},
@@ -200,7 +200,7 @@
 							},
 							"pageSize": 1000,
 							"attributes": " ",
-							"filter": " ",
+							"filter": " [productSubCategory] eq '1'",
 							"orderBy": " ",
 							"dbaFormat": 1,
 							"recordCodes": " "
