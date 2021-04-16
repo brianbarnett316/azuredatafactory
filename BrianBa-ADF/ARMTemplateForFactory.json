@@ -94,6 +94,15 @@
 						"typeProperties": {
 							"source": {
 								"type": "DelimitedTextSource",
+								"additionalColumns": [
+									{
+										"name": "Source System",
+										"value": {
+											"value": "@replace(pipeline().parameters.FileName, '.csv', '')",
+											"type": "Expression"
+										}
+									}
+								],
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
 									"recursive": true
@@ -895,12 +904,6 @@
 								"httpRequestTimeout": "00:01:40",
 								"requestInterval": "00.00:00:00.010",
 								"requestMethod": "GET",
-								"additionalHeaders": {
-									"x-api-key": {
-										"value": "@pipeline().globalParameters.ApiKey",
-										"type": "Expression"
-									}
-								},
 								"paginationRules": {
 									"AbsoluteUrl": "$.nextPage"
 								}
@@ -1046,13 +1049,13 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Salesforce direct to REST API')]",
+			"name": "[concat(parameters('factoryName'), '/Salesforce to Ingress Staging Area JSON')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Salesforce Accounts to REST API",
+						"name": "Salesforce Accounts to JSON",
 						"description": "Note, the sink is the AddressTest entity.  Used for testing only.",
 						"type": "Copy",
 						"dependsOn": [],
@@ -1070,18 +1073,14 @@
 								"readBehavior": "query"
 							},
 							"sink": {
-								"type": "RestSink",
-								"httpRequestTimeout": "00:01:40",
-								"requestInterval": 10,
-								"requestMethod": "PATCH",
-								"writeBatchSize": 10000,
-								"additionalHeaders": {
-									"x-api-key": {
-										"value": "@pipeline().globalParameters.ApiKey",
-										"type": "Expression"
-									}
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
 								},
-								"httpCompressionType": "none"
+								"formatSettings": {
+									"type": "JsonWriteSettings",
+									"filePattern": "arrayOfObjects"
+								}
 							},
 							"enableStaging": false,
 							"translator": {
@@ -1089,7 +1088,8 @@
 								"mappings": [
 									{
 										"source": {
-											"name": "ProfiseeCode__c"
+											"name": "Id",
+											"type": "String"
 										},
 										"sink": {
 											"path": "$['Code']"
@@ -1106,8 +1106,7 @@
 									},
 									{
 										"source": {
-											"name": "ShippingStreet",
-											"type": "String"
+											"name": "ShippingStreet"
 										},
 										"sink": {
 											"path": "$['Address Line 1']"
@@ -1115,8 +1114,7 @@
 									},
 									{
 										"source": {
-											"name": "ShippingCity",
-											"type": "String"
+											"name": "ShippingCity"
 										},
 										"sink": {
 											"path": "$['City']"
@@ -1124,8 +1122,7 @@
 									},
 									{
 										"source": {
-											"name": "ShippingState",
-											"type": "String"
+											"name": "ShippingState"
 										},
 										"sink": {
 											"path": "$['State']"
@@ -1133,8 +1130,7 @@
 									},
 									{
 										"source": {
-											"name": "ShippingPostalCode",
-											"type": "String"
+											"name": "ShippingPostalCode"
 										},
 										"sink": {
 											"path": "$['Zip']"
@@ -1142,7 +1138,8 @@
 									},
 									{
 										"source": {
-											"name": "Phone"
+											"name": "Phone",
+											"type": "String"
 										},
 										"sink": {
 											"path": "$['Phone Number']"
@@ -1150,18 +1147,11 @@
 									},
 									{
 										"source": {
-											"name": "Website"
+											"name": "Website",
+											"type": "String"
 										},
 										"sink": {
 											"path": "$['Website']"
-										}
-									},
-									{
-										"source": {
-											"name": "Industry"
-										},
-										"sink": {
-											"path": "$['Industry']"
 										}
 									}
 								]
@@ -1176,15 +1166,32 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ProfiseeRESTAPI_Records_Upsert",
+								"referenceName": "AdlsGen2BlobJson",
 								"type": "DatasetReference",
 								"parameters": {
-									"entityId": "Customer"
+									"FolderName": {
+										"value": "@concat(variables('OutputContainer'), '/customer')",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@concat('customer_', string(utcnow()), '.json')",
+										"type": "Expression"
+									}
 								}
 							}
 						]
 					}
 				],
+				"variables": {
+					"InputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-input"
+					},
+					"OutputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-output"
+					}
+				},
 				"folder": {
 					"name": "Salesforce"
 				},
@@ -1193,7 +1200,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]",
-				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Records_Upsert')]"
+				"[concat(variables('factoryId'), '/datasets/AdlsGen2BlobJson')]"
 			]
 		},
 		{
@@ -1941,14 +1948,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Salesforce to Ingress Staging Area JSON')]",
+			"name": "[concat(parameters('factoryName'), '/Salesforce direct to REST API')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Salesforce Accounts to JSON",
-						"description": "Note, the sink is the AddressTest entity.  Used for testing only.",
+						"name": "Salesforce Accounts to REST API",
+						"description": "",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -1962,17 +1969,24 @@
 						"typeProperties": {
 							"source": {
 								"type": "SalesforceSource",
+								"additionalColumns": [
+									{
+										"name": "SourceSystem",
+										"value": {
+											"value": "Salesforce",
+											"type": "Expression"
+										}
+									}
+								],
 								"readBehavior": "query"
 							},
 							"sink": {
-								"type": "JsonSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "JsonWriteSettings",
-									"filePattern": "arrayOfObjects"
-								}
+								"type": "RestSink",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": 10,
+								"requestMethod": "PATCH",
+								"writeBatchSize": 10000,
+								"httpCompressionType": "none"
 							},
 							"enableStaging": false,
 							"translator": {
@@ -1980,8 +1994,7 @@
 								"mappings": [
 									{
 										"source": {
-											"name": "Id",
-											"type": "String"
+											"name": "ProfiseeCode__c"
 										},
 										"sink": {
 											"path": "$['Code']"
@@ -1998,7 +2011,8 @@
 									},
 									{
 										"source": {
-											"name": "ShippingStreet"
+											"name": "ShippingStreet",
+											"type": "String"
 										},
 										"sink": {
 											"path": "$['Address Line 1']"
@@ -2006,7 +2020,8 @@
 									},
 									{
 										"source": {
-											"name": "ShippingCity"
+											"name": "ShippingCity",
+											"type": "String"
 										},
 										"sink": {
 											"path": "$['City']"
@@ -2014,7 +2029,8 @@
 									},
 									{
 										"source": {
-											"name": "ShippingState"
+											"name": "ShippingState",
+											"type": "String"
 										},
 										"sink": {
 											"path": "$['State']"
@@ -2022,7 +2038,8 @@
 									},
 									{
 										"source": {
-											"name": "ShippingPostalCode"
+											"name": "ShippingPostalCode",
+											"type": "String"
 										},
 										"sink": {
 											"path": "$['Zip']"
@@ -2045,6 +2062,23 @@
 										"sink": {
 											"path": "$['Website']"
 										}
+									},
+									{
+										"source": {
+											"name": "Industry",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['Industry']"
+										}
+									},
+									{
+										"source": {
+											"name": "SourceSystem"
+										},
+										"sink": {
+											"path": "$['Source System']"
+										}
 									}
 								]
 							}
@@ -2058,32 +2092,15 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "AdlsGen2BlobJson",
+								"referenceName": "ProfiseeRESTAPI_Records_Upsert",
 								"type": "DatasetReference",
 								"parameters": {
-									"FolderName": {
-										"value": "@concat(variables('OutputContainer'), '/customer')",
-										"type": "Expression"
-									},
-									"FileName": {
-										"value": "@concat('customer_', string(utcnow()), '.json')",
-										"type": "Expression"
-									}
+									"entityId": "Customer"
 								}
 							}
 						]
 					}
 				],
-				"variables": {
-					"InputContainer": {
-						"type": "String",
-						"defaultValue": "profisee-input"
-					},
-					"OutputContainer": {
-						"type": "String",
-						"defaultValue": "profisee-output"
-					}
-				},
 				"folder": {
 					"name": "Salesforce"
 				},
@@ -2092,7 +2109,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]",
-				"[concat(variables('factoryId'), '/datasets/AdlsGen2BlobJson')]"
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Records_Upsert')]"
 			]
 		}
 	]
