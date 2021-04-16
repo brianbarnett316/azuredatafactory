@@ -4,7 +4,7 @@
 		"activities": [
 			{
 				"name": "Salesforce Accounts to REST API",
-				"description": "Note, the sink is the AddressTest entity.  Used for testing only.",
+				"description": "",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -26,12 +26,6 @@
 						"requestInterval": 10,
 						"requestMethod": "PATCH",
 						"writeBatchSize": 10000,
-						"additionalHeaders": {
-							"x-api-key": {
-								"value": "@pipeline().globalParameters.ApiKey",
-								"type": "Expression"
-							}
-						},
 						"httpCompressionType": "none"
 					},
 					"enableStaging": false,
