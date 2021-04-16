@@ -126,7 +126,7 @@
 									"name": "SourceSystem"
 								},
 								"sink": {
-									"path": "$['SourceSystem']"
+									"path": "$['Source System']"
 								}
 							}
 						]
