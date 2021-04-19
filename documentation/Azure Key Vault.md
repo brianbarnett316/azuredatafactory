@@ -25,13 +25,14 @@ Steps
    7.  Click on **Review + Create**.
    8.  Go back to your Azure Data Factory browser tab and click on the refresh button to the right of the **Azure key vault name** dropdown. You should now see your new key vault in the list.
 3. Select an existing Key Vault
-   1. Click on the **Grant Data Factory service managed identity access to your Azure Key Vault.** link.
-   2.  This will navigate to your key vault's Access Policies screen to add the necessary access policy.
-	  3.  You can ignore Configure from template, Key permissions, Certificate permissions, and Authorized application.
-	  4.  Secret permissions: **Get**
-	  5.  Select principal: Click on **None selected**.  Search for the name of your Data Factory.  Click on it then click on **Select**.
-	  6.  Click on **Add**
-	  7.  Click on **Save** on the Access policies screen.
+   1. Select the Key Vault name from the dropdown list.
+   2. Click on the **Grant Data Factory service managed identity access to your Azure Key Vault.** link.
+   3. This will navigate to your key vault's Access Policies screen to add the necessary access policy.
+	  4. You can ignore Configure from template, Key permissions, Certificate permissions, and Authorized application.
+	  5. Secret permissions: **Get**
+	  6. Select principal: Click on **None selected**.  Search for the name of your Data Factory.  Click on it then click on **Select**.
+	  7. Click on **Add**
+	  8. Click on **Save** on the Access policies screen.
 4. Enter the Secret name you are going to use (e.g. profisee-rest-gateway-api-key).
 5. Navigate to your key vault to add the API Key as a secret. 
    1. Click on **Secrets** in the left nav panel.
@@ -41,8 +42,6 @@ Steps
    5. Enter the API Key value in the Value field.
    6. Click **Create**.
 6. You may need to refresh your Data Factory in the browser to pick up the new Key Vault settings.
-7.  See [Store credential in Azure Key Vault](https://docs.microsoft.com/en-us/azure/data-factory/store-credentials-in-key-vault) for more information on the necessary steps.
-
 
 More Information
 ----------------
