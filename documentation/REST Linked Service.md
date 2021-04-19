@@ -31,10 +31,11 @@ Steps
 	2. Example: https://masterdataserver.somecompany.com/profisee/rest/v1
 5.  Authentication type: select **Anonymous**
 6.  Add a new Auth header for the **X-API-Key**. You have two options.
-	1.  Enter the API Key value directly into the Value field.  
-	2.  Store the API Key in Azure Key Vault.  Although there are more steps involved, this is the preferred, more secure option.  
+	1.  Select **X-API-Key** from the Name dropdown.
+	2.  Enter the API Key value directly into the Value field.  
+	3.  Store the API Key in Azure Key Vault.  Although there are more steps involved, this is the preferred, more secure option.  
 		1. See [Azure Key Vault](Azure%20Key%20Vault.md) for more information.
-	3. Should you need to use different API Keys with differing permissions to records in Profisee, you will need to create a REST linked service for each API Key you need to use.  And if storing the API Key in Key Vault, create a secret for each API Key.  You could also use one REST linked service.  You would need to instead add the API Key header in each Copy Activity's Source or Sink.  However, you would not be able to store the value in Key Vault.
+	4. Should you need to use different API Keys with differing permissions to records in Profisee, you will need to create a REST linked service for each API Key you need to use.  And if storing the API Key in Key Vault, create a secret for each API Key.  You could also use one REST linked service.  You would need to instead add the API Key header in each Copy Activity's Source or Sink.  However, you would not be able to store the value in Key Vault.
 
 			
 More Information
