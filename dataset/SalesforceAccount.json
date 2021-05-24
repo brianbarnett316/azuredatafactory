@@ -5,11 +5,19 @@
 			"referenceName": "Salesforce1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"EntityName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "SalesforceObject",
 		"schema": [],
 		"typeProperties": {
-			"objectApiName": "Account"
+			"objectApiName": {
+				"value": "@dataset().EntityName",
+				"type": "Expression"
+			}
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
