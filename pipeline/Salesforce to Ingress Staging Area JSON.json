@@ -108,7 +108,10 @@
 				"inputs": [
 					{
 						"referenceName": "SalesforceAccount",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"EntityName": "Customer"
+						}
 					}
 				],
 				"outputs": [
