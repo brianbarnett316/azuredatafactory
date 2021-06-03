@@ -1022,7 +1022,12 @@
 							{
 								"referenceName": "SalesforceAccount",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"EntityName": {
+										"value": "@pipeline().parameters.EntityName",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}
@@ -1184,7 +1189,9 @@
 							{
 								"referenceName": "SalesforceAccount",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"EntityName": "Account"
+								}
 							}
 						],
 						"outputs": [
@@ -1322,7 +1329,9 @@
 							{
 								"referenceName": "SalesforceAccount",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"EntityName": "Customer"
+								}
 							}
 						],
 						"outputs": [
@@ -1549,11 +1558,19 @@
 					"referenceName": "Salesforce1",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"EntityName": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "SalesforceObject",
 				"schema": [],
 				"typeProperties": {
-					"objectApiName": "Account"
+					"objectApiName": {
+						"value": "@dataset().EntityName",
+						"type": "Expression"
+					}
 				}
 			},
 			"dependsOn": [
