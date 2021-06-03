@@ -141,7 +141,13 @@
 				"outputs": [
 					{
 						"referenceName": "SalesforceAccount",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"EntityName": {
+								"value": "@pipeline().parameters.EntityName",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
