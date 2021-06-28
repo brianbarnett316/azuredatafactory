@@ -133,8 +133,7 @@
 							"attributes": "[Address Line 1],[City],[State],[Zip],[Phone Number],[Website],[Industry]",
 							"filter": " ",
 							"orderBy": " ",
-							"dbaFormat": 1,
-							"recordCodes": " 37b3523e-8378-47e8-8ac6-605da547a5c1"
+							"dbaFormat": 1
 						}
 					}
 				],
