@@ -1,0 +1,185 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "BrianBa-ADF"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/REST API direct to Salesforce')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "REST API to Salesforce Accounts",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"AbsoluteUrl": "$.nextPage"
+								}
+							},
+							"sink": {
+								"type": "SalesforceSink",
+								"writeBatchSize": 5000,
+								"writeBehavior": "upsert",
+								"externalIdFieldName": "ProfiseeCode__c",
+								"ignoreNullValues": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['code']"
+										},
+										"sink": {
+											"name": "ProfiseeCode__c",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['name']"
+										},
+										"sink": {
+											"name": "Name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['address Line 1']"
+										},
+										"sink": {
+											"name": "ShippingStreet",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['city']"
+										},
+										"sink": {
+											"name": "ShippingCity",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['state']"
+										},
+										"sink": {
+											"name": "ShippingState",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['zip']"
+										},
+										"sink": {
+											"name": "ShippingPostalCode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['phone Number']"
+										},
+										"sink": {
+											"name": "Phone",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['website']"
+										},
+										"sink": {
+											"name": "Website",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['industry']"
+										},
+										"sink": {
+											"name": "Industry",
+											"type": "String"
+										}
+									}
+								],
+								"collectionReference": "$['data']"
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Records_Get",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": {
+										"value": "@pipeline().parameters.EntityName",
+										"type": "Expression"
+									},
+									"pageSize": 100,
+									"attributes": "[[Address Line 1],[City],[State],[Zip],[Phone Number],[Website],[Industry]",
+									"filter": " ",
+									"orderBy": " ",
+									"dbaFormat": 1
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SalesforceAccount",
+								"type": "DatasetReference",
+								"parameters": {
+									"EntityName": {
+										"value": "@pipeline().parameters.EntityName",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"parameters": {
+					"EntityName": {
+						"type": "string",
+						"defaultValue": "Customer"
+					}
+				},
+				"folder": {
+					"name": "Salesforce"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": []
+		}
+	]
+}
