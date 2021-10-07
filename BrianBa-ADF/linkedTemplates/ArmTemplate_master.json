@@ -63,10 +63,6 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		},
-		"trigger1_properties_Copy from Profisee REST API to CSV_parameters_StartTime": {
-			"type": "string",
-			"defaultValue": "@trigger().startTime"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -135,9 +131,6 @@
 					},
 					"NewJsonMemberFile_properties_typeProperties_scope": {
 						"value": "[parameters('NewJsonMemberFile_properties_typeProperties_scope')]"
-					},
-					"trigger1_properties_Copy from Profisee REST API to CSV_parameters_StartTime": {
-						"value": "[parameters('trigger1_properties_Copy from Profisee REST API to CSV_parameters_StartTime')]"
 					}
 				}
 			},

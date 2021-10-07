@@ -46,9 +46,6 @@
 		},
 		"NewJsonMemberFile_properties_typeProperties_scope": {
 			"value": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
-		},
-		"trigger1_properties_Copy from Profisee REST API to CSV_parameters_StartTime": {
-			"value": "@trigger().startTime"
 		}
 	}
 }

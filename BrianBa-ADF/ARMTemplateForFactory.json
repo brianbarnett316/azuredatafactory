@@ -62,10 +62,6 @@
 		"NewJsonMemberFile_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
-		},
-		"trigger1_properties_Copy from Profisee REST API to CSV_parameters_StartTime": {
-			"type": "string",
-			"defaultValue": "@trigger().startTime"
 		}
 	},
 	"variables": {
@@ -1790,38 +1786,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger1')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Copy from Profisee REST API to CSV",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"StartTime": "[parameters('trigger1_properties_Copy from Profisee REST API to CSV_parameters_StartTime')]"
-						}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 2,
-						"startTime": "2021-10-07T09:30:00Z",
-						"timeZone": "UTC"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Copy from Profisee REST API to CSV')]"
-			]
 		}
 	]
 }
