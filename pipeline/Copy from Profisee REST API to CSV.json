@@ -200,10 +200,7 @@
 							},
 							"pageSize": 1000,
 							"attributes": " ",
-							"filter": {
-								"value": "@[lastChgDTM] gt pipeline().parameters.StartTime AND [lastChgDTM] le pipeline().parameters.EndTime",
-								"type": "Expression"
-							},
+							"filter": " ",
 							"orderBy": " ",
 							"dbaFormat": 1,
 							"recordCodes": " "
