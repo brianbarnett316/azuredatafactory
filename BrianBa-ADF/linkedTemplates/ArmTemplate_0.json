@@ -793,10 +793,7 @@
 									},
 									"pageSize": 1000,
 									"attributes": " ",
-									"filter": {
-										"value": "@[lastChgDTM] gt formatDateTime(pipeline().parameters.StartTime) AND [lastChgDTM] le formatDateTime(pipeline().parameters.EndTime)",
-										"type": "Expression"
-									},
+									"filter": " ",
 									"orderBy": " ",
 									"dbaFormat": 1,
 									"recordCodes": " "
