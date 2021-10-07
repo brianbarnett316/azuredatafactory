@@ -2,7 +2,7 @@
 	"name": "TumbleTrigger",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipeline": {
 			"pipelineReference": {
 				"referenceName": "Copy from Profisee REST API to CSV",
