@@ -479,7 +479,7 @@
 									"pageSize": 1000,
 									"attributes": " ",
 									"filter": {
-										"value": "@[lastChgDTM] gt convertToUtc(pipeline().parameters.StartTime) AND [lastChgDTM] le convertToUtc(pipeline().parameters.EndTime)",
+										"value": "@[lastChgDTM] gt formatDateTime(pipeline().parameters.StartTime) AND [lastChgDTM] le formatDateTime(pipeline().parameters.EndTime)",
 										"type": "Expression"
 									},
 									"orderBy": " ",
