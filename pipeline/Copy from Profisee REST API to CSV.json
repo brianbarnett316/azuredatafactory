@@ -200,10 +200,6 @@
 							},
 							"pageSize": 1000,
 							"attributes": " ",
-							"filter": {
-								"value": "@[lastChgDTM] gt pipeline().parameters.StartTime",
-								"type": "Expression"
-							},
 							"orderBy": " ",
 							"dbaFormat": 1,
 							"recordCodes": " "
