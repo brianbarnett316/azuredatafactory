@@ -200,7 +200,10 @@
 							},
 							"pageSize": 1000,
 							"attributes": " ",
-							"filter": " [productSubCategory] eq '1'",
+							"filter": {
+								"value": "@[lastChgDTM] gt pipeline().parameters.StartTime",
+								"type": "Expression"
+							},
 							"orderBy": " ",
 							"dbaFormat": 1,
 							"recordCodes": " "
@@ -225,6 +228,11 @@
 				]
 			}
 		],
+		"parameters": {
+			"StartTime": {
+				"type": "string"
+			}
+		},
 		"variables": {
 			"OutputContainer": {
 				"type": "String",
