@@ -200,6 +200,10 @@
 							},
 							"pageSize": 1000,
 							"attributes": " ",
+							"filter": {
+								"value": "@[lastChgDTM] gt replace(pipeline().parameters.StartTime, 'Z', '') AND [lastChgDTM] le replace(pipeline().parameters.EndTime, 'Z', '')",
+								"type": "Expression"
+							},
 							"orderBy": " ",
 							"dbaFormat": 1,
 							"recordCodes": " "
@@ -212,7 +216,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FolderName": {
-								"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'))",
+								"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'), '/', formatDateTime(pipeline().parameters.StartTime, 'HH'))",
 								"type": "Expression"
 							},
 							"FileName": {
@@ -226,6 +230,9 @@
 		],
 		"parameters": {
 			"StartTime": {
+				"type": "string"
+			},
+			"EndTime": {
 				"type": "string"
 			}
 		},

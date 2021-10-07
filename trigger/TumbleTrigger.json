@@ -1,0 +1,29 @@
+{
+	"name": "TumbleTrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipeline": {
+			"pipelineReference": {
+				"referenceName": "Copy from Profisee REST API to CSV",
+				"type": "PipelineReference"
+			},
+			"parameters": {
+				"StartTime": "@trigger().outputs.windowStartTime",
+				"EndTime": "@trigger().outputs.windowEndTime"
+			}
+		},
+		"type": "TumblingWindowTrigger",
+		"typeProperties": {
+			"frequency": "Minute",
+			"interval": 15,
+			"startTime": "2021-10-07T08:00:00Z",
+			"delay": "00:00:00",
+			"maxConcurrency": 50,
+			"retryPolicy": {
+				"intervalInSeconds": 30
+			},
+			"dependsOn": []
+		}
+	}
+}
