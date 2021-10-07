@@ -201,7 +201,7 @@
 							"pageSize": 1000,
 							"attributes": " ",
 							"filter": {
-								"value": "@[lastChgDTM] gt replace(pipeline().parameters.StartTime, 'Z', '') AND [lastChgDTM] le replace(pipeline().parameters.EndTime, 'Z', '')",
+								"value": "@[lastChgDTM] gt convertToUtc(pipeline().parameters.StartTime) AND [lastChgDTM] le convertToUtc(pipeline().parameters.EndTime)",
 								"type": "Expression"
 							},
 							"orderBy": " ",
