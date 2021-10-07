@@ -806,7 +806,7 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"FolderName": {
-										"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'), '/', pipeline().parameters.StartTime)",
+										"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'), '/', replace(pipeline().parameters.StartTime, 'Z', ''))",
 										"type": "Expression"
 									},
 									"FileName": {
