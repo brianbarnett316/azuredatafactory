@@ -230,10 +230,10 @@
 		],
 		"parameters": {
 			"StartTime": {
-				"type": "string"
+				"type": "object"
 			},
 			"EndTime": {
-				"type": "string"
+				"type": "object"
 			}
 		},
 		"variables": {
