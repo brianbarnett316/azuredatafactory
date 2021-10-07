@@ -1,0 +1,274 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "BrianBa-ADF"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Copy from Profisee REST API to CSV')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy from Profisee REST API to CSV",
+						"description": "Copy records from Profisee via the Profisee REST API to ADLS Gen2 in CSV format.",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"AbsoluteUrl": "$.nextPage"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['code']"
+										},
+										"sink": {
+											"name": "code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['name']"
+										},
+										"sink": {
+											"name": "name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['productSubCategory']"
+										},
+										"sink": {
+											"name": "productSubCategory",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['color']"
+										},
+										"sink": {
+											"name": "color",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['class']"
+										},
+										"sink": {
+											"name": "class",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['style']"
+										},
+										"sink": {
+											"name": "style",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['productLine']"
+										},
+										"sink": {
+											"name": "productLine",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['standardCost']"
+										},
+										"sink": {
+											"name": "standardCost",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['safetyStockLevel']"
+										},
+										"sink": {
+											"name": "safetyStockLevel",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['reorderPoint']"
+										},
+										"sink": {
+											"name": "reorderPoint",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['msrp']"
+										},
+										"sink": {
+											"name": "msrp",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['weight']"
+										},
+										"sink": {
+											"name": "weight",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['daysToManufacture']"
+										},
+										"sink": {
+											"name": "daysToManufacture",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['dealerCost']"
+										},
+										"sink": {
+											"name": "dealerCost",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellStartDate']"
+										},
+										"sink": {
+											"name": "sellStartDate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "[['sellEndDate']"
+										},
+										"sink": {
+											"name": "sellEndDate",
+											"type": "DateTime"
+										}
+									}
+								],
+								"collectionReference": "$['data']",
+								"mapComplexValuesToString": false
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Records_Get",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": {
+										"value": "@variables('EntityId')",
+										"type": "Expression"
+									},
+									"pageSize": 1000,
+									"attributes": " ",
+									"filter": {
+										"value": "@concat('[lastChgDTM] gt ', replace(pipeline().parameters.StartTime, 'Z', ''), ' AND [lastChgDTM] le ', replace(pipeline().parameters.EndTime, 'Z', ''))",
+										"type": "Expression"
+									},
+									"orderBy": " ",
+									"dbaFormat": 1,
+									"recordCodes": " "
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AdlsGen2BlobCsv",
+								"type": "DatasetReference",
+								"parameters": {
+									"FolderName": {
+										"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'), '/', replace(pipeline().parameters.StartTime, 'Z', ''))",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@concat(variables('EntityId'), '_', string(utcnow()), '.csv')",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"parameters": {
+					"StartTime": {
+						"type": "string"
+					},
+					"EndTime": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"OutputContainer": {
+						"type": "String",
+						"defaultValue": "profisee-output"
+					},
+					"EntityId": {
+						"type": "String",
+						"defaultValue": "product"
+					}
+				},
+				"folder": {
+					"name": "CSV Format"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": []
+		}
+	]
+}
