@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "Copy Customer info from Sales CSV to Profisee REST API_copy1",
+					"referenceName": "Copy Customer info from Sales CSV to Profisee REST API",
 					"type": "PipelineReference"
 				},
 				"parameters": {
