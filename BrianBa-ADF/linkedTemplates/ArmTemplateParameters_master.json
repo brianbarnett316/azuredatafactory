@@ -62,6 +62,15 @@
 		"TumbleTrigger_properties_pipeline_parameters_EndTime": {
 			"value": "@trigger().outputs.windowEndTime"
 		},
+		"NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileName": {
+			"value": "@triggerBody().FileName"
+		},
+		"NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileFolder": {
+			"value": "@triggerBody().FolderPath"
+		},
+		"NewShippingCsv_properties_typeProperties_scope": {
+			"value": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
+		},
 		"containerUri": {
 			"value": ""
 		},

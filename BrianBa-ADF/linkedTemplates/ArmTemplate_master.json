@@ -83,6 +83,18 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
+		"NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileName": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FileName"
+		},
+		"NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileFolder": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FolderPath"
+		},
+		"NewShippingCsv_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -142,15 +154,6 @@
 					},
 					"NewCsvMemberFile_properties_typeProperties_scope": {
 						"value": "[parameters('NewCsvMemberFile_properties_typeProperties_scope')]"
-					},
-					"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName": {
-						"value": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName')]"
-					},
-					"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder": {
-						"value": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder')]"
-					},
-					"NewJsonMemberFile_properties_typeProperties_scope": {
-						"value": "[parameters('NewJsonMemberFile_properties_typeProperties_scope')]"
 					}
 				}
 			},
@@ -170,6 +173,15 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName": {
+						"value": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName')]"
+					},
+					"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder": {
+						"value": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder')]"
+					},
+					"NewJsonMemberFile_properties_typeProperties_scope": {
+						"value": "[parameters('NewJsonMemberFile_properties_typeProperties_scope')]"
+					},
 					"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_parameters_FileName": {
 						"value": "[parameters('NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_parameters_FileName')]"
 					},
@@ -184,6 +196,15 @@
 					},
 					"TumbleTrigger_properties_pipeline_parameters_EndTime": {
 						"value": "[parameters('TumbleTrigger_properties_pipeline_parameters_EndTime')]"
+					},
+					"NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileName": {
+						"value": "[parameters('NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileName')]"
+					},
+					"NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileFolder": {
+						"value": "[parameters('NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileFolder')]"
+					},
+					"NewShippingCsv_properties_typeProperties_scope": {
+						"value": "[parameters('NewShippingCsv_properties_typeProperties_scope')]"
 					}
 				}
 			},

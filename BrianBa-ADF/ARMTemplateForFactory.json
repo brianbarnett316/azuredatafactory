@@ -82,6 +82,18 @@
 		"TumbleTrigger_properties_pipeline_parameters_EndTime": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileName": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FileName"
+		},
+		"NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileFolder": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FolderPath"
+		},
+		"NewShippingCsv_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		}
 	},
 	"variables": {
@@ -110,15 +122,6 @@
 						"typeProperties": {
 							"source": {
 								"type": "DelimitedTextSource",
-								"additionalColumns": [
-									{
-										"name": "productRecordSource",
-										"value": {
-											"value": "@replace(pipeline().parameters.FileName, '.csv', '')",
-											"type": "Expression"
-										}
-									}
-								],
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
 									"recursive": true
@@ -2012,6 +2015,189 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copy Customer info from Shipping CSV to Profisee REST API')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Customer from Shipping CSV to Profisee REST API",
+						"description": "Copy records from ADLS Gen2 in CSV format to Profisee via the Profisee REST API.",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "RestSink",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": 10,
+								"requestMethod": "PATCH",
+								"writeBatchSize": 10000,
+								"httpCompressionType": "none"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CustomerId",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['CustomerShippingId']"
+										}
+									},
+									{
+										"source": {
+											"name": "Shipping Address 1",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['Address Line 1']"
+										}
+									},
+									{
+										"source": {
+											"name": "Shipping City",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['City']"
+										}
+									},
+									{
+										"source": {
+											"name": "Shipping State",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['StateProvince']"
+										}
+									},
+									{
+										"source": {
+											"name": "Shipping Zip",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['Postal Code']"
+										}
+									},
+									{
+										"source": {
+											"name": "Phone",
+											"type": "String"
+										},
+										"sink": {
+											"path": "$['Phone Number']"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AdlsGen2BlobCsv",
+								"type": "DatasetReference",
+								"parameters": {
+									"FolderName": {
+										"value": "@pipeline().parameters.FileFolder",
+										"type": "Expression"
+									},
+									"FileName": {
+										"value": "@pipeline().parameters.FileName",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ProfiseeRESTAPI_Records_Upsert",
+								"type": "DatasetReference",
+								"parameters": {
+									"entityId": "Customer"
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					},
+					"FileFolder": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "CSV Format"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-25T15:29:08Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AdlsGen2BlobCsv')]",
+				"[concat(variables('factoryId'), '/datasets/ProfiseeRESTAPI_Records_Upsert')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/NewShippingCsv')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Copy Customer info from Shipping CSV to Profisee REST API",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"FileName": "[parameters('NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileName')]",
+							"FileFolder": "[parameters('NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileFolder')]"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/transactions/blobs/shipping",
+					"blobPathEndsWith": ".csv",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('NewShippingCsv_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Copy Customer info from Shipping CSV to Profisee REST API')]"
+			]
 		}
 	]
 }

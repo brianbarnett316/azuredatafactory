@@ -7,6 +7,18 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "BrianBa-ADF"
 		},
+		"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FileName"
+		},
+		"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FolderPath"
+		},
+		"NewJsonMemberFile_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
+		},
 		"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_parameters_FileName": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FileName"
@@ -26,12 +38,56 @@
 		"TumbleTrigger_properties_pipeline_parameters_EndTime": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileName": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FileName"
+		},
+		"NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileFolder": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FolderPath"
+		},
+		"NewShippingCsv_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/NewJsonMemberFile')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Copy from JSON to Profisee REST API",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"FileName": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName')]",
+							"FileFolder": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder')]"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/profisee-input/blobs/",
+					"blobPathEndsWith": ".json",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('NewJsonMemberFile_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/NewSalesCsv')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
@@ -92,6 +148,38 @@
 						"intervalInSeconds": 30
 					},
 					"dependsOn": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/NewShippingCsv')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Copy Customer info from Shipping CSV to Profisee REST API",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"FileName": "[parameters('NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileName')]",
+							"FileFolder": "[parameters('NewShippingCsv_properties_Copy Customer info from Shipping CSV to Profisee REST API_parameters_FileFolder')]"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/transactions/blobs/shipping",
+					"blobPathEndsWith": ".csv",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('NewShippingCsv_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
 				}
 			},
 			"dependsOn": []
