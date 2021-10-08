@@ -1,0 +1,140 @@
+{
+	"name": "Copy Customer info from Shipping CSV to Profisee REST API",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Customer from Shipping CSV to Profisee REST API",
+				"description": "Copy records from ADLS Gen2 in CSV format to Profisee via the Profisee REST API.",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "RestSink",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": 10,
+						"requestMethod": "PATCH",
+						"writeBatchSize": 10000,
+						"httpCompressionType": "none"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CustomerId",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['CustomerShippingId']"
+								}
+							},
+							{
+								"source": {
+									"name": "Shipping Address 1",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Address Line 1']"
+								}
+							},
+							{
+								"source": {
+									"name": "Shipping City",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['City']"
+								}
+							},
+							{
+								"source": {
+									"name": "Shipping State",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['StateProvince']"
+								}
+							},
+							{
+								"source": {
+									"name": "Shipping Zip",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Postal Code']"
+								}
+							},
+							{
+								"source": {
+									"name": "Phone",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Phone Number']"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AdlsGen2BlobCsv",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderName": {
+								"value": "@pipeline().parameters.FileFolder",
+								"type": "Expression"
+							},
+							"FileName": {
+								"value": "@pipeline().parameters.FileName",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ProfiseeRESTAPI_Records_Upsert",
+						"type": "DatasetReference",
+						"parameters": {
+							"entityId": "Customer"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			},
+			"FileFolder": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "CSV Format"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-25T15:29:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
