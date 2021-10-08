@@ -7,15 +7,23 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "BrianBa-ADF"
 		},
-		"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName": {
+		"TumbleTrigger_properties_pipeline_parameters_StartTime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"TumbleTrigger_properties_pipeline_parameters_EndTime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileName": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FileName"
 		},
-		"NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder": {
+		"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileFolder": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FolderPath"
 		},
-		"NewJsonMemberFile_properties_typeProperties_scope": {
+		"NewSalesCsv_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		}
@@ -25,7 +33,39 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/NewJsonMemberFile')]",
+			"name": "[concat(parameters('factoryName'), '/TumbleTrigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "Copy from Profisee REST API to CSV",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"StartTime": "[parameters('TumbleTrigger_properties_pipeline_parameters_StartTime')]",
+						"EndTime": "[parameters('TumbleTrigger_properties_pipeline_parameters_EndTime')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 15,
+					"startTime": "2021-10-07T08:00:00Z",
+					"delay": "00:00:00",
+					"maxConcurrency": 50,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/NewSalesCsv')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -34,21 +74,21 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "Copy from JSON to Profisee REST API",
+							"referenceName": "Copy Customer info from Sales CSV to Profisee REST API_copy1",
 							"type": "PipelineReference"
 						},
 						"parameters": {
-							"FileName": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileName')]",
-							"FileFolder": "[parameters('NewJsonMemberFile_properties_Copy from JSON to Profisee REST API_parameters_FileFolder')]"
+							"FileName": "[parameters('NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileName')]",
+							"FileFolder": "[parameters('NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileFolder')]"
 						}
 					}
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/profisee-input/blobs/",
-					"blobPathEndsWith": ".json",
+					"blobPathBeginsWith": "/transactions/blobs/sales",
+					"blobPathEndsWith": ".csv",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('NewJsonMemberFile_properties_typeProperties_scope')]",
+					"scope": "[parameters('NewSalesCsv_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
