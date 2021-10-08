@@ -63,6 +63,18 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		},
+		"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_parameters_FileName": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FileName"
+		},
+		"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_parameters_FileFolder": {
+			"type": "string",
+			"defaultValue": "@triggerBody().FolderPath"
+		},
+		"NewSalesCsv_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
+		},
 		"TumbleTrigger_properties_pipeline_parameters_StartTime": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -70,18 +82,6 @@
 		"TumbleTrigger_properties_pipeline_parameters_EndTime": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileName": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FileName"
-		},
-		"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileFolder": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FolderPath"
-		},
-		"NewSalesCsv_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		},
 		"containerUri": {
 			"type": "string",
@@ -170,20 +170,20 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_parameters_FileName": {
+						"value": "[parameters('NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_parameters_FileName')]"
+					},
+					"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_parameters_FileFolder": {
+						"value": "[parameters('NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_parameters_FileFolder')]"
+					},
+					"NewSalesCsv_properties_typeProperties_scope": {
+						"value": "[parameters('NewSalesCsv_properties_typeProperties_scope')]"
+					},
 					"TumbleTrigger_properties_pipeline_parameters_StartTime": {
 						"value": "[parameters('TumbleTrigger_properties_pipeline_parameters_StartTime')]"
 					},
 					"TumbleTrigger_properties_pipeline_parameters_EndTime": {
 						"value": "[parameters('TumbleTrigger_properties_pipeline_parameters_EndTime')]"
-					},
-					"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileName": {
-						"value": "[parameters('NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileName')]"
-					},
-					"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileFolder": {
-						"value": "[parameters('NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileFolder')]"
-					},
-					"NewSalesCsv_properties_typeProperties_scope": {
-						"value": "[parameters('NewSalesCsv_properties_typeProperties_scope')]"
 					}
 				}
 			},

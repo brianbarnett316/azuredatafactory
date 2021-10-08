@@ -47,20 +47,20 @@
 		"NewJsonMemberFile_properties_typeProperties_scope": {
 			"value": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		},
+		"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_parameters_FileName": {
+			"value": "@triggerBody().FileName"
+		},
+		"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_parameters_FileFolder": {
+			"value": "@triggerBody().FolderPath"
+		},
+		"NewSalesCsv_properties_typeProperties_scope": {
+			"value": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
+		},
 		"TumbleTrigger_properties_pipeline_parameters_StartTime": {
 			"value": "@trigger().outputs.windowStartTime"
 		},
 		"TumbleTrigger_properties_pipeline_parameters_EndTime": {
 			"value": "@trigger().outputs.windowEndTime"
-		},
-		"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileName": {
-			"value": "@triggerBody().FileName"
-		},
-		"NewSalesCsv_properties_Copy Customer info from Sales CSV to Profisee REST API_copy1_parameters_FileFolder": {
-			"value": "@triggerBody().FolderPath"
-		},
-		"NewSalesCsv_properties_typeProperties_scope": {
-			"value": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		}
 	}
 }
