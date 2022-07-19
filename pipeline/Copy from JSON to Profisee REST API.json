@@ -32,9 +32,6 @@
 						"requestInterval": 10,
 						"requestMethod": "PATCH",
 						"writeBatchSize": 10000,
-						"additionalHeaders": {
-							"x-api-key": "add key"
-						},
 						"httpCompressionType": "none"
 					},
 					"enableStaging": false
