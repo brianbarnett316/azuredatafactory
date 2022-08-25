@@ -39,6 +39,81 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['data'][0]['code']"
+								},
+								"sink": {
+									"name": "code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['name']"
+								},
+								"sink": {
+									"name": "name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['productSubCategory']"
+								},
+								"sink": {
+									"name": "productSubCategory",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['style']"
+								},
+								"sink": {
+									"name": "style",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['msrp']"
+								},
+								"sink": {
+									"name": "msrp",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['lastChgDTM']"
+								},
+								"sink": {
+									"name": "lastChgDTM",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['lastChgUserName']"
+								},
+								"sink": {
+									"name": "lastChgUserName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['validationStatusID']"
+								},
+								"sink": {
+									"name": "validationStatusID",
+									"type": "Int16"
+								}
+							}
+						],
+						"collectionReference": "$['data']",
 						"mapComplexValuesToString": false
 					}
 				},
@@ -52,8 +127,8 @@
 								"type": "Expression"
 							},
 							"pageSize": 1000,
-							"attributes": " ",
-							"filter": " ",
+							"attributes": " [productSubCategory], [style], [msrp]",
+							"filter": " [Color] eq 'BLK'",
 							"orderBy": " ",
 							"dbaFormat": 1,
 							"recordCodes": " "
