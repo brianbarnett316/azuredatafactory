@@ -38,18 +38,6 @@
 		"Salesforce1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "tye3950@yahoo.com"
-		},
-		"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FileName"
-		},
-		"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder": {
-			"type": "string",
-			"defaultValue": "@triggerBody().FolderPath"
-		},
-		"NewCsvMemberFile_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/73814551-37dd-4143-a149-df9c2a2c97b6/resourceGroups/ProfiseeBrianBa/providers/Microsoft.Storage/storageAccounts/brianbastorageadlsgen2"
 		}
 	},
 	"variables": {
@@ -83,6 +71,28 @@
 						"type": "SecureString",
 						"value": "[parameters('BlobStorageGen2_accountKey')]"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TumbleTrigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 15,
+					"startTime": "2021-10-07T08:00:00Z",
+					"delay": "00:00:00",
+					"maxConcurrency": 50,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
 				}
 			},
 			"dependsOn": []
@@ -1969,40 +1979,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SalesforceAccount')]",
 				"[concat(variables('factoryId'), '/datasets/AdlsGen2BlobJson')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/NewCsvMemberFile')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Copy from CSV to Profisee REST API",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"FileName": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName')]",
-							"FileFolder": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileFolder')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/profisee-input/blobs/",
-					"blobPathEndsWith": ".csv",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('NewCsvMemberFile_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Copy from CSV to Profisee REST API')]"
 			]
 		}
 	]
