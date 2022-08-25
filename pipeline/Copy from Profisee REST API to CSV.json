@@ -200,10 +200,7 @@
 							},
 							"pageSize": 1000,
 							"attributes": " ",
-							"filter": {
-								"value": "@concat('[lastChgDTM] gt ', replace(pipeline().parameters.StartTime, 'Z', ''), ' AND [lastChgDTM] le ', replace(pipeline().parameters.EndTime, 'Z', ''))",
-								"type": "Expression"
-							},
+							"filter": " ",
 							"orderBy": " ",
 							"dbaFormat": 1,
 							"recordCodes": " "
@@ -228,14 +225,6 @@
 				]
 			}
 		],
-		"parameters": {
-			"StartTime": {
-				"type": "string"
-			},
-			"EndTime": {
-				"type": "string"
-			}
-		},
 		"variables": {
 			"OutputContainer": {
 				"type": "String",
