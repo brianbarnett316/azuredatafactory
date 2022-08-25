@@ -3,16 +3,6 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Stopped",
-		"pipeline": {
-			"pipelineReference": {
-				"referenceName": "Copy from Profisee REST API to CSV",
-				"type": "PipelineReference"
-			},
-			"parameters": {
-				"StartTime": "@trigger().outputs.windowStartTime",
-				"EndTime": "@trigger().outputs.windowEndTime"
-			}
-		},
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Minute",
