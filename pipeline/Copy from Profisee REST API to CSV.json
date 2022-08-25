@@ -213,7 +213,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FolderName": {
-								"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'), '/', replace(pipeline().parameters.StartTime, 'Z', ''))",
+								"value": "@concat(variables('OutputContainer'), '/', variables('EntityId'))",
 								"type": "Expression"
 							},
 							"FileName": {
