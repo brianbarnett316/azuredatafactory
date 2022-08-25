@@ -5,7 +5,7 @@
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://brianbarnettprofisee10062021095233.dev.profisee.com/profisee/rest/v1",
+			"url": "https://brianbarnettprofisee07182022123111.dev.profisee.com/profisee/rest/v1",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous",
 			"authHeaders": {
