@@ -85,7 +85,7 @@
 			},
 			"EntityId": {
 				"type": "String",
-				"defaultValue": "Product"
+				"defaultValue": "product"
 			}
 		},
 		"folder": {
