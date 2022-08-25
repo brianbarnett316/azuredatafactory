@@ -1378,14 +1378,6 @@
 									},
 									{
 										"source": {
-											"path": "[['lastOrderDate']"
-										},
-										"sink": {
-											"path": "$['lastOrderDate']"
-										}
-									},
-									{
-										"source": {
 											"path": "[['lastChgDTM']"
 										},
 										"sink": {
