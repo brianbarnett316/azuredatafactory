@@ -1213,7 +1213,7 @@
 								"mappings": [
 									{
 										"source": {
-											"path": "$['data'][0]['code']"
+											"path": "code"
 										},
 										"sink": {
 											"name": "code",
@@ -1222,7 +1222,7 @@
 									},
 									{
 										"source": {
-											"path": "$['data'][0]['name']"
+											"path": "name"
 										},
 										"sink": {
 											"name": "name",
@@ -1231,7 +1231,7 @@
 									},
 									{
 										"source": {
-											"path": "$['data'][0]['productSubCategory']"
+											"path": "productSubCategory"
 										},
 										"sink": {
 											"name": "productSubCategory",
@@ -1240,7 +1240,7 @@
 									},
 									{
 										"source": {
-											"path": "$['data'][0]['style']"
+											"path": "style"
 										},
 										"sink": {
 											"name": "style",
@@ -1249,7 +1249,7 @@
 									},
 									{
 										"source": {
-											"path": "$['data'][0]['msrp']"
+											"path": "msrp"
 										},
 										"sink": {
 											"name": "msrp",
@@ -1258,7 +1258,7 @@
 									},
 									{
 										"source": {
-											"path": "$['data'][0]['lastChgDTM']"
+											"path": "lastChgDTM"
 										},
 										"sink": {
 											"name": "lastChgDTM",
@@ -1267,7 +1267,7 @@
 									},
 									{
 										"source": {
-											"path": "$['data'][0]['lastChgUserName']"
+											"path": "lastChgUserName"
 										},
 										"sink": {
 											"name": "lastChgUserName",
@@ -1276,7 +1276,7 @@
 									},
 									{
 										"source": {
-											"path": "$['data'][0]['validationStatusID']"
+											"path": "validationStatusID"
 										},
 										"sink": {
 											"name": "validationStatusID",
