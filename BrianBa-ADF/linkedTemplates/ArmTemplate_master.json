@@ -39,6 +39,14 @@
 			"type": "string",
 			"defaultValue": "tye3950@yahoo.com"
 		},
+		"FiveMinTumblingWindow_properties_pipeline_parameters_StartTime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"FiveMinTumblingWindow_properties_pipeline_parameters_EndTime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
 		"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FileName"
@@ -155,6 +163,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"FiveMinTumblingWindow_properties_pipeline_parameters_StartTime": {
+						"value": "[parameters('FiveMinTumblingWindow_properties_pipeline_parameters_StartTime')]"
+					},
+					"FiveMinTumblingWindow_properties_pipeline_parameters_EndTime": {
+						"value": "[parameters('FiveMinTumblingWindow_properties_pipeline_parameters_EndTime')]"
 					},
 					"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
 						"value": "[parameters('NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName')]"

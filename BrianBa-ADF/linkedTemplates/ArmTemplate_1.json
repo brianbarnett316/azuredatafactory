@@ -7,6 +7,14 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "BrianBa-ADF"
 		},
+		"FiveMinTumblingWindow_properties_pipeline_parameters_StartTime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"FiveMinTumblingWindow_properties_pipeline_parameters_EndTime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
 		"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
 			"type": "string",
 			"defaultValue": "@triggerBody().FileName"
@@ -547,13 +555,13 @@
 								"referenceName": "ProfiseeRESTAPI_Records_Get1",
 								"type": "DatasetReference",
 								"parameters": {
-									"entityId": {
-										"value": "@variables('EntityId')",
+									"entityId": "Customer",
+									"pageSize": 1000,
+									"attributes": " [Source System],[CustomerType],[Industry],[Address Line 1],[City],[State],[Zip],[Phone Number],[Email Address],[Region],[CityLimitsID],[TwoWheelsID],[Record Source],[Match Cluster],[Match Status],[Golden Record]",
+									"filter": {
+										"value": "@concat('[lastChgDTM] gt ', replace(pipeline().parameters.StartTime, 'Z', ''), ' AND [lastChgDTM] le ', replace(pipeline().parameters.EndTime, 'Z', ''))",
 										"type": "Expression"
 									},
-									"pageSize": 1000,
-									"attributes": " [productSubCategory], [style], [msrp]",
-									"filter": " [Color] eq 'BLK'",
 									"orderBy": " ",
 									"dbaFormat": 1,
 									"recordCodes": " "
@@ -581,6 +589,14 @@
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
+				},
+				"parameters": {
+					"StartTime": {
+						"type": "string"
+					},
+					"EndTime": {
+						"type": "string"
+					}
 				},
 				"variables": {
 					"OutputContainer": {
@@ -1098,6 +1114,40 @@
 				"lastPublishTime": "2020-09-25T16:03:36Z"
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FiveMinTumblingWindow')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "Copy from Profisee REST API to Product CSV",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"StartTime": "[parameters('FiveMinTumblingWindow_properties_pipeline_parameters_StartTime')]",
+						"EndTime": "[parameters('FiveMinTumblingWindow_properties_pipeline_parameters_EndTime')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 5,
+					"startTime": "2023-05-04T16:54:00Z",
+					"delay": "00:00:00",
+					"maxConcurrency": 50,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Copy from Profisee REST API to Product CSV')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/NewCsvMemberFile')]",

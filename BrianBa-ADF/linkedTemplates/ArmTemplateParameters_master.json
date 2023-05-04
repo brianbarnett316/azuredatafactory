@@ -29,6 +29,12 @@
 		"Salesforce1_properties_typeProperties_username": {
 			"value": "tye3950@yahoo.com"
 		},
+		"FiveMinTumblingWindow_properties_pipeline_parameters_StartTime": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"FiveMinTumblingWindow_properties_pipeline_parameters_EndTime": {
+			"value": "@trigger().outputs.windowEndTime"
+		},
 		"NewCsvMemberFile_properties_Copy from CSV to Profisee REST API_parameters_FileName": {
 			"value": "@triggerBody().FileName"
 		},
