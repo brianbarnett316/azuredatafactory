@@ -122,13 +122,13 @@
 						"referenceName": "ProfiseeRESTAPI_Records_Get1",
 						"type": "DatasetReference",
 						"parameters": {
-							"entityId": {
-								"value": "@variables('EntityId')",
+							"entityId": "Customer",
+							"pageSize": 1000,
+							"attributes": " [Source System],[CustomerType],[Industry],[Address Line 1],[City],[State],[Zip],[Phone Number],[Email Address],[Region],[CityLimitsID],[TwoWheelsID],[Record Source],[Match Cluster],[Match Status],[Golden Record]",
+							"filter": {
+								"value": "@concat('[lastChgDTM] gt ', replace(pipeline().parameters.StartTime, 'Z', ''), ' AND [lastChgDTM] le ', replace(pipeline().parameters.EndTime, 'Z', ''))",
 								"type": "Expression"
 							},
-							"pageSize": 1000,
-							"attributes": " [productSubCategory], [style], [msrp]",
-							"filter": " [Color] eq 'BLK'",
 							"orderBy": " ",
 							"dbaFormat": 1,
 							"recordCodes": " "
@@ -153,6 +153,14 @@
 				]
 			}
 		],
+		"parameters": {
+			"StartTime": {
+				"type": "string"
+			},
+			"EndTime": {
+				"type": "string"
+			}
+		},
 		"variables": {
 			"OutputContainer": {
 				"type": "String",
